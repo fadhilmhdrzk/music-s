@@ -196,7 +196,7 @@ const dewa19Tracks = [
     id: 0,
     title: "Aku Milikmu",
     album: "Format Masa Depan (1994)",
-    cover: "assets/images/Aku milikmu.jfif",
+    cover: "assets/images/aku milikmu.jfif",
     theme: "dewa-aku-milikmu",
     quote: '"Surrendering completely to the warmth of your embrace, letting the rest of the world fade away."',
     meaning: `Featured in Format Masa Depan, "Aku Milikmu" is a timeless romantic ballad expressing complete surrender to love and devotion. Wrapped in iconic electric guitar riffs and soaring vocal harmonies, the track explores the overwhelming passion of a night spent together. It symbolizes the desire to freeze time, holding on tightly to the warmth of intimacy before morning arrives.`,
@@ -502,6 +502,17 @@ function stopVisualizer() {
    VINYL MUSIC PLAYER LOGIC
    ========================================================================== */
 
+const preloadedAudios = [];
+function preloadArtistTracks() {
+  const currentTracks = getTracks();
+  currentTracks.forEach(track => {
+    const a = new Audio();
+    a.preload = "auto";
+    a.src = fixPath(track.src);
+    preloadedAudios.push(a);
+  });
+}
+
 function initPlayer() {
   if (!playlistPills) return;
   const currentTracks = getTracks();
@@ -518,6 +529,7 @@ function initPlayer() {
   renderSleevesGallery();
   setupProgressScrubbing();
   loadTrack(currentTrackIdx, false);
+  preloadArtistTracks();
 }
 
 function loadAudioSourceSafely(srcPath, autoPlay = false) {
