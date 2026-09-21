@@ -104,8 +104,7 @@
 /* ==========================================================================
    FRANK OCEAN THEMES
    ========================================================================== */
-[data-theme="fo-ivy"],
-[data-theme="fo-white-ferrari"] {
+[data-theme="fo-ivy"] {
   --bg-main: #f5f3e7;
   --bg-card: #e5e2cb;
   --bg-card-hover: #d7d3b5;
@@ -119,6 +118,22 @@
   --turntable-wood-light: #424d3a;
   --turntable-metal: #151b11;
   --sticky-bg: #e5e2cb;
+}
+
+[data-theme="fo-white-ferrari"] {
+  --bg-main: #111713; /* Deep Vintage Pine Green Night Sky */
+  --bg-card: #1b241d;
+  --bg-card-hover: #263329;
+  --text-main: #f5f6f0; /* Crisp White Ferrari Body */
+  --text-muted: #9bb399; /* Soft Muted Sage Green */
+  --accent: #e84a35; /* Florida License Plate / Ferrari Red-Orange Accent */
+  --accent-light: #f26e5b;
+  --accent-glow: rgba(232, 74, 53, 0.4);
+  --border-color: #2b3a2e;
+  --turntable-wood: #0b100c;
+  --turntable-wood-light: #18221a;
+  --turntable-metal: #050806;
+  --sticky-bg: #1b241d;
 }
 
 [data-theme="fo-moon-river"] {
