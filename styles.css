@@ -303,6 +303,274 @@
   --sticky-bg: #3d0722;
 }
 
+/* ==========================================================================
+   DEWA 19 THEMES (EXTRACTED FROM EXACT ALBUM ARTWORK)
+   ========================================================================== */
+[data-theme="dewa-aku-milikmu"] {
+  --bg-main: #1f1730;
+  --bg-card: #2e2347;
+  --bg-card-hover: #3d305d;
+  --text-main: #f5f0ff;
+  --text-muted: #b8a6d9;
+  --accent: #fc261b;
+  --accent-light: #ff6058;
+  --accent-glow: rgba(252, 38, 27, 0.4);
+  --border-color: #4a3870;
+  --turntable-wood: #140e20;
+  --turntable-wood-light: #221836;
+  --turntable-metal: #0a0612;
+  --sticky-bg: #2e2347;
+}
+
+[data-theme="dewa-kangen"] {
+  --bg-main: #240503;
+  --bg-card: #3b0905;
+  --bg-card-hover: #540d07;
+  --text-main: #fde8e6;
+  --text-muted: #e68b83;
+  --accent: #f31904;
+  --accent-light: #ff4d3d;
+  --accent-glow: rgba(243, 25, 4, 0.4);
+  --border-color: #610f09;
+  --turntable-wood: #170302;
+  --turntable-wood-light: #2b0604;
+  --turntable-metal: #0d0101;
+  --sticky-bg: #3b0905;
+}
+
+[data-theme="dewa-roman-picisan"] {
+  --bg-main: #1c1727;
+  --bg-card: #2b243b;
+  --bg-card-hover: #3b3252;
+  --text-main: #f4efff;
+  --text-muted: #b4a7d6;
+  --accent: #ee3e0f;
+  --accent-light: #f76843;
+  --accent-glow: rgba(238, 62, 15, 0.4);
+  --border-color: #453a5c;
+  --turntable-wood: #110e1a;
+  --turntable-wood-light: #201a2e;
+  --turntable-metal: #08060d;
+  --sticky-bg: #2b243b;
+}
+
+[data-theme="dewa-mistikus-cinta"] {
+  --bg-main: #2b1f07;
+  --bg-card: #42300b;
+  --bg-card-hover: #59410f;
+  --text-main: #fff8e6;
+  --text-muted: #d6b772;
+  --accent: #cf961f;
+  --accent-light: #fde700;
+  --accent-glow: rgba(207, 150, 31, 0.4);
+  --border-color: #6b4e12;
+  --turntable-wood: #1c1404;
+  --turntable-wood-light: #2e2107;
+  --turntable-metal: #0e0a02;
+  --sticky-bg: #42300b;
+}
+
+/* ==========================================================================
+   HINDIA THEMES (EXTRACTED FROM EXACT ALBUM ARTWORK)
+   ========================================================================== */
+[data-theme="hindia-membasuh"] {
+  --bg-main: #17100e;
+  --bg-card: #261b18;
+  --bg-card-hover: #382723;
+  --text-main: #fcf4f2;
+  --text-muted: #c7a79e;
+  --accent: #f27813;
+  --accent-light: #f69845;
+  --accent-glow: rgba(242, 120, 19, 0.4);
+  --border-color: #4a342e;
+  --turntable-wood: #0f0a09;
+  --turntable-wood-light: #1c1210;
+  --turntable-metal: #070404;
+  --sticky-bg: #261b18;
+}
+
+[data-theme="hindia-kita-ke-sana"] {
+  --bg-main: #181d24;
+  --bg-card: #252e39;
+  --bg-card-hover: #333f4e;
+  --text-main: #f0f6fc;
+  --text-muted: #8ca3be;
+  --accent: #5ca2d5;
+  --accent-light: #8ec3e6;
+  --accent-glow: rgba(92, 162, 213, 0.4);
+  --border-color: #3b4b5e;
+  --turntable-wood: #0f1318;
+  --turntable-wood-light: #1b222b;
+  --turntable-metal: #07090c;
+  --sticky-bg: #252e39;
+}
+
+[data-theme="hindia-semua-lagu"] {
+  --bg-main: #141414;
+  --bg-card: #242424;
+  --bg-card-hover: #333333;
+  --text-main: #f4f4f4;
+  --text-muted: #a3a3a3;
+  --accent: #e05a47;
+  --accent-light: #e88273;
+  --accent-glow: rgba(224, 90, 71, 0.4);
+  --border-color: #3f3f3f;
+  --turntable-wood: #0d0d0d;
+  --turntable-wood-light: #1a1a1a;
+  --turntable-metal: #050505;
+  --sticky-bg: #242424;
+}
+
+[data-theme="hindia-rumah-ke-rumah"] {
+  --bg-main: #1f170d;
+  --bg-card: #332717;
+  --bg-card-hover: #473620;
+  --text-main: #fdf7ee;
+  --text-muted: #cca97e;
+  --accent: #98631d;
+  --accent-light: #c4832c;
+  --accent-glow: rgba(152, 99, 29, 0.4);
+  --border-color: #574125;
+  --turntable-wood: #140e08;
+  --turntable-wood-light: #241a0e;
+  --turntable-metal: #080503;
+  --sticky-bg: #332717;
+}
+
+/* ==========================================================================
+   SAL PRIADI THEMES (EXTRACTED FROM EXACT ALBUM ARTWORK)
+   ========================================================================== */
+[data-theme="sal-kita-usahakan"] {
+  --bg-main: #2b1a0e;
+  --bg-card: #452a17;
+  --bg-card-hover: #5e3a20;
+  --text-main: #fdf5ef;
+  --text-muted: #d9ab8b;
+  --accent: #cf7624;
+  --accent-light: #e0944e;
+  --accent-glow: rgba(207, 118, 36, 0.4);
+  --border-color: #6e4325;
+  --turntable-wood: #1b1009;
+  --turntable-wood-light: #301d10;
+  --turntable-metal: #0d0804;
+  --sticky-bg: #452a17;
+}
+
+[data-theme="sal-id-like-to-watch"] {
+  --bg-main: #241913;
+  --bg-card: #38271e;
+  --bg-card-hover: #4c3629;
+  --text-main: #fcf5f0;
+  --text-muted: #cba793;
+  --accent: #ea960f;
+  --accent-light: #f0ae43;
+  --accent-glow: rgba(234, 150, 15, 0.4);
+  --border-color: #593f30;
+  --turntable-wood: #17100c;
+  --turntable-wood-light: #291c15;
+  --turntable-metal: #0b0705;
+  --sticky-bg: #38271e;
+}
+
+[data-theme="sal-amin-paling-serius"] {
+  --bg-main: #290e04;
+  --bg-card: #421808;
+  --bg-card-hover: #5c220c;
+  --text-main: #fdeee8;
+  --text-muted: #e69c81;
+  --accent: #dc6101;
+  --accent-light: #ed8431;
+  --accent-glow: rgba(220, 97, 1, 0.4);
+  --border-color: #6c290e;
+  --turntable-wood: #1a0902;
+  --turntable-wood-light: #2e1105;
+  --turntable-metal: #0d0401;
+  --sticky-bg: #421808;
+}
+
+[data-theme="sal-ada-titik"] {
+  --bg-main: #141624;
+  --bg-card: #202338;
+  --bg-card-hover: #2d314f;
+  --text-main: #f2f4ff;
+  --text-muted: #9ba4d9;
+  --accent: #7783cb;
+  --accent-light: #9ea8e0;
+  --accent-glow: rgba(119, 131, 203, 0.4);
+  --border-color: #383d63;
+  --turntable-wood: #0d0e17;
+  --turntable-wood-light: #18192b;
+  --turntable-metal: #06070a;
+  --sticky-bg: #202338;
+}
+
+/* ==========================================================================
+   PERUNGGU THEMES (EXTRACTED FROM EXACT ALBUM ARTWORK)
+   ========================================================================== */
+[data-theme="perunggu-33x"] {
+  --bg-main: #21120a;
+  --bg-card: #361d10;
+  --bg-card-hover: #4c2917;
+  --text-main: #fdf3ed;
+  --text-muted: #d4a080;
+  --accent: #c16719;
+  --accent-light: #d88944;
+  --accent-glow: rgba(193, 103, 25, 0.4);
+  --border-color: #593019;
+  --turntable-wood: #140b06;
+  --turntable-wood-light: #26150b;
+  --turntable-metal: #0a0503;
+  --sticky-bg: #361d10;
+}
+
+[data-theme="perunggu-ini-abadi"] {
+  --bg-main: #141313;
+  --bg-card: #242222;
+  --bg-card-hover: #363333;
+  --text-main: #fcf5f6;
+  --text-muted: #d1a5aa;
+  --accent: #ff8c90;
+  --accent-light: #ffaab0;
+  --accent-glow: rgba(255, 140, 144, 0.4);
+  --border-color: #453e3f;
+  --turntable-wood: #0d0c0c;
+  --turntable-wood-light: #191818;
+  --turntable-metal: #050505;
+  --sticky-bg: #242222;
+}
+
+[data-theme="perunggu-gemilang"] {
+  --bg-main: #1c1b1a;
+  --bg-card: #2e2c2a;
+  --bg-card-hover: #403e3a;
+  --text-main: #faf6f0;
+  --text-muted: #cca77e;
+  --accent: #e68e2d;
+  --accent-light: #efaa5c;
+  --accent-glow: rgba(230, 142, 45, 0.4);
+  --border-color: #4c4844;
+  --turntable-wood: #121110;
+  --turntable-wood-light: #21201e;
+  --turntable-metal: #080807;
+  --sticky-bg: #2e2c2a;
+}
+
+[data-theme="perunggu-pastikan-riuh"] {
+  --bg-main: #241e18;
+  --bg-card: #383027;
+  --bg-card-hover: #4c4135;
+  --text-main: #fbf6f0;
+  --text-muted: #d6af92;
+  --accent: #e77421;
+  --accent-light: #ef9550;
+  --accent-glow: rgba(231, 116, 33, 0.4);
+  --border-color: #574739;
+  --turntable-wood: #17130f;
+  --turntable-wood-light: #29221b;
+  --turntable-metal: #0a0806;
+  --sticky-bg: #383027;
+}
+
 /* Base Reset & Styling */
 * {
   box-sizing: border-box;
@@ -362,7 +630,7 @@ header {
   top: 0;
   z-index: 100;
   backdrop-filter: blur(12px);
-  background: rgba(var(--bg-main), 0.85);
+  background: var(--bg-main);
   border-bottom: 1px solid var(--border-color);
   transition: background-color var(--transition-speed), border-color var(--transition-speed);
 }
@@ -692,6 +960,55 @@ header {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 0;
+}
+
+/* Playlist Selector Pills (Default Single-Row Layout) */
+.playlist-pills {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-top: 15px;
+  scrollbar-width: thin;
+  width: 100%;
+}
+
+.pill-item {
+  padding: 8px 16px;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.pill-item:hover,
+.pill-item.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Specifically for Sal Priadi: 2x2 Wrapped Grid due to long song titles */
+body[data-artist="sal-priadi"] .playlist-pills {
+  flex-wrap: wrap;
+  overflow-x: visible;
+  gap: 8px;
+}
+
+body[data-artist="sal-priadi"] .pill-item {
+  flex: 1 1 calc(50% - 8px);
+  max-width: calc(50% - 4px);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 8px 12px;
+  font-size: 0.82rem;
 }
 
 .track-badge {
@@ -876,34 +1193,7 @@ header {
   cursor: pointer;
 }
 
-/* Playlist Selector Pills */
-.playlist-pills {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  margin-top: 15px;
-  scrollbar-width: thin;
-}
 
-.pill-item {
-  padding: 8px 16px;
-  background: var(--bg-main);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  white-space: nowrap;
-  color: var(--text-muted);
-  transition: all 0.2s ease;
-}
-
-.pill-item:hover,
-.pill-item.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
 
 /* ==========================================================================
    MOOD SELECTOR SECTION
@@ -2192,5 +2482,53 @@ footer p span {
   color: #fff;
   border-color: var(--accent);
   transform: translateX(-3px);
+}
+
+/* Indonesian Top 4 Artists Tracklist Box Styling */
+.indo-artists-section {
+  padding-top: 20px;
+}
+
+.artist-tracklist-box {
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+.tracklist-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.tracklist-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tracklist-items li {
+  font-size: 0.84rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.tracklist-items li i {
+  font-size: 0.7rem;
+  color: var(--accent);
+  opacity: 0.85;
 }
 

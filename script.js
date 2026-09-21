@@ -191,6 +191,194 @@ const lanyTracks = [
   }
 ];
 
+const dewa19Tracks = [
+  {
+    id: 0,
+    title: "Aku Milikmu",
+    album: "Format Masa Depan (1994)",
+    cover: "assets/images/Aku milikmu.jfif",
+    theme: "dewa-aku-milikmu",
+    quote: '"Surrendering completely to the warmth of your embrace, letting the rest of the world fade away."',
+    meaning: `Featured in Format Masa Depan, "Aku Milikmu" is a timeless romantic ballad expressing complete surrender to love and devotion. Wrapped in iconic electric guitar riffs and soaring vocal harmonies, the track explores the overwhelming passion of a night spent together. It symbolizes the desire to freeze time, holding on tightly to the warmth of intimacy before morning arrives.`,
+    src: "assets/audio/dewa19_aku_milikmu.webm",
+    duration: "4:32"
+  },
+  {
+    id: 1,
+    title: "Kangen",
+    album: "Dewa 19 (1992)",
+    cover: "assets/images/kangen.jfif",
+    theme: "dewa-kangen",
+    quote: '"Counting every heartbeat across the distance, holding onto fragile hopes of our reunion."',
+    meaning: `The breakthrough masterpiece from Dewa 19's debut album that defined an entire generation. "Kangen" captures the aching vulnerability of distance, nostalgic yearning, and heartfelt romance. Through nostalgic melodies and poetic lyrics, it paints a vivid picture of a soul consumed by longings, waiting patiently for the moment two paths finally cross again.`,
+    src: "assets/audio/dewa19_kangen.webm",
+    duration: "5:08"
+  },
+  {
+    id: 2,
+    title: "Risalah Hati",
+    album: "Bintang Lima (2000)",
+    cover: "assets/images/Risalah hati.jfif",
+    theme: "dewa-roman-picisan",
+    quote: '"An unyielding devotion that dares to bend fate, making even the coldest heart learn how to love."',
+    meaning: `From the legendary Bintang Lima album, "Risalah Hati" is a dramatic rock composition exploring poetic infatuation and stubborn affection. Ahmad Dhani weaves a tale of unyielding determination, where devotion becomes an unstoppable force capable of changing fate. The grandeur of its arrangement reflects the intense emotional weight of convincing a distant heart to love back.`,
+    src: "assets/audio/dewa19_risalah_hati.webm",
+    duration: "4:07"
+  },
+  {
+    id: 3,
+    title: "Mistikus Cinta",
+    album: "Cintailah Cinta (2002)",
+    cover: "assets/images/Mistikus Cinta.jfif",
+    theme: "dewa-mistikus-cinta",
+    quote: '"A mystical bond beyond space and time, entering without a sound to alter our universe forever."',
+    meaning: `A mystical, philosophical reflection from Cintailah Cinta on the transcendent nature of spiritual and romantic love. "Mistikus Cinta" blends hypnotic rhythms with deep lyrical inquiry, portraying passion not merely as a human emotion, but as an uncontrollable cosmic force. It explores how true affection transcends physical boundaries, entering our lives unannounced and altering our perception of reality.`,
+    src: "assets/audio/dewa19_mistikus_cinta.webm",
+    duration: "5:35"
+  }
+];
+
+const hindiaTracks = [
+  {
+    id: 0,
+    title: "Membasuh",
+    album: "Menari dengan Bayangan (2019)",
+    cover: "assets/images/Membasuh.jfif",
+    theme: "hindia-membasuh",
+    quote: '"A gentle sanctuary where we wash away each other’s wounds in an unforgiving world."',
+    meaning: `Featuring Rara Sekar, "Membasuh" is a comforting hymn about healing, mutual support, and finding solace amidst life's chaotic moments. Hindia explores the spirit of selflessness—learning to give without expecting anything in return. The song serves as a gentle reminder that even when the world feels heavy and unforgiving, sharing our wounds can wash away the bitterness of life.`,
+    src: "assets/audio/hindia_membasuh.webm",
+    duration: "6:10"
+  },
+  {
+    id: 1,
+    title: "Kita ke sana",
+    album: "Lagipula Hidup Akan Berakhir (2023)",
+    cover: "assets/images/Kita kesana.jfif",
+    theme: "hindia-kita-ke-sana",
+    quote: '"Stepping boldly into the unknown together, chasing answers beyond the horizon of our fears."',
+    meaning: `An energetic, cathartic track celebrating youth, friendship, and stepping boldly into the unknown together. From Lagipula Hidup Akan Berakhir, "Kita ke sana" reflects on pushing past anxieties and societal expectations. It captures the raw freedom of embarking on a journey with trusted companions, embracing whatever lies ahead with open arms and shared courage.`,
+    src: "assets/audio/hindia_kita_ke_sana.webm",
+    duration: "3:45"
+  },
+  {
+    id: 2,
+    title: "Semua lagu cinta terdengar sama",
+    album: "Lagipula Hidup Akan Berakhir (2023)",
+    cover: "assets/images/Semua lagu cinta terdengar sama.jfif",
+    theme: "hindia-semua-lagu",
+    quote: '"When you are no longer here, every sweet melody loses its magic and fades into empty noise."',
+    meaning: `A sharp, reflective urban track on heartbreak, nostalgia, and the way music ties itself to personal memories. Hindia dissects the hollow feeling after a significant separation, where romantic clichés suddenly lose their magic. The track illustrates how ordinary melodies become painful reminders of someone who was once the entire center of your world.`,
+    src: "assets/audio/hindia_semua_lagu.webm",
+    duration: "4:02"
+  },
+  {
+    id: 3,
+    title: "Rumah ke rumah",
+    album: "Menari dengan Bayangan (2019)",
+    cover: "assets/images/Rumah ke rumah.jfif",
+    theme: "hindia-rumah-ke-rumah",
+    quote: '"Wandering from one heart to another, collecting fragile lessons on the search for home."',
+    meaning: `One of Hindia's most personal tracks, tracing personal growth through past relationships and learning to forgive oneself. "Rumah ke rumah" uses the metaphor of a house to represent the people who offer shelter to a broken heart. It portrays a bittersweet journey of moving from person to person, gathering lessons, and eventually searching for a permanent place to belong.`,
+    src: "assets/audio/hindia_rumah_ke_rumah.webm",
+    duration: "4:37"
+  }
+];
+
+const salPriadiTracks = [
+  {
+    id: 0,
+    title: "Kita usahakan rumah itu",
+    album: "MARKERS AND SUCH (2024)",
+    cover: "assets/images/Kita usahakan rumah itu.jfif",
+    theme: "sal-kita-usahakan",
+    quote: '"Nurturing a warm sanctuary made of shared dreams, soft whispers, and endless laughter."',
+    meaning: `From MARKERS AND SUCH, "Kita usahakan rumah itu" is a heartwarming anthem about building a future, sharing modest dreams, and nurturing love through simple daily acts. Sal Priadi frames romance not as a grand fairy tale, but as a grounded, continuous effort to build a safe haven where two souls can find comfort, laughter, and peace together.`,
+    src: "assets/audio/sal_kita_usahakan_rumah_itu.webm",
+    duration: "3:18"
+  },
+  {
+    id: 1,
+    title: "I'd like to watch you sleeping",
+    album: "MARKERS AND SUCH (2024)",
+    cover: "assets/images/I'd like to watch you sleeping.jfif",
+    theme: "sal-id-like-to-watch",
+    quote: '"Finding absolute tranquility in the quiet rhythm of your breath as the dark world rests."',
+    meaning: `A tender, intimate lullaby capturing the serene beauty of watching a loved one rest peacefully. Sal conveys a deep sense of devotion in the quietest hours of the night. The track reflects an overwhelming desire to protect someone's peace, finding immense joy in simply witnessing their quietest, most vulnerable moments.`,
+    src: "assets/audio/sal_id_like_to_watch_you_sleeping.webm",
+    duration: "3:40"
+  },
+  {
+    id: 2,
+    title: "Amin paling serius",
+    album: "Single (2019)",
+    cover: "assets/images/Amin paling serius.jfif",
+    theme: "sal-amin-paling-serius",
+    quote: '"Whispering our most solemn prayers to the universe, hoping love will shelter us through every storm."',
+    meaning: `A deeply romantic duet with Nadin Amizah, expressing earnest prayers and devotion for a shared future. "Amin paling serius" explores two flawed individuals coming together, laying down their anxieties, and offering their most sincere hopes to the divine. It portrays love as a sacred covenant built on faith, patience, and mutual understanding.`,
+    src: "assets/audio/sal_amin_paling_serius.webm",
+    duration: "5:20"
+  },
+  {
+    id: 3,
+    title: "Ada titik - titik diujung doa",
+    album: "MARKERS AND SUCH (2024)",
+    cover: "assets/images/Ada titik - titik di ujung doa.jfif",
+    theme: "sal-ada-titik",
+    quote: '"Leaving silent pauses at the end of every prayer, where your name is softly kept without a word."',
+    meaning: `A poetic ballad exploring unspoken desires, quiet faith, and hope held in the silent corners of prayer. Sal Priadi captures the emotional weight of loving someone so deeply that words become insufficient. The track symbolizes the quiet moments where feelings are too vast to speak aloud, leaving them as quiet whispers sent to the universe.`,
+    src: "assets/audio/sal_ada_titik.webm",
+    duration: "3:55"
+  }
+];
+
+const perungguTracks = [
+  {
+    id: 0,
+    title: "33x",
+    album: "Memorandum (2022)",
+    cover: "assets/images/33x.jfif",
+    theme: "perunggu-33x",
+    quote: '"Repeating small silent prayers through the relentless noise, finding grounding in the daily grind."',
+    meaning: `An anthemic rock track blending mid-life reflections, resilience, and finding peace amidst daily routines. "33x" speaks to the working-class spirit, balancing adult responsibilities with personal faith. It symbolizes repetition as a form of grounding—offering small, quiet prayers in the middle of life's relentless pace to keep moving forward with hope.`,
+    src: "assets/audio/perunggu_33x.webm",
+    duration: "4:12"
+  },
+  {
+    id: 1,
+    title: "Ini abadi",
+    album: "Memorandum (2022)",
+    cover: "assets/images/Ini abadi.jfif",
+    theme: "perunggu-ini-abadi",
+    quote: '"A timeless bond of brotherhood that outlasts worn-out shoes and tiring miles of life."',
+    meaning: `From Memorandum, an uplifting anthem celebrating enduring friendships and unforgettable memories. "Ini abadi" captures the emotional durability of shared brotherhood and youth. It honors the bonds that remain unbreakable despite growing older, busy lives, and tired feet, preserving precious moments as timeless treasures that never fade.`,
+    src: "assets/audio/perunggu_ini_abadi.webm",
+    duration: "4:48"
+  },
+  {
+    id: 2,
+    title: "Gemilang",
+    album: "Memorandum (2022)",
+    cover: "assets/images/Gemilang.jfif",
+    theme: "perunggu-gemilang",
+    quote: '"Honoring our small victories today, stepping proudly into the uncertainties of tomorrow."',
+    meaning: `A high-energy heartland rock track celebrating small victories and perseverance through life's trials. "Gemilang" serves as a triumphant tribute to anyone striving to survive the daily grind. It encourages listeners to honor their efforts, celebrate brief moments of pride, and step into an uncertain tomorrow with confidence and an unyielding spirit.`,
+    src: "assets/audio/perunggu_gemilang.webm",
+    duration: "4:05"
+  },
+  {
+    id: 3,
+    title: "Pastikan riuh akhiri malammu",
+    album: "Memorandum (2022)",
+    cover: "assets/images/Pastikan riuh akhiri malammu.jfif",
+    theme: "perunggu-pastikan-riuh",
+    quote: '"Letting joyful cheers and warm laughter swallow the exhaustion of a long, hard day."',
+    meaning: `A triumphant closing ballad urging listeners to embrace warmth, joy, and gratitude at the end of hard days. "Pastikan riuh akhiri malammu" reflects on the catharsis of coming together after facing life's struggles. It serves as a heartwarming reminder to leave worries behind, finishing long days with laughter, togetherness, and a grateful heart.`,
+    src: "assets/audio/perunggu_pastikan_riuh.webm",
+    duration: "4:25"
+  }
+];
+
 function fixPath(path) {
   if (!path) return "";
   const isSubFolder = window.location.pathname.includes('/pages/') || window.location.href.includes('/pages/');
@@ -205,6 +393,10 @@ function getTracks() {
   if (currentArtist === "frank-ocean") return frankOceanTracks;
   if (currentArtist === "wave-to-earth") return waveToEarthTracks;
   if (currentArtist === "lany") return lanyTracks;
+  if (currentArtist === "dewa-19") return dewa19Tracks;
+  if (currentArtist === "hindia") return hindiaTracks;
+  if (currentArtist === "sal-priadi") return salPriadiTracks;
+  if (currentArtist === "perunggu") return perungguTracks;
   return danielCaesarTracks;
 }
 
@@ -330,33 +522,52 @@ function initPlayer() {
 
 const audioBlobCache = {};
 
-async function loadAudioSourceSafely(srcPath) {
+async function loadAudioSourceSafely(srcPath, autoPlay = false) {
   if (!audioElement) return;
 
-  if (audioBlobCache[srcPath]) {
-    if (audioElement.src !== audioBlobCache[srcPath]) {
-      audioElement.src = audioBlobCache[srcPath];
+  const applySrc = (url) => {
+    if (audioElement.src !== url) {
+      audioElement.src = url;
       audioElement.load();
     }
+    if (autoPlay) {
+      playAudio();
+    }
+  };
+
+  if (audioBlobCache[srcPath]) {
+    applySrc(audioBlobCache[srcPath]);
     return;
   }
 
+  // Set direct path first for instant playback start
+  const resolvedUrl = new URL(srcPath, window.location.href).href;
+  applySrc(resolvedUrl);
+
+  // Background Blob conversion so Chrome/Edge can seek any WebM file without server Range header dependence
   try {
-    const res = await fetch(srcPath, { cache: "no-cache" });
-    if (!res.ok) throw new Error("HTTP Error " + res.status);
-    const blob = await res.blob();
-    const blobUrl = URL.createObjectURL(blob);
-    audioBlobCache[srcPath] = blobUrl;
-    if (audioElement) {
-      audioElement.src = blobUrl;
-      audioElement.load();
+    const res = await fetch(srcPath);
+    if (res.ok) {
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      audioBlobCache[srcPath] = blobUrl;
+
+      const currentTracks = getTracks();
+      const activeTrack = currentTracks[currentTrackIdx];
+      if (activeTrack && fixPath(activeTrack.src) === srcPath) {
+        const savedTime = audioElement.currentTime || 0;
+        const wasPlaying = isPlaying;
+        audioElement.src = blobUrl;
+        if (savedTime > 0) {
+          try { audioElement.currentTime = savedTime; } catch (e) {}
+        }
+        if (wasPlaying) {
+          audioElement.play().catch(() => {});
+        }
+      }
     }
   } catch (err) {
-    console.log("Blob fetch fallback for:", srcPath, err);
-    if (audioElement) {
-      audioElement.src = srcPath;
-      audioElement.load();
-    }
+    console.log("Blob fetch note:", err);
   }
 }
 
@@ -367,6 +578,7 @@ function loadTrack(index, autoPlay = false) {
 
   // Dynamically change website theme color to match cover art!
   document.documentElement.setAttribute("data-theme", track.theme);
+  if (document.body) document.body.setAttribute("data-theme", track.theme);
 
   // Update UI Text & Cover
   if (trackAlbum) trackAlbum.innerText = `Album: ${track.album}`;
@@ -382,16 +594,9 @@ function loadTrack(index, autoPlay = false) {
     });
   }
 
-  // Direct HTML5 Audio Source assignment for 0ms instant streaming
   if (audioElement) {
     audioElement.preload = "auto";
     const srcPath = fixPath(track.src);
-    const resolvedUrl = new URL(srcPath, window.location.href).href;
-
-    if (audioElement.src !== resolvedUrl) {
-      audioElement.src = srcPath;
-      audioElement.load();
-    }
 
     audioElement.onloadedmetadata = () => {
       if (audioElement.duration && !isNaN(audioElement.duration) && isFinite(audioElement.duration)) {
@@ -404,9 +609,7 @@ function loadTrack(index, autoPlay = false) {
     };
     if (totalTimeEl) totalTimeEl.innerText = track.duration;
 
-    if (autoPlay) {
-      playAudio();
-    }
+    loadAudioSourceSafely(srcPath, autoPlay);
   } else {
     if (autoPlay) {
       playAudio();
@@ -529,17 +732,12 @@ function calculateSeekFromEvent(e, updateAudioNow = false) {
 
   if (updateAudioNow && audioElement && isFinite(seekTime)) {
     try {
-      const maxDuration = (audioElement.duration && isFinite(audioElement.duration)) ? audioElement.duration : duration;
+      const maxDuration = (audioElement.duration && isFinite(audioElement.duration) && audioElement.duration > 0) ? audioElement.duration : duration;
       const safeSeek = Math.max(0, Math.min(seekTime, maxDuration - 0.1));
 
-      if (audioElement.readyState === 0) {
-        audioElement.addEventListener("loadedmetadata", () => {
-          audioElement.currentTime = safeSeek;
-          if (isPlaying) audioElement.play().catch(() => {});
-        }, { once: true });
-      } else {
-        audioElement.currentTime = safeSeek;
-        if (isPlaying) audioElement.play().catch(() => {});
+      audioElement.currentTime = safeSeek;
+      if (isPlaying) {
+        audioElement.play().catch(() => {});
       }
     } catch (err) {
       console.log("Seek error:", err);
@@ -802,16 +1000,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Artist Cards Click
-  const artistCards = document.querySelectorAll(".artist-card");
-  artistCards.forEach(card => {
-    card.addEventListener("click", () => {
-      const viewTarget = card.getAttribute("data-artist-view");
-      if (viewTarget === "artist-dc") {
-        switchView("artist-dc");
-      } else {
-        alert("Pilihan hebat! Halaman khusus untuk artis ini akan langsung aktif begitu Anda mengirimkan nama & lagunya.");
-      }
-    });
-  });
 });

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="wte-love">
+<html lang="en" data-theme="dewa-aku-milikmu">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wave To Earth — Fadhil's Music Sanctuary</title>
-  <meta name="description" content="Wave To Earth dedicated vinyl listening room featuring Love, Seasons, Daisy, and Light." />
+  <title>Dewa 19 — Fadhil's Music Sanctuary</title>
+  <meta name="description" content="Dewa 19 dedicated vinyl listening room with 3D album sleeves and modal stories." />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
   <!-- External Stylesheet -->
   <link rel="stylesheet" href="../styles.css?v=9999999" />
 </head>
-<body data-artist="wave-to-earth">
+<body data-artist="dewa-19">
 
   <!-- GLOBAL NAVIGATION HEADER -->
   <header>
@@ -30,8 +30,8 @@
       <ul class="nav-links">
         <li><a href="../index.html" class="nav-item">Home Profile</a></li>
         <li class="nav-dropdown-wrap">
-          <a href="wave-to-earth.html" class="nav-item nav-btn-dc active">
-            <i class="fa-solid fa-record-vinyl"></i> Wave To Earth
+          <a href="dewa-19.html" class="nav-item nav-btn-dc active">
+            <i class="fa-solid fa-record-vinyl"></i> Dewa 19
           </a>
         </li>
       </ul>
@@ -52,18 +52,18 @@
     <section class="hero-section">
       <div class="container">
         <div class="hero-badge">
-          <i class="fa-solid fa-cloud-sun"></i> Dreamy Lo-Fi Indie Sanctuary
+          <i class="fa-solid fa-guitar"></i> Legendary Indonesian Rock
         </div>
-        <h1 class="hero-title">Ocean Breeze & Jazz Harmony</h1>
+        <h1 class="hero-title">Timeless Rock Anthems & Classical Melodies</h1>
         <p class="hero-subtitle">
-          Welcome to Wave To Earth's listening room. Spin the vinyl, relax, and let the gentle lo-fi waves sweep over you.
+          Welcome to Dewa 19's listening room. Spin the vinyl, settle in, and feel the nostalgia.
         </p>
 
         <!-- Dynamic Lyric Quote -->
         <div class="quote-banner" id="quote-banner">
           <i class="fa-solid fa-quote-left"></i>
           <div class="quote-text" id="quote-text">
-            "Love, my love, you are my everything... floating in the calm sea with you."
+            "Aku milikmu malam ini, kan kupeluk dirimu sampai pagi datang."
           </div>
         </div>
       </div>
@@ -80,7 +80,6 @@
         <div class="turntable-container">
           <!-- Left Column: Realistic Record Player -->
           <div class="turntable-deck" id="turntable-deck">
-            <!-- Tonearm Arm -->
             <div class="tonearm">
               <div class="tonearm-base"></div>
               <div class="tonearm-stick">
@@ -88,10 +87,9 @@
               </div>
             </div>
 
-            <!-- Spinning Vinyl Record -->
             <div class="vinyl-wrapper">
               <div class="vinyl-disc" id="vinyl-disc">
-                <div class="vinyl-label" id="vinyl-label" style="background-image: url(&quot;../assets/images/wave_to_earth_love.jfif&quot;);">
+                <div class="vinyl-label" id="vinyl-label" style="background-image: url(&quot;../assets/images/Dewa%2019.jfif&quot;);">
                   <div class="vinyl-center-hole"></div>
                 </div>
               </div>
@@ -101,11 +99,10 @@
           <!-- Right Column: Player Controls & Details -->
           <div class="player-details">
             <div>
-              <span class="track-badge" id="track-album">Album: 0.1 flaws and all. (2023)</span>
-              <h3 class="track-title" id="track-title">Love</h3>
-              <p class="track-artist">Wave To Earth</p>
+              <span class="track-badge" id="track-album">Album: Format Masa Depan (1994)</span>
+              <h3 class="track-title" id="track-title">Aku Milikmu</h3>
+              <p class="track-artist">Dewa 19</p>
 
-              <!-- Audio Spectrum Equalizer Animation -->
               <div class="visualizer-bar-wrap">
                 <div class="v-bar"></div>
                 <div class="v-bar"></div>
@@ -115,18 +112,16 @@
               </div>
             </div>
 
-            <!-- Progress Slider -->
             <div class="progress-container">
               <div class="time-stamps">
                 <span id="curr-time">0:00</span>
-                <span id="total-time">4:15</span>
+                <span id="total-time">4:32</span>
               </div>
               <div class="progress-bar-bg" id="progress-bg">
                 <div class="progress-bar-fill" id="progress-fill"></div>
               </div>
             </div>
 
-            <!-- Main Buttons -->
             <div class="controls-row">
               <div class="main-controls">
                 <button class="btn-ctrl" id="btn-prev" title="Previous Track">
@@ -140,14 +135,12 @@
                 </button>
               </div>
 
-              <!-- Volume Control -->
               <div class="volume-wrap">
                 <i class="fa-solid fa-volume-high" id="vol-icon" title="Mute / Unmute"></i>
                 <input type="range" class="volume-slider" id="vol-slider" min="0" max="1" step="0.05" value="0.8" />
               </div>
             </div>
 
-            <!-- Playlist Quick Select Pills -->
             <div class="playlist-pills" id="playlist-pills">
               <!-- Dynamically populated by JS -->
             </div>
@@ -173,15 +166,15 @@
   <!-- ALBUM STORY MEANING MODAL -->
   <div class="modal-overlay" id="meaning-modal" aria-hidden="true">
     <div class="modal-card">
-      <button class="modal-close-btn" id="modal-close-btn" aria-label="Tutup Pop-up"><i class="fa-solid fa-xmark"></i></button>
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Pop-up"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-body">
         <div class="modal-cover-wrap">
           <img src="" id="modal-cover-img" alt="Album Cover" />
-          <span class="modal-badge" id="modal-album-name">0.1 flaws and all.</span>
+          <span class="modal-badge" id="modal-album-name">Dewa 19</span>
         </div>
         <div class="modal-info">
-          <h3 class="modal-title" id="modal-track-title">Love</h3>
-          <p class="modal-subtitle">Wave To Earth &bull; Inspiration & Meaning</p>
+          <h3 class="modal-title" id="modal-track-title">Track Title</h3>
+          <p class="modal-subtitle">Dewa 19 &bull; Inspiration & Meaning</p>
           <div class="modal-quote-box" id="modal-quote">
             "..."
           </div>
@@ -202,14 +195,11 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p><span>Wave To Earth</span> &bull; 2026</p>
+      <p><span>Dewa 19</span> &bull; 2026</p>
     </div>
   </footer>
 
-  <!-- HTML5 Audio Element for Preview Tracks -->
   <audio id="audio-element"></audio>
-
-  <!-- External JavaScript -->
   <script src="../script.js?v=9999999"></script>
 </body>
 </html>
