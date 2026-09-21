@@ -1684,72 +1684,115 @@ footer p span {
   }
 
   .turntable-container {
-    padding: 20px 14px;
+    padding: 16px 12px;
     border-radius: 20px;
-    gap: 24px;
+    gap: 16px;
   }
 
   .turntable-deck {
     width: 100% !important;
-    max-width: 320px !important;
-    height: 290px !important;
-    min-height: 290px !important;
+    max-width: 240px !important;
+    height: 210px !important;
+    min-height: 210px !important;
     min-width: unset !important;
-    padding: 15px;
+    padding: 12px;
     border-radius: 16px;
+    margin: 0 auto;
   }
 
   .vinyl-wrapper,
   .vinyl-disc {
-    width: 200px !important;
-    height: 200px !important;
-    min-width: 200px !important;
-    min-height: 200px !important;
-    max-width: 200px !important;
-    max-height: 200px !important;
+    width: 140px !important;
+    height: 140px !important;
+    min-width: 140px !important;
+    min-height: 140px !important;
+    max-width: 140px !important;
+    max-height: 140px !important;
   }
 
   .vinyl-label {
-    width: 68px !important;
-    height: 68px !important;
-    min-width: 68px !important;
-    min-height: 68px !important;
-    max-width: 68px !important;
-    max-height: 68px !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
   }
 
   .tonearm {
-    height: 125px;
-    width: 80px;
-    top: 15px;
-    right: 15px;
+    height: 90px;
+    width: 55px;
+    top: 10px;
+    right: 10px;
   }
 
   .tonearm-stick {
-    height: 100px;
+    height: 70px;
+  }
+
+  .player-details {
+    gap: 12px;
   }
 
   .track-title {
-    font-size: 1.6rem;
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+
+  .track-artist {
+    font-size: 0.9rem;
   }
 
   .controls-row {
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
   }
 
   .main-controls {
     justify-content: center;
+    gap: 10px;
+  }
+
+  .btn-ctrl {
+    width: 40px;
+    height: 40px;
+    font-size: 0.95rem;
+  }
+
+  .btn-ctrl.btn-play {
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
   }
 
   .volume-wrap {
-    justify-content: center;
-    width: 100%;
+    gap: 6px;
   }
 
   .volume-slider {
-    width: 140px;
+    width: 70px;
+  }
+
+  .playlist-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    overflow-x: visible;
+    margin-top: 10px;
+  }
+
+  .pill-item {
+    padding: 6px 10px;
+    font-size: 0.76rem;
+    white-space: normal;
+    text-align: center;
+    flex: 1 1 calc(50% - 6px);
+    max-width: calc(50% - 6px);
+    border-radius: 12px;
   }
 
   .sleeves-grid {
