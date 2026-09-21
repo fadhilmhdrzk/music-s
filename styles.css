@@ -1600,53 +1600,271 @@ footer p span {
 }
 
 /* ==========================================================================
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE BREAKPOINTS (SMARTPHONE & TABLET OPTIMIZED)
    ========================================================================== */
 @media (max-width: 900px) {
   .turntable-container {
     grid-template-columns: 1fr;
-    padding: 24px;
+    padding: 30px 20px;
+    gap: 30px;
+  }
+
+  .turntable-deck {
+    width: 340px;
+    height: 330px;
+    min-width: unset;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  header {
+    padding: 10px 0;
+  }
+
+  .nav-wrapper {
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
   .nav-links {
+    display: flex;
+    gap: 16px;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 4px;
+    justify-content: center;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    padding: 2px 0;
+  }
+
+  .hero-section {
+    padding: 40px 0 24px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 7.5vw, 3.2rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .vibe-stats-bar {
+    padding: 12px 16px;
+    gap: 12px;
+    flex-direction: column;
+    border-radius: 20px;
+    width: 100%;
+  }
+
+  .vibe-stat-divider {
     display: none;
   }
-  .hero-title {
-    font-size: 2.2rem;
+
+  .vibe-stat-item {
+    width: 100%;
+    justify-content: flex-start;
   }
+
+  .turntable-container {
+    padding: 20px 14px;
+    border-radius: 20px;
+    gap: 24px;
+  }
+
+  .turntable-deck {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: 290px !important;
+    min-height: 290px !important;
+    min-width: unset !important;
+    padding: 15px;
+    border-radius: 16px;
+  }
+
   .vinyl-wrapper,
   .vinyl-disc {
-    width: 220px !important;
-    height: 220px !important;
-    min-width: 220px !important;
-    min-height: 220px !important;
-    max-width: 220px !important;
-    max-height: 220px !important;
+    width: 200px !important;
+    height: 200px !important;
+    min-width: 200px !important;
+    min-height: 200px !important;
+    max-width: 200px !important;
+    max-height: 200px !important;
   }
+
   .vinyl-label {
-    width: 76px !important;
-    height: 76px !important;
-    min-width: 76px !important;
-    min-height: 76px !important;
-    max-width: 76px !important;
-    max-height: 76px !important;
+    width: 68px !important;
+    height: 68px !important;
+    min-width: 68px !important;
+    min-height: 68px !important;
+    max-width: 68px !important;
+    max-height: 68px !important;
   }
-  .turntable-deck {
-    min-height: 300px;
-    padding: 15px;
-  }
+
   .tonearm {
-    height: 140px;
+    height: 125px;
+    width: 80px;
+    top: 15px;
     right: 15px;
   }
+
+  .tonearm-stick {
+    height: 100px;
+  }
+
+  .track-title {
+    font-size: 1.6rem;
+  }
+
+  .controls-row {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .main-controls {
+    justify-content: center;
+  }
+
+  .volume-wrap {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .volume-slider {
+    width: 140px;
+  }
+
+  .sleeves-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
+
+  .sleeve-card {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .sleeve-title {
+    font-size: 0.95rem;
+  }
+
+  .sleeve-album {
+    font-size: 0.78rem;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal-card {
+    padding: 24px 16px 20px 16px;
+    border-radius: 20px;
+    max-height: 88vh;
+  }
+
+  .modal-close-btn {
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
   .modal-body {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
+
   .modal-cover-wrap {
-    max-width: 180px;
+    max-width: 150px;
     margin: 0 auto;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .modal-story-text {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .btn-play-modal {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+
+  .artists-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .turntable-deck {
+    max-width: 280px !important;
+    height: 260px !important;
+    min-height: 260px !important;
+  }
+
+  .vinyl-wrapper,
+  .vinyl-disc {
+    width: 170px !important;
+    height: 170px !important;
+    min-width: 170px !important;
+    min-height: 170px !important;
+    max-width: 170px !important;
+    max-height: 170px !important;
+  }
+
+  .vinyl-label {
+    width: 58px !important;
+    height: 58px !important;
+    min-width: 58px !important;
+    min-height: 58px !important;
+    max-width: 58px !important;
+    max-height: 58px !important;
+  }
+
+  .tonearm {
+    height: 105px;
+  }
+
+  .tonearm-stick {
+    height: 80px;
+  }
+
+  .btn-ctrl {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+
+  .btn-ctrl.btn-play {
+    width: 52px;
+    height: 52px;
+    font-size: 1.2rem;
   }
 }
 
