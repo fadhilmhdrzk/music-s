@@ -520,56 +520,20 @@ function initPlayer() {
   loadTrack(currentTrackIdx, false);
 }
 
-const audioBlobCache = {};
-
-async function loadAudioSourceSafely(srcPath, autoPlay = false) {
+function loadAudioSourceSafely(srcPath, autoPlay = false) {
   if (!audioElement) return;
 
-  const applySrc = (url) => {
-    if (audioElement.src !== url) {
-      audioElement.src = url;
-      audioElement.load();
-    }
-    if (autoPlay) {
-      playAudio();
-    }
-  };
-
-  if (audioBlobCache[srcPath]) {
-    applySrc(audioBlobCache[srcPath]);
-    return;
+  const resolvedUrl = new URL(srcPath, window.location.href).href;
+  if (audioElement.src !== resolvedUrl) {
+    audioElement.src = resolvedUrl;
+    audioElement.load();
   }
 
-  // Set direct path first for instant playback start
-  const resolvedUrl = new URL(srcPath, window.location.href).href;
-  applySrc(resolvedUrl);
-
-  // Background Blob conversion so Chrome/Edge can seek any WebM file without server Range header dependence
-  try {
-    const res = await fetch(srcPath);
-    if (res.ok) {
-      const blob = await res.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      audioBlobCache[srcPath] = blobUrl;
-
-      const currentTracks = getTracks();
-      const activeTrack = currentTracks[currentTrackIdx];
-      if (activeTrack && fixPath(activeTrack.src) === srcPath) {
-        const savedTime = audioElement.currentTime || 0;
-        const wasPlaying = isPlaying;
-        audioElement.src = blobUrl;
-        if (savedTime > 0) {
-          try { audioElement.currentTime = savedTime; } catch (e) {}
-        }
-        if (wasPlaying) {
-          audioElement.play().catch(() => {});
-        }
-      }
-    }
-  } catch (err) {
-    console.log("Blob fetch note:", err);
+  if (autoPlay) {
+    playAudio();
   }
 }
+
 
 function loadTrack(index, autoPlay = false) {
   currentTrackIdx = index;
