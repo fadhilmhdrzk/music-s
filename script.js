@@ -382,10 +382,16 @@ function loadTrack(index, autoPlay = false) {
     });
   }
 
-  // Set Audio Source using Blob caching for smooth seeking
+  // Direct HTML5 Audio Source assignment for 0ms instant streaming
   if (audioElement) {
     audioElement.preload = "auto";
     const srcPath = fixPath(track.src);
+    const resolvedUrl = new URL(srcPath, window.location.href).href;
+
+    if (audioElement.src !== resolvedUrl) {
+      audioElement.src = srcPath;
+      audioElement.load();
+    }
 
     audioElement.onloadedmetadata = () => {
       if (audioElement.duration && !isNaN(audioElement.duration) && isFinite(audioElement.duration)) {
@@ -398,11 +404,9 @@ function loadTrack(index, autoPlay = false) {
     };
     if (totalTimeEl) totalTimeEl.innerText = track.duration;
 
-    loadAudioSourceSafely(srcPath).then(() => {
-      if (autoPlay) {
-        playAudio();
-      }
-    });
+    if (autoPlay) {
+      playAudio();
+    }
   } else {
     if (autoPlay) {
       playAudio();
