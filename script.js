@@ -959,6 +959,8 @@ function setupSwipeToDismiss() {
   });
 }
 
+let isPlayerHistoryPushed = false;
+
 function openSpotifyFullPlayer() {
   createSpotifyFullPlayerDOM();
   setupSpotifyControls();
@@ -986,6 +988,14 @@ function openSpotifyFullPlayer() {
 
   updateShuffleRepeatUI();
 
+  // Push history state so phone/browser back button closes player instead of navigating away
+  if (!isPlayerHistoryPushed && !fullPlayer.classList.contains("active")) {
+    isPlayerHistoryPushed = true;
+    try {
+      history.pushState({ spotifyFullPlayerOpen: true }, "");
+    } catch (e) {}
+  }
+
   fullPlayer.style.transform = "";
   fullPlayer.style.opacity = "";
   fullPlayer.classList.add("active");
@@ -993,7 +1003,7 @@ function openSpotifyFullPlayer() {
   document.body.style.overflow = "hidden";
 }
 
-function closeSpotifyFullPlayer() {
+function closeSpotifyFullPlayer(fromPopState = false) {
   const fullPlayer = document.getElementById("spotify-full-player");
   if (!fullPlayer) return;
   fullPlayer.style.transform = "";
@@ -1001,7 +1011,24 @@ function closeSpotifyFullPlayer() {
   fullPlayer.classList.remove("active");
   fullPlayer.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
+
+  if (isPlayerHistoryPushed) {
+    isPlayerHistoryPushed = false;
+    if (!fromPopState) {
+      try {
+        history.back();
+      } catch (e) {}
+    }
+  }
 }
+
+// Handle Browser & Mobile Phone Back Button / Back Gesture
+window.addEventListener("popstate", (e) => {
+  const fullPlayer = document.getElementById("spotify-full-player");
+  if (fullPlayer && fullPlayer.classList.contains("active")) {
+    closeSpotifyFullPlayer(true);
+  }
+});
 
 function setupSpotifyControls() {
   createSpotifyFullPlayerDOM();
