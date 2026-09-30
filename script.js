@@ -826,8 +826,7 @@ function initPlayer() {
       const pill = document.createElement("button");
       pill.className = `pill-item ${idx === currentTrackIdx ? 'active' : ''}`;
       pill.innerText = track.title;
-      pill.addEventListener("dblclick", (e) => {
-        e.stopPropagation();
+      pill.addEventListener("click", () => {
         loadTrack(idx, true);
       });
       playlistPills.appendChild(pill);
