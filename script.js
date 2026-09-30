@@ -915,10 +915,55 @@ function createSpotifyFullPlayerDOM() {
   document.body.appendChild(fullPlayerDiv);
 }
 
+let touchStartY = 0;
+let currentDeltaY = 0;
+
+function setupSwipeToDismiss() {
+  const fullPlayer = document.getElementById("spotify-full-player");
+  if (!fullPlayer || fullPlayer.dataset.swipeBound === "true") return;
+  fullPlayer.dataset.swipeBound = "true";
+
+  fullPlayer.addEventListener("touchstart", (e) => {
+    if (e.touches && e.touches.length === 1) {
+      touchStartY = e.touches[0].clientY;
+      currentDeltaY = 0;
+    }
+  }, { passive: true });
+
+  fullPlayer.addEventListener("touchmove", (e) => {
+    if (e.touches && e.touches.length === 1 && fullPlayer.classList.contains("active")) {
+      const touchY = e.touches[0].clientY;
+      const diff = touchY - touchStartY;
+      if (diff > 0 && fullPlayer.scrollTop <= 0) {
+        currentDeltaY = diff;
+        fullPlayer.classList.add("dragging");
+        fullPlayer.style.transform = `translateY(${currentDeltaY}px)`;
+        fullPlayer.style.opacity = `${Math.max(0.2, 1 - currentDeltaY / 450)}`;
+      }
+    }
+  }, { passive: true });
+
+  fullPlayer.addEventListener("touchend", () => {
+    if (fullPlayer.classList.contains("dragging")) {
+      fullPlayer.classList.remove("dragging");
+      if (currentDeltaY > 110) {
+        fullPlayer.style.transform = "";
+        fullPlayer.style.opacity = "";
+        closeSpotifyFullPlayer();
+      } else {
+        fullPlayer.style.transform = "";
+        fullPlayer.style.opacity = "";
+      }
+      currentDeltaY = 0;
+    }
+  });
+}
+
 function openSpotifyFullPlayer() {
   createSpotifyFullPlayerDOM();
   setupSpotifyControls();
   setupProgressScrubbing();
+  setupSwipeToDismiss();
 
   const fullPlayer = document.getElementById("spotify-full-player");
   if (!fullPlayer) return;
@@ -941,6 +986,8 @@ function openSpotifyFullPlayer() {
 
   updateShuffleRepeatUI();
 
+  fullPlayer.style.transform = "";
+  fullPlayer.style.opacity = "";
   fullPlayer.classList.add("active");
   fullPlayer.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
@@ -949,6 +996,8 @@ function openSpotifyFullPlayer() {
 function closeSpotifyFullPlayer() {
   const fullPlayer = document.getElementById("spotify-full-player");
   if (!fullPlayer) return;
+  fullPlayer.style.transform = "";
+  fullPlayer.style.opacity = "";
   fullPlayer.classList.remove("active");
   fullPlayer.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
@@ -1144,7 +1193,13 @@ function loadTrack(index, autoPlay = false) {
   const spFullCover = document.getElementById("sp-full-cover");
   if (spFullTitle) spFullTitle.innerText = track.title;
   if (spFullArtist) spFullArtist.innerText = track.artist || "";
-  if (spFullCover) spFullCover.src = encodeURI(fixPath(track.cover));
+  if (spFullCover) {
+    spFullCover.classList.add("track-changing");
+    setTimeout(() => {
+      spFullCover.src = encodeURI(fixPath(track.cover));
+      spFullCover.classList.remove("track-changing");
+    }, 120);
+  }
 
   const spFullPlaylistName = document.getElementById("sp-full-playlist-name");
   if (spFullPlaylistName) {
