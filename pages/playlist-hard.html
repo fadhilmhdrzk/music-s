@@ -64,6 +64,19 @@
     <!-- SPOTIFY-STYLE TRACKLIST TABLE SECTION -->
     <section class="playlist-section">
       <div class="container">
+        <!-- PLAYLIST SEARCH & SHUFFLE TOOLBAR -->
+        <div class="playlist-toolbar" id="playlist-toolbar">
+          <div class="playlist-search-box">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" class="playlist-search-input" id="playlist-search-input" placeholder="Search song in playlist..." autocomplete="off" />
+            <button class="search-clear-btn" id="search-clear-btn" style="display:none;" title="Clear"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <button class="playlist-shuffle-action-btn" id="btn-playlist-shuffle-action" title="Shuffle Play">
+            <i class="fa-solid fa-shuffle"></i>
+            <span>Shuffle</span>
+          </button>
+        </div>
+
         <div class="playlist-table-container">
           <table class="playlist-table">
             <thead>
