@@ -3383,11 +3383,12 @@ footer p span {
     max-width: none !important;
   }
 
-  .spotify-buttons-row {
-    gap: 10px !important;
-  }
+.spotify-bottom-player #sp-btn-prev,
+.spotify-bottom-player #sp-btn-next {
+  display: none !important;
+}
 
-  .spotify-bottom-player .spotify-btn-ctrl:not(.spotify-btn-play):not(#sp-btn-next):not(#sp-btn-prev) {
+  .spotify-bottom-player .spotify-btn-ctrl:not(.spotify-btn-play) {
     display: none !important;
   }
 
