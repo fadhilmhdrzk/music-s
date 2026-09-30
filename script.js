@@ -1152,18 +1152,14 @@ function renderPlaylistTable() {
       <td class="track-duration-cell">${track.duration}</td>
     `;
 
-    // Click on row (mobile or desktop)
+    // Click on row plays the track without popping up full player overlay
     tr.addEventListener("click", () => {
-      if (window.innerWidth <= 768) {
-        loadTrack(idx, true);
-        openSpotifyFullPlayer();
-      }
+      loadTrack(idx, true);
     });
 
     tr.addEventListener("dblclick", (e) => {
       e.stopPropagation();
       loadTrack(idx, true);
-      openSpotifyFullPlayer();
     });
 
     tableBody.appendChild(tr);
