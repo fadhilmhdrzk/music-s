@@ -692,8 +692,8 @@ function toggleRepeat() {
 }
 
 function updateShuffleRepeatUI() {
-  const shuffleBtns = [document.getElementById("sp-btn-shuffle"), document.getElementById("btn-shuffle")];
-  const repeatBtns = [document.getElementById("sp-btn-repeat"), document.getElementById("btn-repeat")];
+  const shuffleBtns = [document.getElementById("sp-btn-shuffle"), document.getElementById("btn-shuffle"), document.getElementById("sp-full-btn-shuffle")];
+  const repeatBtns = [document.getElementById("sp-btn-repeat"), document.getElementById("btn-repeat"), document.getElementById("sp-full-btn-repeat")];
 
   shuffleBtns.forEach(btn => {
     if (btn) btn.classList.toggle("active", isShuffle);
@@ -841,7 +841,131 @@ function initPlayer() {
   preloadArtistTracks();
 }
 
+function createSpotifyFullPlayerDOM() {
+  if (document.getElementById("spotify-full-player")) return;
+
+  const fullPlayerDiv = document.createElement("div");
+  fullPlayerDiv.className = "spotify-full-player-overlay";
+  fullPlayerDiv.id = "spotify-full-player";
+  fullPlayerDiv.setAttribute("aria-hidden", "true");
+
+  fullPlayerDiv.innerHTML = `
+    <div class="sp-full-container">
+      <div class="sp-full-header">
+        <button class="sp-full-close-btn" id="sp-full-close-btn" title="Collapse Player">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="sp-full-header-text">
+          <span class="sp-full-playing-from">PLAYING FROM PLAYLIST</span>
+          <span class="sp-full-playlist-name" id="sp-full-playlist-name">Sanctuary Playlist</span>
+        </div>
+        <button class="sp-full-menu-btn" title="Options">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+      </div>
+
+      <div class="sp-full-body">
+        <div class="sp-full-cover-wrap">
+          <img src="" id="sp-full-cover" alt="Album Cover" />
+        </div>
+
+        <div class="sp-full-track-info">
+          <div class="sp-full-meta">
+            <h2 class="sp-full-title" id="sp-full-title">Song Title</h2>
+            <p class="sp-full-artist" id="sp-full-artist">Artist Name</p>
+          </div>
+          <button class="sp-full-like-btn" id="sp-full-like-btn" title="Like">
+            <i class="fa-solid fa-circle-check"></i>
+          </button>
+        </div>
+
+        <div class="sp-full-progress-section">
+          <div class="progress-bar-bg" id="sp-full-progress-bg">
+            <div class="progress-bar-fill" id="sp-full-progress-fill"></div>
+          </div>
+          <div class="sp-full-time-row">
+            <span id="sp-full-curr-time">0:00</span>
+            <span id="sp-full-total-time">0:00</span>
+          </div>
+        </div>
+
+        <div class="sp-full-controls-row">
+          <button class="spotify-btn-ctrl" id="sp-full-btn-shuffle" title="Shuffle (Acak)">
+            <i class="fa-solid fa-shuffle"></i>
+          </button>
+          <button class="spotify-btn-ctrl" id="sp-full-btn-prev" title="Previous Track">
+            <i class="fa-solid fa-backward-step"></i>
+          </button>
+          <button class="spotify-btn-ctrl spotify-btn-play sp-full-play-big" id="sp-full-btn-play" title="Play / Pause">
+            <i class="fa-solid fa-play" id="sp-full-play-icon"></i>
+          </button>
+          <button class="spotify-btn-ctrl" id="sp-full-btn-next" title="Next Track">
+            <i class="fa-solid fa-forward-step"></i>
+          </button>
+          <button class="spotify-btn-ctrl" id="sp-full-btn-repeat" title="Repeat (Ulang)">
+            <i class="fa-solid fa-repeat"></i>
+          </button>
+        </div>
+
+        <div class="sp-full-footer">
+          <div class="sp-full-device">
+            <i class="fa-solid fa-compact-disc"></i>
+            <span>Fadhil's Music Sanctuary</span>
+          </div>
+          <div class="sp-full-extra-actions">
+            <i class="fa-solid fa-share-nodes"></i>
+            <i class="fa-solid fa-bars-staggered"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(fullPlayerDiv);
+}
+
+function openSpotifyFullPlayer() {
+  createSpotifyFullPlayerDOM();
+  setupSpotifyControls();
+  setupProgressScrubbing();
+
+  const fullPlayer = document.getElementById("spotify-full-player");
+  if (!fullPlayer) return;
+
+  const currentTracks = getTracks();
+  const track = currentTracks[currentTrackIdx];
+  if (track) {
+    const spFullTitle = document.getElementById("sp-full-title");
+    const spFullArtist = document.getElementById("sp-full-artist");
+    const spFullCover = document.getElementById("sp-full-cover");
+    if (spFullTitle) spFullTitle.innerText = track.title;
+    if (spFullArtist) spFullArtist.innerText = track.artist || "";
+    if (spFullCover) spFullCover.src = encodeURI(fixPath(track.cover));
+  }
+
+  const spFullPlayIcon = document.getElementById("sp-full-play-icon");
+  if (spFullPlayIcon) {
+    spFullPlayIcon.className = isPlaying ? "fa-solid fa-pause" : "fa-solid fa-play";
+  }
+
+  updateShuffleRepeatUI();
+
+  fullPlayer.classList.add("active");
+  fullPlayer.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeSpotifyFullPlayer() {
+  const fullPlayer = document.getElementById("spotify-full-player");
+  if (!fullPlayer) return;
+  fullPlayer.classList.remove("active");
+  fullPlayer.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
 function setupSpotifyControls() {
+  createSpotifyFullPlayerDOM();
+
   const spBtnPlay = document.getElementById("sp-btn-play");
   const spBtnPrev = document.getElementById("sp-btn-prev");
   const spBtnNext = document.getElementById("sp-btn-next");
@@ -850,33 +974,80 @@ function setupSpotifyControls() {
 
   if (spBtnPlay && !spBtnPlay.dataset.bound) {
     spBtnPlay.dataset.bound = "true";
-    spBtnPlay.addEventListener("click", () => {
-      if (isPlaying) {
-        pauseAudio();
-      } else {
-        playAudio();
-      }
+    spBtnPlay.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (isPlaying) { pauseAudio(); } else { playAudio(); }
     });
   }
 
   if (spBtnPrev && !spBtnPrev.dataset.bound) {
     spBtnPrev.dataset.bound = "true";
-    spBtnPrev.addEventListener("click", () => playPrevTrack());
+    spBtnPrev.addEventListener("click", (e) => { e.stopPropagation(); playPrevTrack(); });
   }
 
   if (spBtnNext && !spBtnNext.dataset.bound) {
     spBtnNext.dataset.bound = "true";
-    spBtnNext.addEventListener("click", () => playNextTrack());
+    spBtnNext.addEventListener("click", (e) => { e.stopPropagation(); playNextTrack(); });
   }
 
   if (spBtnShuffle && !spBtnShuffle.dataset.bound) {
     spBtnShuffle.dataset.bound = "true";
-    spBtnShuffle.addEventListener("click", () => toggleShuffle());
+    spBtnShuffle.addEventListener("click", (e) => { e.stopPropagation(); toggleShuffle(); });
   }
 
   if (spBtnRepeat && !spBtnRepeat.dataset.bound) {
     spBtnRepeat.dataset.bound = "true";
-    spBtnRepeat.addEventListener("click", () => toggleRepeat());
+    spBtnRepeat.addEventListener("click", (e) => { e.stopPropagation(); toggleRepeat(); });
+  }
+
+  // Full Player Modal Controls
+  const closeBtn = document.getElementById("sp-full-close-btn");
+  if (closeBtn && !closeBtn.dataset.bound) {
+    closeBtn.dataset.bound = "true";
+    closeBtn.addEventListener("click", closeSpotifyFullPlayer);
+  }
+
+  const fullPlayBtn = document.getElementById("sp-full-btn-play");
+  if (fullPlayBtn && !fullPlayBtn.dataset.bound) {
+    fullPlayBtn.dataset.bound = "true";
+    fullPlayBtn.addEventListener("click", () => {
+      if (isPlaying) { pauseAudio(); } else { playAudio(); }
+    });
+  }
+
+  const fullPrevBtn = document.getElementById("sp-full-btn-prev");
+  if (fullPrevBtn && !fullPrevBtn.dataset.bound) {
+    fullPrevBtn.dataset.bound = "true";
+    fullPrevBtn.addEventListener("click", () => playPrevTrack());
+  }
+
+  const fullNextBtn = document.getElementById("sp-full-btn-next");
+  if (fullNextBtn && !fullNextBtn.dataset.bound) {
+    fullNextBtn.dataset.bound = "true";
+    fullNextBtn.addEventListener("click", () => playNextTrack());
+  }
+
+  const fullShuffleBtn = document.getElementById("sp-full-btn-shuffle");
+  if (fullShuffleBtn && !fullShuffleBtn.dataset.bound) {
+    fullShuffleBtn.dataset.bound = "true";
+    fullShuffleBtn.addEventListener("click", () => toggleShuffle());
+  }
+
+  const fullRepeatBtn = document.getElementById("sp-full-btn-repeat");
+  if (fullRepeatBtn && !fullRepeatBtn.dataset.bound) {
+    fullRepeatBtn.dataset.bound = "true";
+    fullRepeatBtn.addEventListener("click", () => toggleRepeat());
+  }
+
+  // Open Full Player on clicking bottom bar
+  const bottomPlayer = document.getElementById("spotify-bottom-player");
+  if (bottomPlayer && !bottomPlayer.dataset.modalBound) {
+    bottomPlayer.dataset.modalBound = "true";
+    bottomPlayer.style.cursor = "pointer";
+    bottomPlayer.addEventListener("click", (e) => {
+      if (e.target.closest("button") || e.target.closest("input") || e.target.closest("#progress-bg")) return;
+      openSpotifyFullPlayer();
+    });
   }
 
   updateShuffleRepeatUI();
@@ -914,10 +1085,18 @@ function renderPlaylistTable() {
       <td class="track-duration-cell">${track.duration}</td>
     `;
 
-    // ONLY double click changes and plays the song
+    // Click on row (mobile or desktop)
+    tr.addEventListener("click", () => {
+      if (window.innerWidth <= 768) {
+        loadTrack(idx, true);
+        openSpotifyFullPlayer();
+      }
+    });
+
     tr.addEventListener("dblclick", (e) => {
       e.stopPropagation();
       loadTrack(idx, true);
+      openSpotifyFullPlayer();
     });
 
     tableBody.appendChild(tr);
@@ -968,6 +1147,22 @@ function loadTrack(index, autoPlay = false) {
   if (spArtist) spArtist.innerText = track.artist || "";
   if (spCover) spCover.src = encodeURI(fixPath(track.cover));
 
+  // Update Spotify Full Player Overlay Elements
+  const spFullTitle = document.getElementById("sp-full-title");
+  const spFullArtist = document.getElementById("sp-full-artist");
+  const spFullCover = document.getElementById("sp-full-cover");
+  if (spFullTitle) spFullTitle.innerText = track.title;
+  if (spFullArtist) spFullArtist.innerText = track.artist || "";
+  if (spFullCover) spFullCover.src = encodeURI(fixPath(track.cover));
+
+  const spFullPlaylistName = document.getElementById("sp-full-playlist-name");
+  if (spFullPlaylistName) {
+    const heroTitle = document.querySelector(".hero-title");
+    if (heroTitle) {
+      spFullPlaylistName.innerText = heroTitle.innerText.replace("♾️", "").trim();
+    }
+  }
+
   // Update Pill selection (artist pages)
   if (playlistPills) {
     const pills = playlistPills.querySelectorAll(".pill-item");
@@ -989,15 +1184,19 @@ function loadTrack(index, autoPlay = false) {
     const srcPath = fixPath(track.src);
 
     audioElement.onloadedmetadata = () => {
+      let timeStr = track.duration;
       if (audioElement.duration && !isNaN(audioElement.duration) && isFinite(audioElement.duration)) {
         const mins = Math.floor(audioElement.duration / 60);
         const secs = Math.floor(audioElement.duration % 60);
-        if (totalTimeEl) totalTimeEl.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-      } else {
-        if (totalTimeEl) totalTimeEl.innerText = track.duration;
+        timeStr = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
       }
+      if (totalTimeEl) totalTimeEl.innerText = timeStr;
+      const spFullTotalTime = document.getElementById("sp-full-total-time");
+      if (spFullTotalTime) spFullTotalTime.innerText = timeStr;
     };
     if (totalTimeEl) totalTimeEl.innerText = track.duration;
+    const spFullTotalTime = document.getElementById("sp-full-total-time");
+    if (spFullTotalTime) spFullTotalTime.innerText = track.duration;
 
     loadAudioSourceSafely(srcPath, autoPlay);
   } else {
@@ -1018,6 +1217,8 @@ function playAudio() {
   if (playIcon) playIcon.className = "fa-solid fa-pause";
   const spPlayIcon = document.getElementById("sp-play-icon");
   if (spPlayIcon) spPlayIcon.className = "fa-solid fa-pause";
+  const spFullPlayIcon = document.getElementById("sp-full-play-icon");
+  if (spFullPlayIcon) spFullPlayIcon.className = "fa-solid fa-pause";
 
   if (vinylDisc) vinylDisc.classList.add("playing");
   if (turntableDeck) turntableDeck.classList.add("playing");
@@ -1037,6 +1238,8 @@ function pauseAudio() {
   if (playIcon) playIcon.className = "fa-solid fa-play";
   const spPlayIcon = document.getElementById("sp-play-icon");
   if (spPlayIcon) spPlayIcon.className = "fa-solid fa-play";
+  const spFullPlayIcon = document.getElementById("sp-full-play-icon");
+  if (spFullPlayIcon) spFullPlayIcon.className = "fa-solid fa-play";
 
   if (vinylDisc) vinylDisc.classList.remove("playing");
   if (turntableDeck) turntableDeck.classList.remove("playing");
@@ -1096,29 +1299,30 @@ let isSeekingTimeout = null;
 let pendingSeekTime = null;
 let ignoreNextClick = false;
 
+let activeScrubBg = null;
+
 if (audioElement) {
   audioElement.addEventListener("timeupdate", () => {
     const duration = getTrackDuration();
     if (!isDraggingProgress && !isSeekingTimeout && duration > 0) {
       const currentTime = audioElement.currentTime || 0;
       const pct = Math.min(100, Math.max(0, (currentTime / duration) * 100));
-      const pFill = document.getElementById("progress-fill") || progressFill;
-      const cTime = document.getElementById("curr-time") || currTimeEl;
-      if (pFill) pFill.style.width = `${pct}%`;
 
-      // Format Time
+      const pFills = [document.getElementById("progress-fill"), document.getElementById("sp-full-progress-fill")].filter(Boolean);
+      pFills.forEach(f => f.style.width = `${pct}%`);
+
       const currentMins = Math.floor(currentTime / 60);
       const currentSecs = Math.floor(currentTime % 60);
-      if (cTime) cTime.innerText = `${currentMins}:${currentSecs < 10 ? '0' : ''}${currentSecs}`;
+      const timeStr = `${currentMins}:${currentSecs < 10 ? '0' : ''}${currentSecs}`;
+
+      const cTimes = [document.getElementById("curr-time"), document.getElementById("sp-full-curr-time")].filter(Boolean);
+      cTimes.forEach(ct => ct.innerText = timeStr);
     }
   });
 }
 
-function calculateSeekFromEvent(e, updateAudioNow = false) {
-  const pBg = document.getElementById("progress-bg") || progressBg;
-  const pFill = document.getElementById("progress-fill") || progressFill;
-  const cTime = document.getElementById("curr-time") || currTimeEl;
-
+function calculateSeekFromEvent(e, pBgTarget, updateAudioNow = false) {
+  const pBg = pBgTarget || document.getElementById("progress-bg") || progressBg;
   if (!pBg) return 0;
   const duration = getTrackDuration();
   if (duration <= 0) return 0;
@@ -1127,14 +1331,16 @@ function calculateSeekFromEvent(e, updateAudioNow = false) {
   const clientX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : (e.clientX || 0);
   const clickPos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
 
-  // Update UI fill percentage
-  if (pFill) pFill.style.width = `${clickPos * 100}%`;
+  const pFills = [document.getElementById("progress-fill"), document.getElementById("sp-full-progress-fill")].filter(Boolean);
+  pFills.forEach(f => f.style.width = `${clickPos * 100}%`);
 
-  // Calculate timestamp
   const seekTime = clickPos * duration;
   const mins = Math.floor(seekTime / 60);
   const secs = Math.floor(seekTime % 60);
-  if (cTime) cTime.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  const timeStr = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+
+  const cTimes = [document.getElementById("curr-time"), document.getElementById("sp-full-curr-time")].filter(Boolean);
+  cTimes.forEach(ct => ct.innerText = timeStr);
 
   if (updateAudioNow && audioElement && isFinite(seekTime)) {
     let maxDur = duration;
@@ -1175,54 +1381,61 @@ function calculateSeekFromEvent(e, updateAudioNow = false) {
 }
 
 function setupProgressScrubbing() {
-  const pBg = document.getElementById("progress-bg") || progressBg;
-  if (!pBg || pBg.dataset.scrubBound === "true") return;
-  pBg.dataset.scrubBound = "true";
+  const pBgs = [document.getElementById("progress-bg"), document.getElementById("sp-full-progress-bg")].filter(Boolean);
 
-  pBg.addEventListener("mousedown", (e) => {
-    isDraggingProgress = true;
-    pBg.classList.add("dragging");
-    pendingSeekTime = calculateSeekFromEvent(e, false);
+  pBgs.forEach(pBg => {
+    if (pBg.dataset.scrubBound === "true") return;
+    pBg.dataset.scrubBound = "true";
+
+    pBg.addEventListener("mousedown", (e) => {
+      isDraggingProgress = true;
+      activeScrubBg = pBg;
+      pBg.classList.add("dragging");
+      pendingSeekTime = calculateSeekFromEvent(e, pBg, false);
+    });
+
+    pBg.addEventListener("click", (e) => {
+      if (ignoreNextClick) return;
+      calculateSeekFromEvent(e, pBg, true);
+    });
+
+    pBg.addEventListener("touchstart", (e) => {
+      isDraggingProgress = true;
+      activeScrubBg = pBg;
+      pBg.classList.add("dragging");
+      pendingSeekTime = calculateSeekFromEvent(e, pBg, false);
+    }, { passive: true });
   });
 
   window.addEventListener("mousemove", (e) => {
-    if (isDraggingProgress) {
-      pendingSeekTime = calculateSeekFromEvent(e, false);
+    if (isDraggingProgress && activeScrubBg) {
+      pendingSeekTime = calculateSeekFromEvent(e, activeScrubBg, false);
     }
   });
 
   window.addEventListener("mouseup", (e) => {
-    if (isDraggingProgress) {
-      calculateSeekFromEvent(e, true);
+    if (isDraggingProgress && activeScrubBg) {
+      calculateSeekFromEvent(e, activeScrubBg, true);
       isDraggingProgress = false;
-      pBg.classList.remove("dragging");
+      activeScrubBg.classList.remove("dragging");
+      activeScrubBg = null;
       ignoreNextClick = true;
       setTimeout(() => { ignoreNextClick = false; }, 100);
     }
   });
 
-  pBg.addEventListener("click", (e) => {
-    if (ignoreNextClick) return;
-    calculateSeekFromEvent(e, true);
-  });
-
-  pBg.addEventListener("touchstart", (e) => {
-    isDraggingProgress = true;
-    pBg.classList.add("dragging");
-    pendingSeekTime = calculateSeekFromEvent(e, false);
-  }, { passive: true });
-
   window.addEventListener("touchmove", (e) => {
-    if (isDraggingProgress) {
-      pendingSeekTime = calculateSeekFromEvent(e, false);
+    if (isDraggingProgress && activeScrubBg) {
+      pendingSeekTime = calculateSeekFromEvent(e, activeScrubBg, false);
     }
   }, { passive: true });
 
   window.addEventListener("touchend", (e) => {
-    if (isDraggingProgress) {
-      calculateSeekFromEvent(e, true);
+    if (isDraggingProgress && activeScrubBg) {
+      calculateSeekFromEvent(e, activeScrubBg, true);
       isDraggingProgress = false;
-      pBg.classList.remove("dragging");
+      activeScrubBg.classList.remove("dragging");
+      activeScrubBg = null;
     }
   });
 }
