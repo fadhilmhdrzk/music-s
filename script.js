@@ -859,9 +859,7 @@ function createSpotifyFullPlayerDOM() {
           <span class="sp-full-playing-from">PLAYING FROM PLAYLIST</span>
           <span class="sp-full-playlist-name" id="sp-full-playlist-name">Sanctuary Playlist</span>
         </div>
-        <button class="sp-full-menu-btn" title="Options">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-        </button>
+        <div style="width: 36px;"></div>
       </div>
 
       <div class="sp-full-body">
@@ -874,9 +872,6 @@ function createSpotifyFullPlayerDOM() {
             <h2 class="sp-full-title" id="sp-full-title">Song Title</h2>
             <p class="sp-full-artist" id="sp-full-artist">Artist Name</p>
           </div>
-          <button class="sp-full-like-btn" id="sp-full-like-btn" title="Like">
-            <i class="fa-solid fa-circle-check"></i>
-          </button>
         </div>
 
         <div class="sp-full-progress-section">
@@ -911,10 +906,6 @@ function createSpotifyFullPlayerDOM() {
           <div class="sp-full-device">
             <i class="fa-solid fa-compact-disc"></i>
             <span>Fadhil's Music Sanctuary</span>
-          </div>
-          <div class="sp-full-extra-actions">
-            <i class="fa-solid fa-share-nodes"></i>
-            <i class="fa-solid fa-bars-staggered"></i>
           </div>
         </div>
       </div>
