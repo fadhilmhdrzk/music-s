@@ -3347,7 +3347,7 @@ footer p span {
     gap: 10px !important;
   }
 
-  .spotify-btn-ctrl:not(.spotify-btn-play):not(#sp-btn-next):not(#sp-btn-prev) {
+  .spotify-bottom-player .spotify-btn-ctrl:not(.spotify-btn-play):not(#sp-btn-next):not(#sp-btn-prev) {
     display: none !important;
   }
 
@@ -3576,6 +3576,9 @@ footer p span {
 }
 
 .sp-full-controls-row .spotify-btn-ctrl {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
   font-size: 1.35rem;
   color: #b3b3b3;
   transition: color 0.2s ease, transform 0.2s ease;
