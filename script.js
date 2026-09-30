@@ -692,7 +692,7 @@ function toggleRepeat() {
 }
 
 function updateShuffleRepeatUI() {
-  const shuffleBtns = [document.getElementById("sp-btn-shuffle"), document.getElementById("btn-shuffle"), document.getElementById("sp-full-btn-shuffle"), document.getElementById("btn-playlist-shuffle-action")];
+  const shuffleBtns = [document.getElementById("sp-btn-shuffle"), document.getElementById("btn-shuffle"), document.getElementById("sp-full-btn-shuffle")];
   const repeatBtns = [document.getElementById("sp-btn-repeat"), document.getElementById("btn-repeat"), document.getElementById("sp-full-btn-repeat")];
 
   shuffleBtns.forEach(btn => {
@@ -701,6 +701,119 @@ function updateShuffleRepeatUI() {
 
   repeatBtns.forEach(btn => {
     if (btn) btn.classList.toggle("active", isRepeat);
+  });
+}
+
+// DOM Elements
+const audioElement = document.getElementById("audio-element");
+const turntableDeck = document.getElementById("turntable-deck");
+const vinylDisc = document.getElementById("vinyl-disc");
+const vinylLabel = document.getElementById("vinyl-label");
+const trackAlbum = document.getElementById("track-album");
+const trackTitle = document.getElementById("track-title");
+const trackArtist = document.getElementById("track-artist");
+const playBtn = document.getElementById("btn-play");
+const playIcon = document.getElementById("play-icon");
+const prevBtn = document.getElementById("btn-prev");
+const nextBtn = document.getElementById("btn-next");
+const currTimeEl = document.getElementById("curr-time");
+const totalTimeEl = document.getElementById("total-time");
+const progressBg = document.getElementById("progress-bg");
+const progressFill = document.getElementById("progress-fill");
+const volSlider = document.getElementById("vol-slider");
+const volIcon = document.getElementById("vol-icon");
+const playlistPills = document.getElementById("playlist-pills");
+const quoteText = document.getElementById("quote-text");
+const sleevesGrid = document.getElementById("sleeves-grid");
+const visualizerWrap = document.querySelector(".visualizer-bar-wrap");
+const vBars = document.querySelectorAll(".v-bar");
+
+// Spotify Bottom Player Elements
+const spTitle = document.getElementById("sp-title");
+const spArtist = document.getElementById("sp-artist");
+const spCover = document.getElementById("sp-cover");
+
+// Modal DOM Elements
+const meaningModal = document.getElementById("meaning-modal");
+const modalCloseBtn = document.getElementById("modal-close-btn");
+const modalCoverImg = document.getElementById("modal-cover-img");
+const modalAlbumName = document.getElementById("modal-album-name");
+const modalTrackTitle = document.getElementById("modal-track-title");
+const modalQuote = document.getElementById("modal-quote");
+const modalMeaningText = document.getElementById("modal-meaning-text");
+const btnPlayModal = document.getElementById("btn-play-modal");
+
+// Web Audio API Real Frequency Analyzer
+let audioCtx = null;
+let analyser = null;
+let dataArray = null;
+let sourceNode = null;
+let visualizerAnimFrame = null;
+
+function initAudioContext() {
+  if (!audioCtx) {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) {
+        audioCtx = new AudioContextClass();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+        sourceNode = audioCtx.createMediaElementSource(audioElement);
+        sourceNode.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+      }
+    } catch (e) {
+      console.log("AudioContext note:", e);
+    }
+  }
+}
+
+function startVisualizer() {
+  if (visualizerWrap) visualizerWrap.classList.add("playing");
+  initAudioContext();
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  function draw() {
+    if (!isPlaying) return;
+    if (analyser && dataArray) {
+      analyser.getByteFrequencyData(dataArray);
+      const indices = [2, 5, 8, 12, 16];
+      vBars.forEach((bar, i) => {
+        const val = dataArray[indices[i]] || 0;
+        const height = 6 + (val / 255) * 22;
+        bar.style.height = `${height}px`;
+      });
+    }
+    visualizerAnimFrame = requestAnimationFrame(draw);
+  }
+
+  cancelAnimationFrame(visualizerAnimFrame);
+  draw();
+}
+
+function stopVisualizer() {
+  cancelAnimationFrame(visualizerAnimFrame);
+  if (visualizerWrap) visualizerWrap.classList.remove("playing");
+  vBars.forEach(bar => {
+    bar.style.height = "";
+  });
+}
+
+/* ==========================================================================
+   MUSIC PLAYER LOGIC (TURNTABLE PLAYER)
+   ========================================================================== */
+
+const preloadedAudios = [];
+function preloadArtistTracks() {
+  const currentTracks = getTracks();
+  currentTracks.forEach(track => {
+    const a = new Audio();
+    a.preload = "auto";
+    a.src = fixPath(track.src);
+    preloadedAudios.push(a);
   });
 }
 
@@ -724,7 +837,6 @@ function initPlayer() {
   renderSleevesGallery();
   setupProgressScrubbing();
   setupSpotifyControls();
-  setupPlaylistSearchAndShuffle();
   loadTrack(currentTrackIdx, false);
   preloadArtistTracks();
 }
@@ -1008,73 +1120,16 @@ function setupSpotifyControls() {
   updateShuffleRepeatUI();
 }
 
-function setupPlaylistSearchAndShuffle() {
-  const searchInput = document.getElementById("playlist-search-input");
-  const clearBtn = document.getElementById("search-clear-btn");
-  const shuffleActionBtn = document.getElementById("btn-playlist-shuffle-action");
-
-  if (searchInput && !searchInput.dataset.bound) {
-    searchInput.dataset.bound = "true";
-    searchInput.addEventListener("input", (e) => {
-      const val = e.target.value;
-      if (clearBtn) clearBtn.style.display = val ? "inline-block" : "none";
-      renderPlaylistTable(val);
-    });
-  }
-
-  if (clearBtn && !clearBtn.dataset.bound) {
-    clearBtn.dataset.bound = "true";
-    clearBtn.addEventListener("click", () => {
-      if (searchInput) searchInput.value = "";
-      clearBtn.style.display = "none";
-      renderPlaylistTable("");
-    });
-  }
-
-  if (shuffleActionBtn && !shuffleActionBtn.dataset.bound) {
-    shuffleActionBtn.dataset.bound = "true";
-    shuffleActionBtn.addEventListener("click", () => {
-      isShuffle = true;
-      updateShuffleRepeatUI();
-      playNextTrack();
-    });
-  }
-}
-
-function renderPlaylistTable(searchQuery = "") {
+function renderPlaylistTable() {
   const tableBody = document.getElementById("playlist-table-body");
   if (!tableBody) return;
   tableBody.innerHTML = "";
-  let currentTracks = getTracks();
+  const currentTracks = getTracks();
 
-  if (searchQuery && searchQuery.trim() !== "") {
-    const q = searchQuery.toLowerCase().trim();
-    currentTracks = currentTracks.filter(t => 
-      t.title.toLowerCase().includes(q) || 
-      (t.artist && t.artist.toLowerCase().includes(q)) || 
-      (t.album && t.album.toLowerCase().includes(q))
-    );
-  }
-
-  if (currentTracks.length === 0) {
-    tableBody.innerHTML = `
-      <tr>
-        <td colspan="4" style="text-align: center; padding: 32px 16px; color: var(--text-muted); font-size: 0.9rem;">
-          <i class="fa-solid fa-magnifying-glass" style="margin-right: 8px; opacity: 0.7;"></i> No songs found matching "${searchQuery}"
-        </td>
-      </tr>
-    `;
-    return;
-  }
-
-  const allTracks = getTracks();
-  currentTracks.forEach((track) => {
-    const trackIdx = allTracks.findIndex(t => t.id === track.id && t.title === track.title);
-    const safeIdx = trackIdx >= 0 ? trackIdx : 0;
-
+  currentTracks.forEach((track, idx) => {
     const tr = document.createElement("tr");
-    tr.className = `playlist-row ${safeIdx === currentTrackIdx ? (isPlaying ? 'playing' : 'selected') : ''}`;
-    tr.dataset.index = safeIdx;
+    tr.className = `playlist-row ${idx === currentTrackIdx ? (isPlaying ? 'playing' : 'selected') : ''}`;
+    tr.dataset.index = idx;
 
     const resolvedCover = encodeURI(fixPath(track.cover));
     const fallbackCover = encodeURI(fixPath("assets/images/Daniel Caesar.jfif"));
@@ -1082,7 +1137,7 @@ function renderPlaylistTable(searchQuery = "") {
 
     tr.innerHTML = `
       <td class="track-num-cell">
-        <span class="track-num-text">${safeIdx + 1}</span>
+        <span class="track-num-text">${idx + 1}</span>
         <i class="fa-solid fa-play play-icon-hover"></i>
         <i class="fa-solid fa-volume-high playing-eq-icon" style="display:none;"></i>
       </td>
@@ -1099,12 +1154,12 @@ function renderPlaylistTable(searchQuery = "") {
 
     // Click on row plays the track without popping up full player overlay
     tr.addEventListener("click", () => {
-      loadTrack(safeIdx, true);
+      loadTrack(idx, true);
     });
 
     tr.addEventListener("dblclick", (e) => {
       e.stopPropagation();
-      loadTrack(safeIdx, true);
+      loadTrack(idx, true);
     });
 
     tableBody.appendChild(tr);
