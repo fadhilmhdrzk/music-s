@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="wont-live-here">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>♾️ Playlist — Fadhil's Music Sanctuary</title>
+  <meta name="description" content="♾️ dedicated vinyl listening room with 3D album sleeves and modal stories." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="../styles.css?v=20260923_v1000" />
+</head>
+<body data-artist="playlist-infinity">
+
+  <!-- GLOBAL NAVIGATION HEADER -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="logo">
+        <i class="fa-solid fa-compact-disc"></i>
+        <span>FADHIL'S MUSIC</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-item">Home Profile</a></li>
+        <li class="nav-dropdown-wrap">
+          <a href="playlist-infinity.html" class="nav-item nav-btn-dc active">
+            <i class="fa-solid fa-record-vinyl"></i> ♾️
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- BACK TO HOME TOP BAR -->
+  <div class="artist-top-bar">
+    <div class="container">
+      <a href="../index.html" class="btn-back-home">
+        <i class="fa-solid fa-arrow-left"></i> Back to Fadhil's Profile
+      </a>
+    </div>
+  </div>
+
+  <main style="padding-bottom: 110px;">
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-badge">
+          <i class="fa-solid fa-infinity"></i> Curated Mixed Playlist
+        </div>
+        <h1 class="hero-title"><span class="hero-emoji">♾️</span> <span class="gradient-text">Playlist Sanctuary</span></h1>
+        <p class="hero-subtitle">
+          Koleksi lagu pilihan dari berbagai artis favorit. Nikmati pengalaman mendengarkan musik ala Spotify.
+        </p>
+      </div>
+    </section>
+
+    <!-- SPOTIFY-STYLE TRACKLIST TABLE SECTION -->
+    <section class="playlist-section">
+      <div class="container">
+        <div class="playlist-table-container">
+          <table class="playlist-table">
+            <thead>
+              <tr>
+                <th style="width: 50px; text-align: center;">#</th>
+                <th>Judul & Artis</th>
+                <th>Album</th>
+                <th style="width: 80px; text-align: right;"><i class="fa-regular fa-clock"></i></th>
+              </tr>
+            </thead>
+            <tbody id="playlist-table-body">
+              <!-- Dynamically populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PERSISTENT SPOTIFY BOTTOM PLAYER -->
+  <div class="spotify-bottom-player" id="spotify-bottom-player">
+    <div class="spotify-now-playing">
+      <img src="../assets/images/Daniel Caesar.jfif" id="sp-cover" alt="Track Cover" />
+      <div class="spotify-song-info">
+        <span class="spotify-song-title" id="sp-title">Cheerleader (Felix Jaehn Remix)</span>
+        <span class="spotify-song-artist" id="sp-artist">OMI</span>
+      </div>
+    </div>
+
+    <div class="spotify-center-controls">
+      <div class="spotify-buttons-row">
+        <button class="spotify-btn-ctrl" id="sp-btn-shuffle" title="Shuffle (Acak Lagu)">
+          <i class="fa-solid fa-shuffle"></i>
+        </button>
+        <button class="spotify-btn-ctrl" id="sp-btn-prev" title="Previous Track">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
+        <button class="spotify-btn-ctrl spotify-btn-play" id="sp-btn-play" title="Play / Pause">
+          <i class="fa-solid fa-play" id="sp-play-icon"></i>
+        </button>
+        <button class="spotify-btn-ctrl" id="sp-btn-next" title="Next Track">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+        <button class="spotify-btn-ctrl" id="sp-btn-repeat" title="Repeat (Ulang Lagu)">
+          <i class="fa-solid fa-repeat"></i>
+        </button>
+      </div>
+
+      <div class="spotify-progress-wrap">
+        <span class="spotify-time-str" id="curr-time">0:00</span>
+        <div class="progress-bar-bg" id="progress-bg" style="flex: 1;">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <span class="spotify-time-str" id="total-time">3:01</span>
+      </div>
+    </div>
+
+    <div class="spotify-right-controls">
+      <i class="fa-solid fa-volume-high" id="vol-icon" title="Mute / Unmute" style="cursor: pointer; color: var(--text-muted);"></i>
+      <input type="range" class="volume-slider" id="vol-slider" min="0" max="1" step="0.05" value="0.8" style="width: 90px;" />
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p><span>Fadhil's Music Sanctuary</span> &bull; 2026</p>
+    </div>
+  </footer>
+
+  <audio id="audio-element"></audio>
+  <script src="../script.js?v=20260923_v1000"></script>
+</body>
+</html>

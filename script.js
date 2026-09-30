@@ -379,6 +379,225 @@ const perungguTracks = [
   }
 ];
 
+const infinityTracks = [
+  {
+    id: 0,
+    title: "Cheerleader (Felix Jaehn Remix)",
+    artist: "OMI",
+    album: "Me 4 U (2015)",
+    cover: "assets/images/cheerleader.png",
+    src: "assets/audio/inf_01_cheerleader.webm",
+    duration: "3:01"
+  },
+  {
+    id: 1,
+    title: "Locked Out of Heaven",
+    artist: "Bruno Mars",
+    album: "Unorthodox Jukebox (2012)",
+    cover: "assets/images/Locked out of a heaven.jfif",
+    src: "assets/audio/inf_02_locked_out_of_heaven.webm",
+    duration: "3:53"
+  },
+  {
+    id: 2,
+    title: "Cheap Thrills (feat. Sean Paul)",
+    artist: "Sia ft. Sean Paul",
+    album: "This Is Acting (2016)",
+    cover: "assets/images/Cheap thrills.jfif",
+    src: "assets/audio/inf_03_cheap_thrills.webm",
+    duration: "3:44"
+  },
+  {
+    id: 3,
+    title: "Perfect Strangers (ft. JP Cooper)",
+    artist: "Jonas Blue ft. JP Cooper",
+    album: "Blue (2016)",
+    cover: "assets/images/Perfect strangers.jfif",
+    src: "assets/audio/inf_04_perfect_strangers.webm",
+    duration: "3:16"
+  },
+  {
+    id: 4,
+    title: "Rude",
+    artist: "MAGIC!",
+    album: "Don't Kill the Magic (2013)",
+    cover: "assets/images/rude.png",
+    src: "assets/audio/inf_05_rude.webm",
+    duration: "3:44"
+  },
+  {
+    id: 5,
+    title: "Rockabye (feat. Sean Paul & Anne-Marie)",
+    artist: "Clean Bandit ft. Sean Paul & Anne-Marie",
+    album: "What Is Love? (2016)",
+    cover: "assets/images/Rockabye.jfif",
+    src: "assets/audio/inf_06_rockabye.webm",
+    duration: "4:11"
+  },
+  {
+    id: 6,
+    title: "Treat You Better",
+    artist: "Shawn Mendes",
+    album: "Illuminate (2016)",
+    cover: "assets/images/Treat you better.png",
+    src: "assets/audio/inf_07_treat_you_better.webm",
+    duration: "3:07"
+  },
+  {
+    id: 7,
+    title: "One More Night",
+    artist: "Maroon 5",
+    album: "Overexposed (2012)",
+    cover: "assets/images/One more night.jfif",
+    src: "assets/audio/inf_08_one_more_night.webm",
+    duration: "3:39"
+  },
+  {
+    id: 8,
+    title: "Payphone (ft. Wiz Khalifa)",
+    artist: "Maroon 5 ft. Wiz Khalifa",
+    album: "Overexposed (2012)",
+    cover: "assets/images/One more night.jfif",
+    src: "assets/audio/inf_09_payphone.webm",
+    duration: "3:51"
+  },
+  {
+    id: 9,
+    title: "Drag Me Down",
+    artist: "One Direction",
+    album: "Made in the A.M. (2015)",
+    cover: "assets/images/Drag me down.jfif",
+    src: "assets/audio/inf_10_drag_me_down.webm",
+    duration: "3:14"
+  },
+  {
+    id: 10,
+    title: "Closer (ft. Halsey)",
+    artist: "The Chainsmokers ft. Halsey",
+    album: "Collage (2016)",
+    cover: "assets/images/Closer.jfif",
+    src: "assets/audio/inf_11_closer.webm",
+    duration: "4:04"
+  },
+  {
+    id: 11,
+    title: "One Last Time",
+    artist: "Ariana Grande",
+    album: "My Everything (2014)",
+    cover: "assets/images/One last time.jfif",
+    src: "assets/audio/inf_12_one_last_time.webm",
+    duration: "3:17"
+  },
+  {
+    id: 12,
+    title: "The Lazy Song",
+    artist: "Bruno Mars",
+    album: "Doo-Wops & Hooligans (2010)",
+    cover: "assets/images/The lazy song.jpg",
+    src: "assets/audio/inf_13_the_lazy_song.webm",
+    duration: "3:15"
+  },
+  {
+    id: 13,
+    title: "Steal My Girl",
+    artist: "One Direction",
+    album: "Four (2014)",
+    cover: "assets/images/Steal my girl.png",
+    src: "assets/audio/inf_14_steal_my_girl.webm",
+    duration: "3:48"
+  },
+  {
+    id: 14,
+    title: "Roar",
+    artist: "Katy Perry",
+    album: "PRISM (2013)",
+    cover: "assets/images/Roar.jfif",
+    src: "assets/audio/inf_15_roar.webm",
+    duration: "3:43"
+  },
+  {
+    id: 15,
+    title: "Bang Bang",
+    artist: "Jessie J, Ariana Grande & Nicki Minaj",
+    album: "Sweet Talker (2014)",
+    cover: "assets/images/Bang bang.jpg",
+    src: "assets/audio/inf_16_bang_bang.webm",
+    duration: "3:19"
+  },
+  {
+    id: 16,
+    title: "Replay",
+    artist: "Iyaz",
+    album: "Replay (2009)",
+    cover: "assets/images/Replay.jfif",
+    src: "assets/audio/inf_17_replay.webm",
+    duration: "3:02"
+  },
+  {
+    id: 17,
+    title: "Unconditionally",
+    artist: "Katy Perry",
+    album: "PRISM (2013)",
+    cover: "assets/images/Unconditionally.jfif",
+    src: "assets/audio/inf_18_unconditionally.webm",
+    duration: "3:48"
+  },
+  {
+    id: 18,
+    title: "Water",
+    artist: "Tyla",
+    album: "TYLA (2023)",
+    cover: "assets/images/Water.jfif",
+    src: "assets/audio/inf_19_water.webm",
+    duration: "3:20"
+  },
+  {
+    id: 19,
+    title: "Great Expectation",
+    artist: "Sienna Spiro",
+    album: "Great Expectation - Single (2024)",
+    cover: "assets/images/Great expectation.jfif",
+    src: "assets/audio/inf_20_sienna_spiro.webm",
+    duration: "2:52"
+  }
+];
+
+const grayscaleTracks = [
+  {
+    id: 0,
+    title: "Grayscale Track 1",
+    artist: "Various Artists",
+    album: "The World in Grayscale",
+    cover: "assets/images/Frank Ocean.jfif",
+    src: "assets/audio/fo_white_ferrari.webm",
+    duration: "4:08"
+  }
+];
+
+const hardTracks = [
+  {
+    id: 0,
+    title: "Hard Track 1",
+    artist: "Various Artists",
+    album: "SHIT GOES HARD",
+    cover: "assets/images/LANY.jfif",
+    src: "assets/audio/lany_cause.webm",
+    duration: "4:18"
+  }
+];
+
+const indosTracks = [
+  {
+    id: 0,
+    title: "Indo Track 1",
+    artist: "Various Indonesian Artists",
+    album: "Indo's Playlist",
+    cover: "assets/images/Dewa 19.jfif",
+    src: "assets/audio/dewa19_kangen.webm",
+    duration: "5:08"
+  }
+];
+
 function fixPath(path) {
   if (!path) return "";
   const isSubFolder = window.location.pathname.includes('/pages/') || window.location.href.includes('/pages/');
@@ -389,14 +608,20 @@ function fixPath(path) {
 }
 
 function getTracks() {
-  const currentArtist = document.body.getAttribute("data-artist");
-  if (currentArtist === "frank-ocean") return frankOceanTracks;
-  if (currentArtist === "wave-to-earth") return waveToEarthTracks;
-  if (currentArtist === "lany") return lanyTracks;
-  if (currentArtist === "dewa-19") return dewa19Tracks;
-  if (currentArtist === "hindia") return hindiaTracks;
-  if (currentArtist === "sal-priadi") return salPriadiTracks;
-  if (currentArtist === "perunggu") return perungguTracks;
+  const bodyArtist = document.body ? document.body.getAttribute("data-artist") : "";
+  const href = window.location.href.toLowerCase();
+
+  if (bodyArtist === "playlist-infinity" || href.includes("playlist-infinity")) return infinityTracks;
+  if (bodyArtist === "playlist-grayscale" || href.includes("playlist-grayscale")) return grayscaleTracks;
+  if (bodyArtist === "playlist-hard" || href.includes("playlist-hard")) return hardTracks;
+  if (bodyArtist === "playlist-indos" || href.includes("playlist-indos")) return indosTracks;
+  if (bodyArtist === "frank-ocean" || href.includes("frank-ocean")) return frankOceanTracks;
+  if (bodyArtist === "wave-to-earth" || href.includes("wave-to-earth")) return waveToEarthTracks;
+  if (bodyArtist === "lany" || href.includes("lany")) return lanyTracks;
+  if (bodyArtist === "dewa-19" || href.includes("dewa-19")) return dewa19Tracks;
+  if (bodyArtist === "hindia" || href.includes("hindia")) return hindiaTracks;
+  if (bodyArtist === "sal-priadi" || href.includes("sal-priadi")) return salPriadiTracks;
+  if (bodyArtist === "perunggu" || href.includes("perunggu")) return perungguTracks;
   return danielCaesarTracks;
 }
 
@@ -405,6 +630,79 @@ let currentTrackIdx = 0;
 let isPlaying = false;
 let lastVolume = 0.8;
 let selectedModalTrackIdx = 0;
+let isShuffle = false;
+let isRepeat = false;
+
+function playNextTrack() {
+  const tracks = getTracks();
+  if (!tracks || tracks.length === 0) return;
+
+  if (isRepeat) {
+    loadTrack(currentTrackIdx, true);
+    return;
+  }
+
+  if (isShuffle) {
+    if (tracks.length === 1) {
+      loadTrack(0, true);
+      return;
+    }
+    let randomIdx;
+    do {
+      randomIdx = Math.floor(Math.random() * tracks.length);
+    } while (randomIdx === currentTrackIdx && tracks.length > 1);
+    loadTrack(randomIdx, true);
+    return;
+  }
+
+  let nextIdx = (currentTrackIdx + 1) % tracks.length;
+  loadTrack(nextIdx, true);
+}
+
+function playPrevTrack() {
+  const tracks = getTracks();
+  if (!tracks || tracks.length === 0) return;
+
+  if (isShuffle) {
+    if (tracks.length === 1) {
+      loadTrack(0, true);
+      return;
+    }
+    let randomIdx;
+    do {
+      randomIdx = Math.floor(Math.random() * tracks.length);
+    } while (randomIdx === currentTrackIdx && tracks.length > 1);
+    loadTrack(randomIdx, true);
+    return;
+  }
+
+  let prevIdx = currentTrackIdx - 1;
+  if (prevIdx < 0) prevIdx = tracks.length - 1;
+  loadTrack(prevIdx, true);
+}
+
+function toggleShuffle() {
+  isShuffle = !isShuffle;
+  updateShuffleRepeatUI();
+}
+
+function toggleRepeat() {
+  isRepeat = !isRepeat;
+  updateShuffleRepeatUI();
+}
+
+function updateShuffleRepeatUI() {
+  const shuffleBtns = [document.getElementById("sp-btn-shuffle"), document.getElementById("btn-shuffle")];
+  const repeatBtns = [document.getElementById("sp-btn-repeat"), document.getElementById("btn-repeat")];
+
+  shuffleBtns.forEach(btn => {
+    if (btn) btn.classList.toggle("active", isShuffle);
+  });
+
+  repeatBtns.forEach(btn => {
+    if (btn) btn.classList.toggle("active", isRepeat);
+  });
+}
 
 // DOM Elements
 const audioElement = document.getElementById("audio-element");
@@ -413,6 +711,7 @@ const vinylDisc = document.getElementById("vinyl-disc");
 const vinylLabel = document.getElementById("vinyl-label");
 const trackAlbum = document.getElementById("track-album");
 const trackTitle = document.getElementById("track-title");
+const trackArtist = document.getElementById("track-artist");
 const playBtn = document.getElementById("btn-play");
 const playIcon = document.getElementById("play-icon");
 const prevBtn = document.getElementById("btn-prev");
@@ -428,6 +727,11 @@ const quoteText = document.getElementById("quote-text");
 const sleevesGrid = document.getElementById("sleeves-grid");
 const visualizerWrap = document.querySelector(".visualizer-bar-wrap");
 const vBars = document.querySelectorAll(".v-bar");
+
+// Spotify Bottom Player Elements
+const spTitle = document.getElementById("sp-title");
+const spArtist = document.getElementById("sp-artist");
+const spCover = document.getElementById("sp-cover");
 
 // Modal DOM Elements
 const meaningModal = document.getElementById("meaning-modal");
@@ -499,7 +803,7 @@ function stopVisualizer() {
 }
 
 /* ==========================================================================
-   VINYL MUSIC PLAYER LOGIC
+   MUSIC PLAYER LOGIC (TURNTABLE PLAYER)
    ========================================================================== */
 
 const preloadedAudios = [];
@@ -514,22 +818,111 @@ function preloadArtistTracks() {
 }
 
 function initPlayer() {
-  if (!playlistPills) return;
+  currentTrackIdx = 0; // Always start from Track #1 on page load
   const currentTracks = getTracks();
-  // Build playlist pills
-  playlistPills.innerHTML = "";
-  currentTracks.forEach((track, idx) => {
-    const pill = document.createElement("button");
-    pill.className = `pill-item ${idx === currentTrackIdx ? 'active' : ''}`;
-    pill.innerText = track.title;
-    pill.addEventListener("click", () => loadTrack(idx, true));
-    playlistPills.appendChild(pill);
-  });
+  if (playlistPills) {
+    playlistPills.innerHTML = "";
+    currentTracks.forEach((track, idx) => {
+      const pill = document.createElement("button");
+      pill.className = `pill-item ${idx === currentTrackIdx ? 'active' : ''}`;
+      pill.innerText = track.title;
+      pill.addEventListener("dblclick", (e) => {
+        e.stopPropagation();
+        loadTrack(idx, true);
+      });
+      playlistPills.appendChild(pill);
+    });
+  }
 
+  renderPlaylistTable();
   renderSleevesGallery();
   setupProgressScrubbing();
+  setupSpotifyControls();
   loadTrack(currentTrackIdx, false);
   preloadArtistTracks();
+}
+
+function setupSpotifyControls() {
+  const spBtnPlay = document.getElementById("sp-btn-play");
+  const spBtnPrev = document.getElementById("sp-btn-prev");
+  const spBtnNext = document.getElementById("sp-btn-next");
+  const spBtnShuffle = document.getElementById("sp-btn-shuffle");
+  const spBtnRepeat = document.getElementById("sp-btn-repeat");
+
+  if (spBtnPlay && !spBtnPlay.dataset.bound) {
+    spBtnPlay.dataset.bound = "true";
+    spBtnPlay.addEventListener("click", () => {
+      if (isPlaying) {
+        pauseAudio();
+      } else {
+        playAudio();
+      }
+    });
+  }
+
+  if (spBtnPrev && !spBtnPrev.dataset.bound) {
+    spBtnPrev.dataset.bound = "true";
+    spBtnPrev.addEventListener("click", () => playPrevTrack());
+  }
+
+  if (spBtnNext && !spBtnNext.dataset.bound) {
+    spBtnNext.dataset.bound = "true";
+    spBtnNext.addEventListener("click", () => playNextTrack());
+  }
+
+  if (spBtnShuffle && !spBtnShuffle.dataset.bound) {
+    spBtnShuffle.dataset.bound = "true";
+    spBtnShuffle.addEventListener("click", () => toggleShuffle());
+  }
+
+  if (spBtnRepeat && !spBtnRepeat.dataset.bound) {
+    spBtnRepeat.dataset.bound = "true";
+    spBtnRepeat.addEventListener("click", () => toggleRepeat());
+  }
+
+  updateShuffleRepeatUI();
+}
+
+function renderPlaylistTable() {
+  const tableBody = document.getElementById("playlist-table-body");
+  if (!tableBody) return;
+  tableBody.innerHTML = "";
+  const currentTracks = getTracks();
+
+  currentTracks.forEach((track, idx) => {
+    const tr = document.createElement("tr");
+    tr.className = `playlist-row ${idx === currentTrackIdx ? (isPlaying ? 'playing' : 'selected') : ''}`;
+    tr.dataset.index = idx;
+
+    const resolvedCover = encodeURI(fixPath(track.cover));
+    const fallbackCover = encodeURI(fixPath("assets/images/Daniel Caesar.jfif"));
+    const artistName = track.artist || "";
+
+    tr.innerHTML = `
+      <td class="track-num-cell">
+        <span class="track-num-text">${idx + 1}</span>
+        <i class="fa-solid fa-play play-icon-hover"></i>
+        <i class="fa-solid fa-volume-high playing-eq-icon" style="display:none;"></i>
+      </td>
+      <td class="track-info-cell">
+        <img class="track-thumb-img" src="${resolvedCover}" alt="${track.title}" onerror="this.onerror=null; this.src='${fallbackCover}';" />
+        <div class="track-details-wrap">
+          <span class="track-name-title">${track.title}</span>
+          ${artistName ? `<span class="track-artist-sub">${artistName}</span>` : ''}
+        </div>
+      </td>
+      <td class="track-album-cell">${track.album}</td>
+      <td class="track-duration-cell">${track.duration}</td>
+    `;
+
+    // ONLY double click changes and plays the song
+    tr.addEventListener("dblclick", (e) => {
+      e.stopPropagation();
+      loadTrack(idx, true);
+    });
+
+    tableBody.appendChild(tr);
+  });
 }
 
 function loadAudioSourceSafely(srcPath, autoPlay = false) {
@@ -546,29 +939,51 @@ function loadAudioSourceSafely(srcPath, autoPlay = false) {
   }
 }
 
-
 function loadTrack(index, autoPlay = false) {
   currentTrackIdx = index;
   const currentTracks = getTracks();
   const track = currentTracks[currentTrackIdx];
 
-  // Dynamically change website theme color to match cover art!
-  document.documentElement.setAttribute("data-theme", track.theme);
-  if (document.body) document.body.setAttribute("data-theme", track.theme);
+  if (!track) return;
 
-  // Update UI Text & Cover
+  // Dynamically change website theme color ONLY for artist pages, NOT playlist pages!
+  const bodyArtist = document.body ? document.body.getAttribute("data-artist") : "";
+  const isPlaylistPage = bodyArtist && bodyArtist.startsWith("playlist-");
+  if (!isPlaylistPage && track.theme) {
+    document.documentElement.setAttribute("data-theme", track.theme);
+    if (document.body) document.body.setAttribute("data-theme", track.theme);
+  }
+
+  // Update UI Text & Cover for vinyl player (if present)
   if (trackAlbum) trackAlbum.innerText = `Album: ${track.album}`;
   if (trackTitle) trackTitle.innerText = track.title;
+  if (trackArtist) trackArtist.innerText = track.artist || "";
   if (vinylLabel) vinylLabel.style.backgroundImage = `url("${encodeURI(fixPath(track.cover))}")`;
   if (quoteText) quoteText.innerText = track.quote;
 
-  // Update Pill selection
+  // Update Spotify Bottom Player Elements
+  const spTitle = document.getElementById("sp-title");
+  const spArtist = document.getElementById("sp-artist");
+  const spCover = document.getElementById("sp-cover");
+  if (spTitle) spTitle.innerText = track.title;
+  if (spArtist) spArtist.innerText = track.artist || "";
+  if (spCover) spCover.src = encodeURI(fixPath(track.cover));
+
+  // Update Pill selection (artist pages)
   if (playlistPills) {
     const pills = playlistPills.querySelectorAll(".pill-item");
     pills.forEach((pill, i) => {
       pill.classList.toggle("active", i === currentTrackIdx);
     });
   }
+
+  // Update Playlist Table selection & playing state
+  const rows = document.querySelectorAll(".playlist-row");
+  rows.forEach((row, i) => {
+    const isCurrent = i === currentTrackIdx;
+    row.classList.toggle("playing", isCurrent && isPlaying);
+    row.classList.toggle("selected", isCurrent && !isPlaying);
+  });
 
   if (audioElement) {
     audioElement.preload = "auto";
@@ -602,8 +1017,17 @@ function playAudio() {
     console.log("Audio play error:", e);
   });
   if (playIcon) playIcon.className = "fa-solid fa-pause";
+  const spPlayIcon = document.getElementById("sp-play-icon");
+  if (spPlayIcon) spPlayIcon.className = "fa-solid fa-pause";
+
   if (vinylDisc) vinylDisc.classList.add("playing");
   if (turntableDeck) turntableDeck.classList.add("playing");
+
+  const rows = document.querySelectorAll(".playlist-row");
+  rows.forEach((row, i) => {
+    row.classList.toggle("playing", i === currentTrackIdx);
+  });
+
   startVisualizer();
 }
 
@@ -612,8 +1036,17 @@ function pauseAudio() {
   isPlaying = false;
   audioElement.pause();
   if (playIcon) playIcon.className = "fa-solid fa-play";
+  const spPlayIcon = document.getElementById("sp-play-icon");
+  if (spPlayIcon) spPlayIcon.className = "fa-solid fa-play";
+
   if (vinylDisc) vinylDisc.classList.remove("playing");
   if (turntableDeck) turntableDeck.classList.remove("playing");
+
+  const rows = document.querySelectorAll(".playlist-row");
+  rows.forEach((row) => {
+    row.classList.remove("playing");
+  });
+
   stopVisualizer();
 }
 
@@ -631,16 +1064,13 @@ if (playBtn) {
 // Prev / Next Track
 if (prevBtn) {
   prevBtn.addEventListener("click", () => {
-    let prevIdx = currentTrackIdx - 1;
-    if (prevIdx < 0) prevIdx = getTracks().length - 1;
-    loadTrack(prevIdx, true);
+    playPrevTrack();
   });
 }
 
 if (nextBtn) {
   nextBtn.addEventListener("click", () => {
-    let nextIdx = (currentTrackIdx + 1) % getTracks().length;
-    loadTrack(nextIdx, true);
+    playNextTrack();
   });
 }
 
@@ -663,13 +1093,14 @@ function getTrackDuration() {
 
 // Time Progress Updates & Interactive Drag/Scrubbing
 let isDraggingProgress = false;
+let isSeekingTimeout = null;
 let pendingSeekTime = null;
 let ignoreNextClick = false;
 
 if (audioElement) {
   audioElement.addEventListener("timeupdate", () => {
     const duration = getTrackDuration();
-    if (!isDraggingProgress && duration > 0) {
+    if (!isDraggingProgress && !isSeekingTimeout && duration > 0) {
       const currentTime = audioElement.currentTime || 0;
       const pct = Math.min(100, Math.max(0, (currentTime / duration) * 100));
       const pFill = document.getElementById("progress-fill") || progressFill;
@@ -707,16 +1138,37 @@ function calculateSeekFromEvent(e, updateAudioNow = false) {
   if (cTime) cTime.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 
   if (updateAudioNow && audioElement && isFinite(seekTime)) {
-    try {
-      const maxDuration = (audioElement.duration && isFinite(audioElement.duration) && audioElement.duration > 0) ? audioElement.duration : duration;
-      const safeSeek = Math.max(0, Math.min(seekTime, maxDuration - 0.1));
+    let maxDur = duration;
+    if (audioElement.duration && isFinite(audioElement.duration) && audioElement.duration > 0) {
+      maxDur = audioElement.duration;
+    }
+    const safeSeek = Math.max(0, Math.min(seekTime, maxDur - 0.1));
 
-      audioElement.currentTime = safeSeek;
-      if (isPlaying) {
-        audioElement.play().catch(() => {});
+    if (isSeekingTimeout) clearTimeout(isSeekingTimeout);
+    isSeekingTimeout = setTimeout(() => {
+      isSeekingTimeout = null;
+    }, 400);
+
+    const applySeek = () => {
+      try {
+        audioElement.currentTime = safeSeek;
+        if (isPlaying) {
+          audioElement.play().catch(() => {});
+        }
+      } catch (err) {
+        console.log("Seek error:", err);
       }
-    } catch (err) {
-      console.log("Seek error:", err);
+    };
+
+    if (audioElement.readyState >= 1) {
+      applySeek();
+    } else {
+      const onMeta = () => {
+        audioElement.removeEventListener("loadedmetadata", onMeta);
+        applySeek();
+      };
+      audioElement.addEventListener("loadedmetadata", onMeta);
+      audioElement.load();
     }
   }
 
@@ -813,11 +1265,11 @@ function updateVolIcon(val) {
   }
 }
 
-// When song ends, play next
-if (audioElement) {
+// When song ends, play next (or repeat / shuffle)
+if (audioElement && !audioElement.dataset.endedBound) {
+  audioElement.dataset.endedBound = "true";
   audioElement.addEventListener("ended", () => {
-    let nextIdx = (currentTrackIdx + 1) % getTracks().length;
-    loadTrack(nextIdx, true);
+    playNextTrack();
   });
 }
 
@@ -891,6 +1343,13 @@ function renderSleevesGallery() {
     // Click on sleeve card opens the Pop-up Modal with story & meaning!
     sleeveCard.addEventListener("click", () => {
       openMeaningModal(track);
+    });
+
+    // Double click on sleeve card plays the song directly!
+    sleeveCard.addEventListener("dblclick", (e) => {
+      e.stopPropagation();
+      closeMeaningModal();
+      loadTrack(track.id, true);
     });
 
     sleevesGrid.appendChild(sleeveCard);
@@ -976,4 +1435,108 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Auto-play next track when audio ends
+  if (audioElement && !audioElement.dataset.endedBound) {
+    audioElement.dataset.endedBound = "true";
+    audioElement.addEventListener("ended", () => {
+      playNextTrack();
+    });
+  }
+
+  // Index Page Theme Switcher Initialization
+  initIndexThemeSwitcher();
 });
+
+// Run theme switcher initialization immediately if DOM is already ready
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  setTimeout(initIndexThemeSwitcher, 0);
+} else {
+  document.addEventListener("DOMContentLoaded", initIndexThemeSwitcher);
+}
+
+/* Index Page Theme Switcher Logic */
+function initIndexThemeSwitcher() {
+  const isIndexPage = !document.body || !document.body.hasAttribute("data-artist");
+  if (!isIndexPage) return;
+
+  const savedTheme = localStorage.getItem("fadhil_index_theme") || "black-white";
+  setIndexTheme(savedTheme);
+
+  const themeBtns = document.querySelectorAll(".theme-picker-btn");
+  themeBtns.forEach(btn => {
+    btn.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const themeVal = btn.getAttribute("data-theme-val");
+      if (themeVal) {
+        setIndexTheme(themeVal);
+      }
+    };
+  });
+}
+
+function setIndexTheme(themeName) {
+  const isIndexPage = !document.body || !document.body.hasAttribute("data-artist");
+  if (!isIndexPage) return;
+
+  if (document.documentElement) {
+    document.documentElement.removeAttribute("data-theme");
+    document.documentElement.setAttribute("data-index-theme", themeName);
+  }
+  if (document.body) {
+    document.body.removeAttribute("data-theme");
+    document.body.setAttribute("data-index-theme", themeName);
+  }
+
+  // Direct CSS variable overrides on documentElement for instant rendering
+  const themes = {
+    "black-white": { bg: "#0c0c0d", card: "#18181a", text: "#ffffff", muted: "#a1a1aa", accent: "#ffffff", border: "#27272a" },
+    "vintage-cream": { bg: "#f7f3eb", card: "#ebdccb", text: "#2b221a", muted: "#6b5c4f", accent: "#c86d51", border: "#d8c4b0" },
+    "midnight-dark": { bg: "#0b0f19", card: "#131c2e", text: "#f1f5f9", muted: "#94a3b8", accent: "#38bdf8", border: "#1e293b" },
+    "neon-violet": { bg: "#12091c", card: "#201133", text: "#f5f0fd", muted: "#b794f4", accent: "#a855f7", border: "#3b1d66" }
+  };
+
+  const palette = themes[themeName] || themes["black-white"];
+  const root = document.documentElement;
+  root.style.setProperty("--bg-main", palette.bg, "important");
+  root.style.setProperty("--bg-card", palette.card, "important");
+  root.style.setProperty("--text-main", palette.text, "important");
+  root.style.setProperty("--text-muted", palette.muted, "important");
+  root.style.setProperty("--accent", palette.accent, "important");
+  root.style.setProperty("--border-color", palette.border, "important");
+  document.body.style.backgroundColor = palette.bg;
+  document.body.style.color = palette.text;
+
+  // Grayscale filter & button styling for Black & White theme
+  const artistBanners = document.querySelectorAll(".artist-card-banner");
+  artistBanners.forEach(banner => {
+    if (themeName === "black-white") {
+      banner.style.filter = "grayscale(100%) contrast(115%)";
+    } else {
+      banner.style.filter = "none";
+    }
+  });
+
+  const exploreBtns = document.querySelectorAll(".btn-explore-artist");
+  exploreBtns.forEach(btn => {
+    if (themeName === "black-white") {
+      btn.style.backgroundColor = "#000000";
+      btn.style.color = "#ffffff";
+      btn.style.border = "1px solid #ffffff";
+    } else {
+      btn.style.backgroundColor = "";
+      btn.style.color = "";
+      btn.style.border = "";
+    }
+  });
+
+  localStorage.setItem("fadhil_index_theme", themeName);
+
+  const themeBtns = document.querySelectorAll(".theme-picker-btn");
+  themeBtns.forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-theme-val") === themeName);
+  });
+}
+
+
+

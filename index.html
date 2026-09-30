@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="wont-live-here">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <!-- External Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=9999999" />
+  <link rel="stylesheet" href="styles.css?v=20260923_v1000" />
 </head>
 <body>
 
@@ -27,9 +27,31 @@
         <span>FADHIL'S MUSIC</span>
       </a>
 
+      <!-- INDEX THEME PICKER (Only Active on Index Page) -->
+      <div class="theme-switcher-wrap" id="theme-switcher-wrap">
+        <span class="theme-switcher-label"><i class="fa-solid fa-palette"></i> Theme:</span>
+        <div class="theme-picker-pills">
+          <button class="theme-picker-btn active" onclick="setIndexTheme('vintage-cream')" data-theme-val="vintage-cream" title="Vintage Cream">
+            <span class="theme-dot dot-cream"></span> Cream
+          </button>
+          <button class="theme-picker-btn" onclick="setIndexTheme('black-white')" data-theme-val="black-white" title="Black & White Noir">
+            <span class="theme-dot dot-bw"></span> B&W Noir
+          </button>
+          <button class="theme-picker-btn" onclick="setIndexTheme('midnight-dark')" data-theme-val="midnight-dark" title="Midnight Dark">
+            <span class="theme-dot dot-dark"></span> Midnight
+          </button>
+          <button class="theme-picker-btn" onclick="setIndexTheme('neon-violet')" data-theme-val="neon-violet" title="Neon Violet">
+            <span class="theme-dot dot-violet"></span> Violet
+          </button>
+        </div>
+      </div>
+
       <ul class="nav-links">
         <li><a href="index.html" class="nav-item active">Home Profile</a></li>
-        <li class="nav-dropdown-wrap"><i class="fa-solid fa-record-vinyl"></i></li>
+        <li><a href="pages/lany.html" class="nav-item nav-btn-dc active">
+          <i class="fa-solid fa-record-vinyl"></i> 
+        </a>
+        </li>
       </ul>
     </div>
   </header>
@@ -253,6 +275,92 @@
         </div>
       </div>
     </section>
+
+    <!-- CURATED PLAYLISTS SECTION (MULTI-ARTIST & MULTI-SONG) -->
+    <section class="artists-grid-section indo-artists-section" id="indo-artists">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-tag">Indonesian Soundscapes</span>
+          <h2 class="section-title">Explore My Playlist</h2>
+          <p class="section-desc">A curated collection of favorite Indonesian musical artists, top tracks, and soulful reflections.</p>
+        </div>
+
+        <div class="artists-grid">
+          <!-- PLAYLIST 1: ♾️ -->
+          <a href="pages/playlist-infinity.html" class="artist-card">
+            <div class="artist-card-banner" style="background-image: url('assets/images/infinity.jpg');">
+              <div class="artist-card-overlay"></div>
+            </div>
+            <div class="artist-card-body">
+              <div class="artist-genre-pill"><i class="fa-solid fa-infinity"></i> Ultimate Hits & Mixed Vibes</div>
+              <h3 class="artist-name">♾️</h3>
+              <p class="artist-bio">A curated list of songs that instantly remind me of your smile.</p>
+              <div class="artist-card-footer">
+                <span class="artist-song-count">Playlist Available</span>
+                <span class="btn-explore-artist">
+                  Explore Sanctuary <i class="fa-solid fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- PLAYLIST 2: THE WORLD IN GRAYSCALE -->
+          <a href="pages/playlist-grayscale.html" class="artist-card">
+            <div class="artist-card-banner" style="background-image: url('assets/images/grayscale.jfif');">
+              <div class="artist-card-overlay"></div>
+            </div>
+            <div class="artist-card-body">
+              <div class="artist-genre-pill"><i class="fa-solid fa-cloud-moon"></i> Melancholy & Deep Thoughts</div>
+              <h3 class="artist-name">The world in grayscale</h3>
+              <p class="artist-bio">for a world thats lost its color.</p>
+              <div class="artist-card-footer">
+                <span class="artist-song-count">Playlist Ready</span>
+                <span class="btn-explore-artist">
+                  Explore Sanctuary <i class="fa-solid fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- PLAYLIST 3: SHIT GOES HARD -->
+          <a href="pages/playlist-hard.html" class="artist-card">
+            <div class="artist-card-banner" style="background-image: url('assets/images/hardd.jpg');">
+              <div class="artist-card-overlay"></div>
+            </div>
+            <div class="artist-card-body">
+              <div class="artist-genre-pill"><i class="fa-solid fa-bolt"></i> High Energy & Heavy Bangers</div>
+              <h3 class="artist-name">SHIT GOES HARD</h3>
+              <p class="artist-bio">Bars that hit hard.</p>
+              <div class="artist-card-footer">
+                <span class="artist-song-count">Playlist Ready</span>
+                <span class="btn-explore-artist">
+                  Explore Sanctuary <i class="fa-solid fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- PLAYLIST 4: INDO'S -->
+          <a href="pages/playlist-indos.html" class="artist-card">
+            <div class="artist-card-banner" style="background-image: url('assets/images/indo.jfif');">
+              <div class="artist-card-overlay"></div>
+            </div>
+            <div class="artist-card-body">
+              <div class="artist-genre-pill"><i class="fa-solid fa-flag"></i> Indonesian Soundscapes</div>
+              <h3 class="artist-name">Indo's</h3>
+              <p class="artist-bio">Koleksi lagu-lagu hits dan klasik terbaik dari berbagai artis Indonesia.</p>
+              <div class="artist-card-footer">
+                <span class="artist-song-count">Playlist Ready</span>
+                <span class="btn-explore-artist">
+                  Explore Sanctuary <i class="fa-solid fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -263,6 +371,6 @@
   </footer>
 
   <!-- External JavaScript -->
-  <script src="script.js?v=20260921_v3"></script>
+  <script src="script.js?v=20260923_v1000"></script>
 </body>
 </html>
