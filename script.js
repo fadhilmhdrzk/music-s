@@ -595,7 +595,7 @@ const grayscaleTracks = [
     title: "Moon (Feat. Bon Iver)",
     artist: "Daniel Caesar, Bon Iver",
     album: "CASE STUDY 01 (2019)",
-    cover: "assets/images/Baby blues.jfif",
+    cover: "assets/images/Baby Blues.jfif",
     src: "assets/audio/gray_04_moon.webm",
     duration: "5:17"
   },
@@ -676,7 +676,7 @@ const grayscaleTracks = [
     title: "Emily's Song",
     artist: "Daniel Caesar",
     album: "Freudian (2017)",
-    cover: "assets/images/Baby blues.jfif",
+    cover: "assets/images/Baby Blues.jfif",
     src: "assets/audio/gray_13_emilys_song.webm",
     duration: "2:55"
   },
@@ -694,7 +694,7 @@ const grayscaleTracks = [
     title: "Hold Me Down",
     artist: "Daniel Caesar",
     album: "Freudian (2017)",
-    cover: "assets/images/Hold me down.jfif",
+    cover: "assets/images/hold me down.jfif",
     src: "assets/audio/gray_15_hold_me_down.webm",
     duration: "3:51"
   },
