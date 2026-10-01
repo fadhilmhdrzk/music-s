@@ -577,7 +577,7 @@ const grayscaleTracks = [
     title: "Last Night on Earth",
     artist: "Green Day",
     album: "21st Century Breakdown (2009)",
-    cover: "assets/images/Last night on earth.jfif",
+    cover: "assets/images/Last night on the earth.jfif",
     src: "assets/audio/gray_02_last_night_on_earth.webm",
     duration: "3:42"
   },
@@ -649,7 +649,7 @@ const grayscaleTracks = [
     title: "Futile Devices (Doveman Remix)",
     artist: "Sufjan Stevens",
     album: "Call Me by Your Name (2017)",
-    cover: "assets/images/Futile devices.jfif",
+    cover: "assets/images/Futli devices.jfif",
     src: "assets/audio/gray_10_futile_devices.webm",
     duration: "2:17"
   },
@@ -748,24 +748,429 @@ const grayscaleTracks = [
 const hardTracks = [
   {
     id: 0,
-    title: "Hard Track 1",
-    artist: "Various Artists",
-    album: "SHIT GOES HARD",
-    cover: "assets/images/LANY.jfif",
-    src: "assets/audio/lany_cause.webm",
-    duration: "4:18"
+    title: "heart pt. 6",
+    artist: "Kendrick Lamar",
+    album: "heart pt. 6 - Single (2024)",
+    cover: "assets/images/Heart.jfif",
+    src: "assets/audio/hard_01_heart_pt_6.webm",
+    duration: "4:53"
+  },
+  {
+    id: 1,
+    title: "Push Ups",
+    artist: "Drake",
+    album: "Push Ups - Single (2024)",
+    cover: "assets/images/Push ups.jfif",
+    src: "assets/audio/hard_02_push_ups.webm",
+    duration: "3:53"
+  },
+  {
+    id: 2,
+    title: "BABY I'M BACK",
+    artist: "The Kid LAROI",
+    album: "THE FIRST TIME (2024)",
+    cover: "assets/images/Baby im back.jfif",
+    src: "assets/audio/hard_03_baby_im_back.webm",
+    duration: "2:53"
+  },
+  {
+    id: 3,
+    title: "Earrings",
+    artist: "Malcolm Todd",
+    album: "Sweet Boy (2024)",
+    cover: "assets/images/Earring.jfif",
+    src: "assets/audio/hard_04_earrings.webm",
+    duration: "2:32"
+  },
+  {
+    id: 4,
+    title: "Wonderwall",
+    artist: "Oasis",
+    album: "(What's the Story) Morning Glory? (1995)",
+    cover: "assets/images/Champagne supernova.jfif",
+    src: "assets/audio/hard_05_wonderwall.webm",
+    duration: "4:19"
+  },
+  {
+    id: 5,
+    title: "Not You Too (feat. Chris Brown)",
+    artist: "Drake, Chris Brown",
+    album: "Dark Lane Demo Tapes (2020)",
+    cover: "assets/images/Not you too.jfif",
+    src: "assets/audio/hard_06_not_you_too.webm",
+    duration: "4:31"
+  },
+  {
+    id: 6,
+    title: "9",
+    artist: "Drake",
+    album: "Views (2016)",
+    cover: "assets/images/9.jfif",
+    src: "assets/audio/hard_07_9.webm",
+    duration: "4:17"
+  },
+  {
+    id: 7,
+    title: "Don't Look Back in Anger",
+    artist: "Oasis",
+    album: "(What's the Story) Morning Glory? (1995)",
+    cover: "assets/images/Champagne supernova.jfif",
+    src: "assets/audio/hard_08_dont_look_back_in_anger.webm",
+    duration: "4:50"
+  },
+  {
+    id: 8,
+    title: "Champagne Supernova",
+    artist: "Oasis",
+    album: "(What's the Story) Morning Glory? (1995)",
+    cover: "assets/images/Champagne supernova.jfif",
+    src: "assets/audio/hard_09_champagne_supernova.webm",
+    duration: "7:29"
+  },
+  {
+    id: 9,
+    title: "Stand by Me",
+    artist: "Oasis",
+    album: "Be Here Now (1997)",
+    cover: "assets/images/Stand by me.jfif",
+    src: "assets/audio/hard_10_stand_by_me.webm",
+    duration: "5:59"
+  },
+  {
+    id: 10,
+    title: "Dreams, Fairytales, Fantasies",
+    artist: "A$AP Ferg, Brent Faiyaz, Salaam Remi",
+    album: "Floor Seats II (2020)",
+    cover: "assets/images/Dreams.jfif",
+    src: "assets/audio/hard_11_dreams_fairytales_fantasies.webm",
+    duration: "3:45"
+  },
+  {
+    id: 11,
+    title: "It Was A Good Day",
+    artist: "Ice Cube",
+    album: "The Predator (1992)",
+    cover: "assets/images/It was a good day.jfif",
+    src: "assets/audio/hard_12_it_was_a_good_day.webm",
+    duration: "4:20"
+  },
+  {
+    id: 12,
+    title: "All Eyez On Me (ft. Big Syke)",
+    artist: "2Pac, Big Syke",
+    album: "All Eyez on Me (1996)",
+    cover: "assets/images/All eyez on me.jfif",
+    src: "assets/audio/hard_13_all_eyez_on_me.webm",
+    duration: "5:08"
+  },
+  {
+    id: 13,
+    title: "Demons",
+    artist: "Imagine Dragons",
+    album: "Night Visions (2012)",
+    cover: "assets/images/Demons.jfif",
+    src: "assets/audio/hard_14_demons.webm",
+    duration: "2:57"
+  },
+  {
+    id: 14,
+    title: "Sweet Boy",
+    artist: "Malcolm Todd",
+    album: "Sweet Boy (2024)",
+    cover: "assets/images/Earring.jfif",
+    src: "assets/audio/hard_15_sweet_boy.webm",
+    duration: "3:00"
+  },
+  {
+    id: 15,
+    title: "Devil In A New Dress",
+    artist: "Kanye West, Rick Ross",
+    album: "My Beautiful Dark Twisted Fantasy (2010)",
+    cover: "assets/images/Devil in a new dress.jfif",
+    src: "assets/audio/hard_16_devil_in_a_new_dress.webm",
+    duration: "5:52"
+  },
+  {
+    id: 16,
+    title: "Sweet Life",
+    artist: "Frank Ocean",
+    album: "Channel Orange (2012)",
+    cover: "assets/images/Pink Matter.jfif",
+    src: "assets/audio/hard_17_sweet_life.webm",
+    duration: "4:23"
+  },
+  {
+    id: 17,
+    title: "Lost Stars",
+    artist: "Adam Levine",
+    album: "Begin Again Soundtrack (2014)",
+    cover: "assets/images/Lost stars.jfif",
+    src: "assets/audio/hard_18_lost_stars.webm",
+    duration: "4:28"
+  },
+  {
+    id: 18,
+    title: "YUP AND I DO",
+    artist: "ZEDDY WILL",
+    album: "YUP AND I DO - Single (2024)",
+    cover: "assets/images/Yup and i do.jfif",
+    src: "assets/audio/hard_19_yup_and_i_do.webm",
+    duration: "2:05"
+  },
+  {
+    id: 19,
+    title: "Praise The Lord (Da Shine)",
+    artist: "A$AP Rocky, Skepta",
+    album: "TESTING (2018)",
+    cover: "assets/images/Praise the lord.jfif",
+    src: "assets/audio/hard_20_praise_the_lord.webm",
+    duration: "3:27"
+  },
+  {
+    id: 20,
+    title: "M a k e I t T o T h e M o r n i n g",
+    artist: "PARTYNEXTDOOR",
+    album: "PARTYNEXTDOOR 4 (2024)",
+    cover: "assets/images/Make it to the morning.jfif",
+    src: "assets/audio/hard_21_make_it_to_the_morning.webm",
+    duration: "2:49"
+  },
+  {
+    id: 21,
+    title: "Company",
+    artist: "Justin Bieber",
+    album: "Purpose (2015)",
+    cover: "assets/images/Company.jfif",
+    src: "assets/audio/hard_22_company.webm",
+    duration: "3:28"
+  },
+  {
+    id: 22,
+    title: "Like Him (feat. Lola Young)",
+    artist: "Tyler, The Creator, Lola Young",
+    album: "CHROMAKOPIA (2024)",
+    cover: "assets/images/Like him.jfif",
+    src: "assets/audio/hard_23_like_him.webm",
+    duration: "4:39"
+  },
+  {
+    id: 23,
+    title: "Everyday Hustle",
+    artist: "Future, Metro Boomin, Rick Ross",
+    album: "WE DON'T TRUST YOU (2024)",
+    cover: "assets/images/Everyday hustle.jfif",
+    src: "assets/audio/hard_24_everyday_hustle.webm",
+    duration: "3:49"
+  },
+  {
+    id: 24,
+    title: "One Thing",
+    artist: "One Direction",
+    album: "Up All Night (2011)",
+    cover: "assets/images/One thing.jfif",
+    src: "assets/audio/hard_25_one_thing.webm",
+    duration: "3:19"
+  },
+  {
+    id: 25,
+    title: "You Know How We Do It",
+    artist: "Ice Cube",
+    album: "Lethal Injection (1993)",
+    cover: "assets/images/You know how we do it.jfif",
+    src: "assets/audio/hard_26_you_know_how_we_do_it.webm",
+    duration: "3:53"
+  },
+  {
+    id: 26,
+    title: "No Role Modelz",
+    artist: "J. Cole",
+    album: "2014 Forest Hills Drive (2014)",
+    cover: "assets/images/No role modelz.jfif",
+    src: "assets/audio/hard_27_no_role_modelz.webm",
+    duration: "4:53"
   }
 ];
 
 const indosTracks = [
   {
     id: 0,
-    title: "Indo Track 1",
-    artist: "Various Indonesian Artists",
-    album: "Indo's Playlist",
-    cover: "assets/images/Dewa 19.jfif",
-    src: "assets/audio/dewa19_kangen.webm",
-    duration: "5:08"
+    title: "Dia",
+    artist: "MALIQ & D'Essentials",
+    album: "Free Your Mind (2007)",
+    cover: "assets/images/Dia.jfif",
+    src: "assets/audio/indo_01_dia.webm",
+    duration: "4:38"
+  },
+  {
+    id: 1,
+    title: "Foto kita blur",
+    artist: "Sal Priadi",
+    album: "MARKERS AND SUCH (2024)",
+    cover: "assets/images/Kita usahakan rumah itu.jfif",
+    src: "assets/audio/indo_02_foto_kita_blur.webm",
+    duration: "5:01"
+  },
+  {
+    id: 2,
+    title: "Berapa Kali Kita Akan Saling Memaafkan",
+    artist: "Pamungkas",
+    album: "Solipsism 0.2 (2021)",
+    cover: "assets/images/berapa kali.jpg",
+    src: "assets/audio/indo_03_berapa_kali_kita_akan_saling_memaafkan.webm",
+    duration: "5:27"
+  },
+  {
+    id: 3,
+    title: "Hanya Untuk-Mu",
+    artist: "Ten2Five",
+    album: "I Will Fly (2004)",
+    cover: "assets/images/Hanya untukmu.jfif",
+    src: "assets/audio/indo_04_hanya_untuk_mu.webm",
+    duration: "3:52"
+  },
+  {
+    id: 4,
+    title: "Romansa Ke Masa Depan",
+    artist: "Glenn Fredly",
+    album: "Romansa Ke Masa Depan (2019)",
+    cover: "assets/images/Romansa ke mada depan.jfif",
+    src: "assets/audio/indo_05_romansa_ke_masa_depan.webm",
+    duration: "5:21"
+  },
+  {
+    id: 5,
+    title: "Lihat Kebunku (Taman Bunga)",
+    artist: "Aku Jeje",
+    album: "Taman Bunga - Single (2024)",
+    cover: "assets/images/Lihat kebunku.jfif",
+    src: "assets/audio/indo_06_lihat_kebunku_taman_bunga.webm",
+    duration: "3:46"
+  },
+  {
+    id: 6,
+    title: "I'd like to watch you sleeping",
+    artist: "Sal Priadi",
+    album: "MARKERS AND SUCH (2024)",
+    cover: "assets/images/Kita usahakan rumah itu.jfif",
+    src: "assets/audio/sal_id_like_to_watch_you_sleeping.webm",
+    duration: "3:40"
+  },
+  {
+    id: 7,
+    title: "Terbuang Dalam Waktu",
+    artist: "Barasuara",
+    album: "Terbuang Dalam Waktu - Single (2023)",
+    cover: "assets/images/Terbuang dalam waktu.jfif",
+    src: "assets/audio/indo_08_terbuang_dalam_waktu.webm",
+    duration: "4:54"
+  },
+  {
+    id: 8,
+    title: "Titik Nadir (feat. Monita Tahalea)",
+    artist: "Kahitna, Monita Tahalea",
+    album: "Cinta Sudah Lewat (2003)",
+    cover: "assets/images/Titik nadir.jfif",
+    src: "assets/audio/indo_09_titik_nadir.webm",
+    duration: "4:27"
+  },
+  {
+    id: 9,
+    title: "Firasat",
+    artist: "Marcell",
+    album: "Marcell (2003)",
+    cover: "assets/images/Firasat.jfif",
+    src: "assets/audio/indo_10_firasat.webm",
+    duration: "4:39"
+  },
+  {
+    id: 10,
+    title: "Dewi",
+    artist: "Alexa",
+    album: "Alexa (2008)",
+    cover: "assets/images/Dewi.jfif",
+    src: "assets/audio/indo_11_dewi.webm",
+    duration: "4:54"
+  },
+  {
+    id: 11,
+    title: "Cinta Sudah Lewat",
+    artist: "Kahitna",
+    album: "Cinta Sudah Lewat (2003)",
+    cover: "assets/images/Cinta sudah lewat.jfif",
+    src: "assets/audio/indo_12_cinta_sudah_lewat.webm",
+    duration: "4:15"
+  },
+  {
+    id: 12,
+    title: "Akhir Cerita Cinta",
+    artist: "Glenn Fredly",
+    album: "Selamat Pagi, Dunia! (2002)",
+    cover: "assets/images/Akhir cerita cinta.jfif",
+    src: "assets/audio/indo_13_akhir_cerita_cinta.webm",
+    duration: "4:31"
+  },
+  {
+    id: 13,
+    title: "Aku Milikmu",
+    artist: "Dewa 19",
+    album: "Format Masa Depan (1994)",
+    cover: "assets/images/aku milikmu.jfif",
+    src: "assets/audio/dewa19_aku_milikmu.webm",
+    duration: "4:32"
+  },
+  {
+    id: 14,
+    title: "Kasih Putih",
+    artist: "Yovie Widianto, Glenn Fredly",
+    album: "Kisah Tak Sempurna (2000)",
+    cover: "assets/images/Kasih putih.jfif",
+    src: "assets/audio/indo_15_kasih_putih.webm",
+    duration: "4:19"
+  },
+  {
+    id: 15,
+    title: "Hitam Putih",
+    artist: "Fourtwnty",
+    album: "Lelaku (2015)",
+    cover: "assets/images/Hitam putih.jfif",
+    src: "assets/audio/indo_16_hitam_putih.webm",
+    duration: "5:07"
+  },
+  {
+    id: 16,
+    title: "Keabadian",
+    artist: "Reza Artamevia",
+    album: "Keabadian (2000)",
+    cover: "assets/images/Keabadian.jfif",
+    src: "assets/audio/indo_17_keabadian.webm",
+    duration: "4:13"
+  },
+  {
+    id: 17,
+    title: "Untukku",
+    artist: "Chrisye",
+    album: "Kala Cinta Menggoda (1997)",
+    cover: "assets/images/Untukku.jfif",
+    src: "assets/audio/indo_18_untukku.webm",
+    duration: "4:52"
+  },
+  {
+    id: 18,
+    title: "Kekal",
+    artist: "Nadin Amizah",
+    album: "Kalah Bertaruh (2021)",
+    cover: "assets/images/Kekal.jfif",
+    src: "assets/audio/indo_19_kekal.webm",
+    duration: "4:35"
+  },
+  {
+    id: 19,
+    title: "Membasuh",
+    artist: "Hindia, Rara Sekar",
+    album: "Menari dengan Bayangan (2019)",
+    cover: "assets/images/Rumah ke rumah.jfif",
+    src: "assets/audio/hindia_membasuh.webm",
+    duration: "6:10"
   }
 ];
 
@@ -850,13 +1255,24 @@ function playPrevTrack() {
   const tracks = getTracks();
   if (!tracks || tracks.length === 0) return;
 
+  // Jika lagu sedang diputar lebih dari 3 detik, tombol back mengulang lagu ke 0:00
+  if (audioElement && audioElement.currentTime > 3) {
+    audioElement.currentTime = 0;
+    if (!isPlaying) {
+      playAudio();
+    }
+    return;
+  }
+
+  // Jika masih di detik 1-3 pertama, kembali ke lagu sebelum diputar dari playbackHistory
   if (playbackHistory.length > 0) {
     const prevIdx = playbackHistory.pop();
     loadTrack(prevIdx, true, true);
   } else {
-    let prevIdx = currentTrackIdx - 1;
-    if (prevIdx < 0) prevIdx = tracks.length - 1;
-    loadTrack(prevIdx, true, true);
+    // Jika lagu pertama yang diputar (belum ada riwayat), back hanya mengulang lagu ke 0:00
+    if (audioElement) {
+      audioElement.currentTime = 0;
+    }
   }
 }
 
@@ -1020,6 +1436,7 @@ function initPlayer() {
   renderSleevesGallery();
   playbackHistory = [];
   shuffleQueue = [];
+  hasUserPlayed = false;
   setupProgressScrubbing();
   setupSpotifyControls();
   loadTrack(currentTrackIdx, false, true);
@@ -1438,7 +1855,7 @@ function updateMediaSession(track) {
 
     navigator.mediaSession.metadata = new MediaMetadata({
       title: track.title || "Track",
-      artist: track.artist || "Fadhil's Music Sanctuary",
+      artist: "Fadhil's Music Sanctuary",
       album: track.album || "Sanctuary",
       artwork: [
         { src: absoluteCoverUrl, sizes: '96x96' },
@@ -1486,8 +1903,12 @@ function updateMediaSessionPositionState() {
   } catch (e) {}
 }
 
+let hasUserPlayed = false;
+
 function loadTrack(index, autoPlay = false, isBackNavigation = false) {
-  if (!isBackNavigation && currentTrackIdx !== undefined && currentTrackIdx !== null && currentTrackIdx !== index) {
+  if (autoPlay && !hasUserPlayed) {
+    hasUserPlayed = true;
+  } else if (!isBackNavigation && currentTrackIdx !== undefined && currentTrackIdx !== null && currentTrackIdx !== index) {
     playbackHistory.push(currentTrackIdx);
     if (playbackHistory.length > 100) {
       playbackHistory.shift();
@@ -1592,6 +2013,7 @@ function loadTrack(index, autoPlay = false, isBackNavigation = false) {
 
 function playAudio() {
   if (!audioElement) return;
+  hasUserPlayed = true;
   isPlaying = true;
   if ('mediaSession' in navigator) {
     navigator.mediaSession.playbackState = "playing";
