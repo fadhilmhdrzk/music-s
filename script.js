@@ -206,7 +206,7 @@ const dewa19Tracks = [
   {
     id: 1,
     title: "Kangen",
-    album: "Dewa 19 (1992)",
+    album: "ok19 (1992)",
     cover: "assets/images/kangen.jfif",
     theme: "dewa-kangen",
     quote: '"Counting every heartbeat across the distance, holding onto fragile hopes of our reunion."',
@@ -632,6 +632,22 @@ let lastVolume = 0.8;
 let selectedModalTrackIdx = 0;
 let isShuffle = false;
 let isRepeat = false;
+let playbackHistory = [];
+let shuffleQueue = [];
+
+function generateShuffleQueue(tracksCount, currentIdx) {
+  const indices = [];
+  for (let i = 0; i < tracksCount; i++) {
+    if (i !== currentIdx) {
+      indices.push(i);
+    }
+  }
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  return indices;
+}
 
 function playNextTrack() {
   const tracks = getTracks();
@@ -647,11 +663,11 @@ function playNextTrack() {
       loadTrack(0, true);
       return;
     }
-    let randomIdx;
-    do {
-      randomIdx = Math.floor(Math.random() * tracks.length);
-    } while (randomIdx === currentTrackIdx && tracks.length > 1);
-    loadTrack(randomIdx, true);
+    if (!shuffleQueue || shuffleQueue.length === 0) {
+      shuffleQueue = generateShuffleQueue(tracks.length, currentTrackIdx);
+    }
+    const nextIdx = shuffleQueue.shift();
+    loadTrack(nextIdx, true);
     return;
   }
 
@@ -663,26 +679,21 @@ function playPrevTrack() {
   const tracks = getTracks();
   if (!tracks || tracks.length === 0) return;
 
-  if (isShuffle) {
-    if (tracks.length === 1) {
-      loadTrack(0, true);
-      return;
-    }
-    let randomIdx;
-    do {
-      randomIdx = Math.floor(Math.random() * tracks.length);
-    } while (randomIdx === currentTrackIdx && tracks.length > 1);
-    loadTrack(randomIdx, true);
-    return;
+  if (playbackHistory.length > 0) {
+    const prevIdx = playbackHistory.pop();
+    loadTrack(prevIdx, true, true);
+  } else {
+    let prevIdx = currentTrackIdx - 1;
+    if (prevIdx < 0) prevIdx = tracks.length - 1;
+    loadTrack(prevIdx, true, true);
   }
-
-  let prevIdx = currentTrackIdx - 1;
-  if (prevIdx < 0) prevIdx = tracks.length - 1;
-  loadTrack(prevIdx, true);
 }
 
 function toggleShuffle() {
   isShuffle = !isShuffle;
+  if (isShuffle) {
+    shuffleQueue = [];
+  }
   updateShuffleRepeatUI();
 }
 
@@ -692,7 +703,7 @@ function toggleRepeat() {
 }
 
 function updateShuffleRepeatUI() {
-  const shuffleBtns = [document.getElementById("sp-btn-shuffle"), document.getElementById("btn-shuffle"), document.getElementById("sp-full-btn-shuffle")];
+  const shuffleBtns = [document.getElementById("sp-btn-shuffle"), document.getElementById("btn-shuffle"), document.getElementById("sp-full-btn-shuffle"), document.getElementById("btn-playlist-shuffle")];
   const repeatBtns = [document.getElementById("sp-btn-repeat"), document.getElementById("btn-repeat"), document.getElementById("sp-full-btn-repeat")];
 
   shuffleBtns.forEach(btn => {
@@ -833,12 +844,123 @@ function initPlayer() {
     });
   }
 
+  setupPlaylistControls();
   renderPlaylistTable();
   renderSleevesGallery();
+  playbackHistory = [];
+  shuffleQueue = [];
   setupProgressScrubbing();
   setupSpotifyControls();
-  loadTrack(currentTrackIdx, false);
+  loadTrack(currentTrackIdx, false, true);
   preloadArtistTracks();
+}
+
+let currentSearchTerm = "";
+
+function setupPlaylistControls() {
+  const searchInput = document.getElementById("playlist-search-input");
+  if (searchInput) {
+    currentSearchTerm = searchInput.value || "";
+    if (!searchInput.dataset.bound) {
+      searchInput.dataset.bound = "true";
+      searchInput.addEventListener("input", (e) => {
+        currentSearchTerm = e.target.value;
+        renderPlaylistTable();
+      });
+    }
+  }
+
+  const btnPlaylistPlay = document.getElementById("btn-playlist-play");
+  if (btnPlaylistPlay && !btnPlaylistPlay.dataset.bound) {
+    btnPlaylistPlay.dataset.bound = "true";
+    btnPlaylistPlay.addEventListener("click", () => {
+      if (isPlaying) {
+        pauseAudio();
+      } else {
+        if (!audioElement.src || audioElement.src === "" || audioElement.src === window.location.href) {
+          loadTrack(currentTrackIdx, true);
+        } else {
+          playAudio();
+        }
+      }
+    });
+  }
+
+  const btnShuffle = document.getElementById("btn-playlist-shuffle");
+  if (btnShuffle && !btnShuffle.dataset.bound) {
+    btnShuffle.dataset.bound = "true";
+    btnShuffle.addEventListener("click", () => {
+      toggleShuffle();
+    });
+  }
+}
+
+function renderPlaylistTable() {
+  const tableBody = document.getElementById("playlist-table-body");
+  if (!tableBody) return;
+  tableBody.innerHTML = "";
+  const currentTracks = getTracks();
+
+  const filteredTracks = currentTracks.filter(track => {
+    if (!currentSearchTerm) return true;
+    const term = currentSearchTerm.toLowerCase();
+    const title = (track.title || "").toLowerCase();
+    const artist = (track.artist || "").toLowerCase();
+    const album = (track.album || "").toLowerCase();
+    return title.includes(term) || artist.includes(term) || album.includes(term);
+  });
+
+  if (filteredTracks.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td colspan="4" style="text-align: center; padding: 24px; color: var(--text-muted); font-size: 0.9rem;">
+        <i class="fa-solid fa-magnifying-glass" style="margin-right: 8px;"></i> Lagu tidak ditemukan
+      </td>
+    `;
+    tableBody.appendChild(tr);
+    return;
+  }
+
+  filteredTracks.forEach((track) => {
+    const originalIdx = currentTracks.findIndex(t => t.id === track.id);
+    const idx = originalIdx !== -1 ? originalIdx : 0;
+    const tr = document.createElement("tr");
+    tr.className = `playlist-row ${idx === currentTrackIdx ? (isPlaying ? 'playing' : 'selected') : ''}`;
+    tr.dataset.index = idx;
+
+    const resolvedCover = encodeURI(fixPath(track.cover));
+    const fallbackCover = encodeURI(fixPath("assets/images/Daniel Caesar.jfif"));
+    const artistName = track.artist || "";
+
+    tr.innerHTML = `
+      <td class="track-num-cell">
+        <span class="track-num-text">${idx + 1}</span>
+        <i class="fa-solid fa-play play-icon-hover"></i>
+        <i class="fa-solid fa-volume-high playing-eq-icon" style="display:none;"></i>
+      </td>
+      <td class="track-info-cell">
+        <img class="track-thumb-img" src="${resolvedCover}" alt="${track.title}" onerror="this.onerror=null; this.src='${fallbackCover}';" />
+        <div class="track-details-wrap">
+          <span class="track-name-title">${track.title}</span>
+          ${artistName ? `<span class="track-artist-sub">${artistName}</span>` : ''}
+        </div>
+      </td>
+      <td class="track-album-cell">${track.album}</td>
+      <td class="track-duration-cell">${track.duration}</td>
+    `;
+
+    // Click on row plays the track without popping up full player overlay
+    tr.addEventListener("click", () => {
+      loadTrack(idx, true);
+    });
+
+    tr.addEventListener("dblclick", (e) => {
+      e.stopPropagation();
+      loadTrack(idx, true);
+    });
+
+    tableBody.appendChild(tr);
+  });
 }
 
 function createSpotifyFullPlayerDOM() {
@@ -1120,51 +1242,7 @@ function setupSpotifyControls() {
   updateShuffleRepeatUI();
 }
 
-function renderPlaylistTable() {
-  const tableBody = document.getElementById("playlist-table-body");
-  if (!tableBody) return;
-  tableBody.innerHTML = "";
-  const currentTracks = getTracks();
 
-  currentTracks.forEach((track, idx) => {
-    const tr = document.createElement("tr");
-    tr.className = `playlist-row ${idx === currentTrackIdx ? (isPlaying ? 'playing' : 'selected') : ''}`;
-    tr.dataset.index = idx;
-
-    const resolvedCover = encodeURI(fixPath(track.cover));
-    const fallbackCover = encodeURI(fixPath("assets/images/Daniel Caesar.jfif"));
-    const artistName = track.artist || "";
-
-    tr.innerHTML = `
-      <td class="track-num-cell">
-        <span class="track-num-text">${idx + 1}</span>
-        <i class="fa-solid fa-play play-icon-hover"></i>
-        <i class="fa-solid fa-volume-high playing-eq-icon" style="display:none;"></i>
-      </td>
-      <td class="track-info-cell">
-        <img class="track-thumb-img" src="${resolvedCover}" alt="${track.title}" onerror="this.onerror=null; this.src='${fallbackCover}';" />
-        <div class="track-details-wrap">
-          <span class="track-name-title">${track.title}</span>
-          ${artistName ? `<span class="track-artist-sub">${artistName}</span>` : ''}
-        </div>
-      </td>
-      <td class="track-album-cell">${track.album}</td>
-      <td class="track-duration-cell">${track.duration}</td>
-    `;
-
-    // Click on row plays the track without popping up full player overlay
-    tr.addEventListener("click", () => {
-      loadTrack(idx, true);
-    });
-
-    tr.addEventListener("dblclick", (e) => {
-      e.stopPropagation();
-      loadTrack(idx, true);
-    });
-
-    tableBody.appendChild(tr);
-  });
-}
 
 function loadAudioSourceSafely(srcPath, autoPlay = false) {
   if (!audioElement) return;
@@ -1180,12 +1258,76 @@ function loadAudioSourceSafely(srcPath, autoPlay = false) {
   }
 }
 
-function loadTrack(index, autoPlay = false) {
+function updateMediaSession(track) {
+  if (!('mediaSession' in navigator) || !track) return;
+
+  try {
+    const rawCover = fixPath(track.cover);
+    const absoluteCoverUrl = new URL(rawCover, window.location.href).href;
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track.title || "Track",
+      artist: track.artist || "Fadhil's Music Sanctuary",
+      album: track.album || "Sanctuary",
+      artwork: [
+        { src: absoluteCoverUrl, sizes: '96x96' },
+        { src: absoluteCoverUrl, sizes: '128x128' },
+        { src: absoluteCoverUrl, sizes: '192x192' },
+        { src: absoluteCoverUrl, sizes: '256x256' },
+        { src: absoluteCoverUrl, sizes: '384x384' },
+        { src: absoluteCoverUrl, sizes: '512x512' }
+      ]
+    });
+
+    const handlers = [
+      ['play', () => playAudio()],
+      ['pause', () => pauseAudio()],
+      ['previoustrack', () => playPrevTrack()],
+      ['nexttrack', () => playNextTrack()],
+      ['seekto', (details) => {
+        if (audioElement && details.seekTime !== undefined && details.seekTime !== null) {
+          audioElement.currentTime = details.seekTime;
+          updateMediaSessionPositionState();
+        }
+      }]
+    ];
+
+    handlers.forEach(([action, handler]) => {
+      try {
+        navigator.mediaSession.setActionHandler(action, handler);
+      } catch (e) {}
+    });
+  } catch (err) {
+    console.log("MediaSession update error:", err);
+  }
+}
+
+function updateMediaSessionPositionState() {
+  if (!('mediaSession' in navigator) || !audioElement || !navigator.mediaSession.setPositionState) return;
+  try {
+    if (audioElement.duration && isFinite(audioElement.duration) && !isNaN(audioElement.duration) && audioElement.duration > 0) {
+      navigator.mediaSession.setPositionState({
+        duration: audioElement.duration,
+        playbackRate: audioElement.playbackRate || 1,
+        position: Math.min(audioElement.currentTime || 0, audioElement.duration)
+      });
+    }
+  } catch (e) {}
+}
+
+function loadTrack(index, autoPlay = false, isBackNavigation = false) {
+  if (!isBackNavigation && currentTrackIdx !== undefined && currentTrackIdx !== null && currentTrackIdx !== index) {
+    playbackHistory.push(currentTrackIdx);
+    if (playbackHistory.length > 100) {
+      playbackHistory.shift();
+    }
+  }
   currentTrackIdx = index;
   const currentTracks = getTracks();
   const track = currentTracks[currentTrackIdx];
 
   if (!track) return;
+  updateMediaSession(track);
 
   // Dynamically change website theme color ONLY for artist pages, NOT playlist pages!
   const bodyArtist = document.body ? document.body.getAttribute("data-artist") : "";
@@ -1280,6 +1422,9 @@ function loadTrack(index, autoPlay = false) {
 function playAudio() {
   if (!audioElement) return;
   isPlaying = true;
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.playbackState = "playing";
+  }
   audioElement.play().catch(e => {
     console.log("Audio play error:", e);
   });
@@ -1288,6 +1433,8 @@ function playAudio() {
   if (spPlayIcon) spPlayIcon.className = "fa-solid fa-pause";
   const spFullPlayIcon = document.getElementById("sp-full-play-icon");
   if (spFullPlayIcon) spFullPlayIcon.className = "fa-solid fa-pause";
+  const btnPlaylistPlayIcon = document.getElementById("btn-playlist-play-icon");
+  if (btnPlaylistPlayIcon) btnPlaylistPlayIcon.className = "fa-solid fa-pause";
 
   if (vinylDisc) vinylDisc.classList.add("playing");
   if (turntableDeck) turntableDeck.classList.add("playing");
@@ -1303,12 +1450,17 @@ function playAudio() {
 function pauseAudio() {
   if (!audioElement) return;
   isPlaying = false;
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.playbackState = "paused";
+  }
   audioElement.pause();
   if (playIcon) playIcon.className = "fa-solid fa-play";
   const spPlayIcon = document.getElementById("sp-play-icon");
   if (spPlayIcon) spPlayIcon.className = "fa-solid fa-play";
   const spFullPlayIcon = document.getElementById("sp-full-play-icon");
   if (spFullPlayIcon) spFullPlayIcon.className = "fa-solid fa-play";
+  const btnPlaylistPlayIcon = document.getElementById("btn-playlist-play-icon");
+  if (btnPlaylistPlayIcon) btnPlaylistPlayIcon.className = "fa-solid fa-play";
 
   if (vinylDisc) vinylDisc.classList.remove("playing");
   if (turntableDeck) turntableDeck.classList.remove("playing");
@@ -1387,6 +1539,7 @@ if (audioElement) {
       const cTimes = [document.getElementById("curr-time"), document.getElementById("sp-full-curr-time")].filter(Boolean);
       cTimes.forEach(ct => ct.innerText = timeStr);
     }
+    updateMediaSessionPositionState();
   });
 }
 
