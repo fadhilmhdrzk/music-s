@@ -565,12 +565,183 @@ const infinityTracks = [
 const grayscaleTracks = [
   {
     id: 0,
-    title: "Grayscale Track 1",
-    artist: "Various Artists",
-    album: "The World in Grayscale",
-    cover: "assets/images/Frank Ocean.jfif",
-    src: "assets/audio/fo_white_ferrari.webm",
-    duration: "4:08"
+    title: "Sparks",
+    artist: "Coldplay",
+    album: "Parachutes (2000)",
+    cover: "assets/images/gray_01_sparks.jpg",
+    src: "assets/audio/gray_01_sparks.webm",
+    duration: "3:47"
+  },
+  {
+    id: 1,
+    title: "Last Night on Earth",
+    artist: "Green Day",
+    album: "21st Century Breakdown (2009)",
+    cover: "assets/images/gray_02_last_night_on_earth.jpg",
+    src: "assets/audio/gray_02_last_night_on_earth.webm",
+    duration: "3:42"
+  },
+  {
+    id: 2,
+    title: "Staying",
+    artist: "Lizzy McAlpine",
+    album: "five seconds flat (2022)",
+    cover: "assets/images/gray_03_staying.jpg",
+    src: "assets/audio/gray_03_staying.webm",
+    duration: "2:32"
+  },
+  {
+    id: 3,
+    title: "Moon (Feat. Bon Iver)",
+    artist: "Daniel Caesar, Bon Iver",
+    album: "CASE STUDY 01 (2019)",
+    cover: "assets/images/gray_04_moon.jpg",
+    src: "assets/audio/gray_04_moon.webm",
+    duration: "5:17"
+  },
+  {
+    id: 4,
+    title: "Oceans & Engines",
+    artist: "NIKI",
+    album: "Nicole (2022)",
+    cover: "assets/images/gray_05_oceans_and_engines.jpg",
+    src: "assets/audio/gray_05_oceans_and_engines.webm",
+    duration: "5:36"
+  },
+  {
+    id: 5,
+    title: "I Love You, I'm Sorry",
+    artist: "Gracie Abrams",
+    album: "The Secret of Us (2024)",
+    cover: "assets/images/gray_06_i_love_you_im_sorry.jpg",
+    src: "assets/audio/gray_06_i_love_you_im_sorry.webm",
+    duration: "2:37"
+  },
+  {
+    id: 6,
+    title: "A Couple Minutes",
+    artist: "Olivia Dean",
+    album: "Messy (2023)",
+    cover: "assets/images/gray_07_a_couple_minutes.jpg",
+    src: "assets/audio/gray_07_a_couple_minutes.webm",
+    duration: "3:32"
+  },
+  {
+    id: 7,
+    title: "Almost Is Never Enough",
+    artist: "Ariana Grande, Nathan Sykes",
+    album: "Yours Truly (2013)",
+    cover: "assets/images/gray_08_almost_is_never_enough.jpg",
+    src: "assets/audio/gray_08_almost_is_never_enough.webm",
+    duration: "5:26"
+  },
+  {
+    id: 8,
+    title: "All I Need To Hear",
+    artist: "The 1975",
+    album: "Being Funny in a Foreign Language (2022)",
+    cover: "assets/images/gray_09_all_i_need_to_hear.jpg",
+    src: "assets/audio/gray_09_all_i_need_to_hear.webm",
+    duration: "3:31"
+  },
+  {
+    id: 9,
+    title: "Futile Devices (Doveman Remix)",
+    artist: "Sufjan Stevens",
+    album: "Call Me by Your Name (2017)",
+    cover: "assets/images/gray_10_futile_devices.jpg",
+    src: "assets/audio/gray_10_futile_devices.webm",
+    duration: "2:17"
+  },
+  {
+    id: 10,
+    title: "Strange",
+    artist: "Celeste",
+    album: "Not Your Muse (2020)",
+    cover: "assets/images/gray_11_strange.jpg",
+    src: "assets/audio/gray_11_strange.webm",
+    duration: "4:16"
+  },
+  {
+    id: 11,
+    title: "purple",
+    artist: "Olivia Rodrigo",
+    album: "GUTS (2023)",
+    cover: "assets/images/gray_12_purple.jpg",
+    src: "assets/audio/gray_12_purple.webm",
+    duration: "4:00"
+  },
+  {
+    id: 12,
+    title: "Emily's Song",
+    artist: "Daniel Caesar",
+    album: "Freudian (2017)",
+    cover: "assets/images/gray_13_emilys_song.jpg",
+    src: "assets/audio/gray_13_emilys_song.webm",
+    duration: "2:55"
+  },
+  {
+    id: 13,
+    title: "About You",
+    artist: "The 1975",
+    album: "Being Funny in a Foreign Language (2022)",
+    cover: "assets/images/gray_14_about_you.jpg",
+    src: "assets/audio/gray_14_about_you.webm",
+    duration: "5:27"
+  },
+  {
+    id: 14,
+    title: "Hold Me Down",
+    artist: "Daniel Caesar",
+    album: "Freudian (2017)",
+    cover: "assets/images/gray_15_hold_me_down.jpg",
+    src: "assets/audio/gray_15_hold_me_down.webm",
+    duration: "3:51"
+  },
+  {
+    id: 15,
+    title: "The Only Exception",
+    artist: "Paramore",
+    album: "Brand New Eyes (2009)",
+    cover: "assets/images/gray_16_the_only_exception.jpg",
+    src: "assets/audio/gray_16_the_only_exception.webm",
+    duration: "4:27"
+  },
+  {
+    id: 16,
+    title: "Those Eyes",
+    artist: "New West",
+    album: "Call Me When You Get Home (2023)",
+    cover: "assets/images/gray_17_those_eyes.jpg",
+    src: "assets/audio/gray_17_those_eyes.webm",
+    duration: "3:41"
+  },
+  {
+    id: 17,
+    title: "Fix You",
+    artist: "Coldplay",
+    album: "X&Y (2005)",
+    cover: "assets/images/gray_18_fix_you.jpg",
+    src: "assets/audio/gray_18_fix_you.webm",
+    duration: "4:55"
+  },
+  {
+    id: 18,
+    title: "Blessed",
+    artist: "Daniel Caesar",
+    album: "Freudian (2017)",
+    cover: "assets/images/gray_19_blessed.jpg",
+    src: "assets/audio/gray_19_blessed.webm",
+    duration: "4:01"
+  },
+  {
+    id: 19,
+    title: "A Sorrowful Reunion",
+    artist: "Reality Club",
+    album: "Reality Club (2023)",
+    cover: "assets/images/gray_20_a_sorrowful_reunion.jpg",
+    src: "assets/audio/gray_20_a_sorrowful_reunion.webm",
+    duration: "4:20"
   }
 ];
 
