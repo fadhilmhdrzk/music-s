@@ -579,7 +579,7 @@ const grayscaleTracks = [
     album: "21st Century Breakdown (2009)",
     cover: "assets/images/Last night on the earth.jfif",
     src: "assets/audio/gray_02_last_night_on_earth.webm",
-    duration: "3:42"
+    duration: "3:57"
   },
   {
     id: 2,
