@@ -1210,6 +1210,7 @@ let isShuffle = false;
 let isRepeat = false;
 let playbackHistory = [];
 let shuffleQueue = [];
+let userQueue = [];
 
 function generateShuffleQueue(tracksCount, currentIdx) {
   const indices = [];
@@ -1231,6 +1232,12 @@ function playNextTrack() {
 
   if (isRepeat) {
     loadTrack(currentTrackIdx, true);
+    return;
+  }
+
+  if (userQueue && userQueue.length > 0) {
+    const nextIdx = userQueue.shift();
+    loadTrack(nextIdx, true);
     return;
   }
 
@@ -1279,9 +1286,10 @@ function playPrevTrack() {
 function toggleShuffle() {
   isShuffle = !isShuffle;
   if (isShuffle) {
-    shuffleQueue = [];
+    shuffleQueue = generateShuffleQueue(getTracks().length, currentTrackIdx);
   }
   updateShuffleRepeatUI();
+  renderQueuePanel();
 }
 
 function toggleRepeat() {
@@ -1521,6 +1529,9 @@ function renderPlaylistTable() {
     const artistName = track.artist || "";
 
     tr.innerHTML = `
+      <div class="swipe-queue-action">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </div>
       <td class="track-num-cell">
         <span class="track-num-text">${idx + 1}</span>
         <i class="fa-solid fa-play play-icon-hover"></i>
@@ -1534,11 +1545,32 @@ function renderPlaylistTable() {
         </div>
       </td>
       <td class="track-album-cell">${track.album}</td>
-      <td class="track-duration-cell">${track.duration}</td>
+      <td class="track-duration-cell">
+        <div class="duration-inner-wrap">
+          <span class="duration-text">${track.duration}</span>
+          <div class="track-menu-wrap">
+            <button class="track-menu-btn" title="Pilihan" aria-label="More options">
+              <i class="fa-solid fa-ellipsis"></i>
+            </button>
+            <div class="track-dropdown-menu">
+              <button class="dropdown-item btn-add-queue" data-index="${idx}">
+                <i class="fa-solid fa-bars-staggered"></i> Add to queue
+              </button>
+            </div>
+          </div>
+        </div>
+      </td>
     `;
 
+    let ignoreClickAfterSwipe = false;
+
     // Click on row plays the track without popping up full player overlay
-    tr.addEventListener("click", () => {
+    tr.addEventListener("click", (e) => {
+      if (ignoreClickAfterSwipe) {
+        e.stopPropagation();
+        ignoreClickAfterSwipe = false;
+        return;
+      }
       loadTrack(idx, true);
     });
 
@@ -1547,9 +1579,144 @@ function renderPlaylistTable() {
       loadTrack(idx, true);
     });
 
+    // Touch Swipe Right Gesture on Mobile to Add to Queue
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let deltaX = 0;
+    let isSwiping = false;
+    let isHorizontalSwipe = false;
+    const swipeAction = tr.querySelector(".swipe-queue-action");
+
+    tr.addEventListener("touchstart", (e) => {
+      if (e.touches && e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        deltaX = 0;
+        isSwiping = false;
+        isHorizontalSwipe = false;
+        tr.style.transition = "none";
+      }
+    }, { passive: true });
+
+    tr.addEventListener("touchmove", (e) => {
+      if (e.touches && e.touches.length === 1) {
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const diffX = currentX - touchStartX;
+        const diffY = currentY - touchStartY;
+
+        if (!isSwiping) {
+          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 6) {
+            isSwiping = true;
+            isHorizontalSwipe = true;
+          } else if (Math.abs(diffY) > 6) {
+            isSwiping = true;
+            isHorizontalSwipe = false;
+          }
+        }
+
+        if (isHorizontalSwipe && diffX > 0) {
+          deltaX = Math.min(95, diffX);
+          tr.style.transform = `translateX(${deltaX}px)`;
+
+          if (swipeAction) {
+            swipeAction.style.opacity = Math.min(1, deltaX / 35).toString();
+            if (deltaX > 60) {
+              swipeAction.classList.add("triggered");
+            } else {
+              swipeAction.classList.remove("triggered");
+            }
+          }
+        }
+      }
+    }, { passive: true });
+
+    tr.addEventListener("touchend", () => {
+      tr.style.transition = "transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+
+      if (isHorizontalSwipe && deltaX > 60) {
+        ignoreClickAfterSwipe = true;
+        addToQueue(idx);
+        if (swipeAction) {
+          swipeAction.classList.add("triggered");
+          setTimeout(() => {
+            if (swipeAction) {
+              swipeAction.classList.remove("triggered");
+              swipeAction.style.opacity = "0";
+            }
+          }, 250);
+        }
+      }
+
+      tr.style.transform = "translateX(0)";
+      if (swipeAction) {
+        swipeAction.style.opacity = "0";
+      }
+      deltaX = 0;
+      isSwiping = false;
+      isHorizontalSwipe = false;
+    });
+
+    // 3-Dots dropdown menu click handlers
+    const menuBtn = tr.querySelector(".track-menu-btn");
+    const dropdownMenu = tr.querySelector(".track-dropdown-menu");
+    const addQueueBtn = tr.querySelector(".btn-add-queue");
+
+    if (menuBtn && dropdownMenu) {
+      menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        document.querySelectorAll(".track-dropdown-menu.show").forEach(menu => {
+          if (menu !== dropdownMenu) menu.classList.remove("show");
+        });
+        dropdownMenu.classList.toggle("show");
+      });
+    }
+
+    if (addQueueBtn) {
+      addQueueBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (dropdownMenu) dropdownMenu.classList.remove("show");
+        addToQueue(idx);
+      });
+    }
+
     tableBody.appendChild(tr);
   });
 }
+
+function addToQueue(index) {
+  const currentTracks = getTracks();
+  const track = currentTracks[index];
+  if (!track) return;
+  userQueue.push(index);
+  showToast(`Added to queue: <strong>${track.title}</strong>`);
+  renderQueuePanel();
+}
+
+function showToast(message) {
+  let toast = document.getElementById("toast-notification");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast-notification";
+    toast.className = "toast-notification";
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${message}</span>`;
+  toast.classList.add("show");
+  if (toast.timeoutId) clearTimeout(toast.timeoutId);
+  toast.timeoutId = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2500);
+}
+
+// Global click handler to close open dropdown menus when clicking outside
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".track-menu-wrap")) {
+    document.querySelectorAll(".track-dropdown-menu.show").forEach(menu => {
+      menu.classList.remove("show");
+    });
+  }
+});
 
 function createSpotifyFullPlayerDOM() {
   if (document.getElementById("spotify-full-player")) return;
@@ -1617,6 +1784,9 @@ function createSpotifyFullPlayerDOM() {
             <i class="fa-solid fa-compact-disc"></i>
             <span>Fadhil's Music Sanctuary</span>
           </div>
+          <button class="spotify-btn-ctrl" id="sp-full-btn-queue" title="Antrean Pemutaran (Queue)">
+            <i class="fa-solid fa-list-ul"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -1777,6 +1947,15 @@ function setupSpotifyControls() {
     spBtnRepeat.addEventListener("click", (e) => { e.stopPropagation(); toggleRepeat(); });
   }
 
+  const spBtnQueue = document.getElementById("sp-btn-queue");
+  if (spBtnQueue && !spBtnQueue.dataset.bound) {
+    spBtnQueue.dataset.bound = "true";
+    spBtnQueue.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleQueuePanel();
+    });
+  }
+
   // Full Player Modal Controls
   const closeBtn = document.getElementById("sp-full-close-btn");
   if (closeBtn && !closeBtn.dataset.bound) {
@@ -1816,6 +1995,15 @@ function setupSpotifyControls() {
     fullRepeatBtn.addEventListener("click", () => toggleRepeat());
   }
 
+  const spFullBtnQueue = document.getElementById("sp-full-btn-queue");
+  if (spFullBtnQueue && !spFullBtnQueue.dataset.bound) {
+    spFullBtnQueue.dataset.bound = "true";
+    spFullBtnQueue.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleQueuePanel();
+    });
+  }
+
   // Open Full Player on clicking bottom bar
   const bottomPlayer = document.getElementById("spotify-bottom-player");
   if (bottomPlayer && !bottomPlayer.dataset.modalBound) {
@@ -1839,6 +2027,10 @@ function loadAudioSourceSafely(srcPath, autoPlay = false) {
   if (audioElement.src !== resolvedUrl) {
     audioElement.src = resolvedUrl;
     audioElement.load();
+  } else {
+    try {
+      audioElement.currentTime = 0;
+    } catch (e) {}
   }
 
   if (autoPlay) {
@@ -1981,6 +2173,9 @@ function loadTrack(index, autoPlay = false, isBackNavigation = false) {
     row.classList.toggle("playing", isCurrent && isPlaying);
     row.classList.toggle("selected", isCurrent && !isPlaying);
   });
+
+  // Update Queue Panel if open
+  renderQueuePanel();
 
   if (audioElement) {
     audioElement.preload = "auto";
@@ -2563,6 +2758,459 @@ function setIndexTheme(themeName) {
   themeBtns.forEach(btn => {
     btn.classList.toggle("active", btn.getAttribute("data-theme-val") === themeName);
   });
+}
+
+/* ==========================================================================
+   QUEUE PANEL OVERLAY LOGIC
+   ========================================================================== */
+
+function getCurrentPlaylistContextName() {
+  const bodyArtist = document.body ? document.body.getAttribute("data-artist") : "";
+  const heroTitle = document.querySelector(".hero-title");
+  if (heroTitle) {
+    let t = heroTitle.innerText.replace("♾️", "").trim();
+    if (t) return t;
+  }
+  const artistMap = {
+    "daniel-caesar": "Daniel Caesar",
+    "frank-ocean": "Frank Ocean",
+    "wave-to-earth": "Wave To Earth",
+    "lany": "LANY",
+    "dewa-19": "Dewa 19",
+    "hindia": "Hindia",
+    "sal-priadi": "Sal Priadi",
+    "perunggu": "Perunggu",
+    "playlist-infinity": "Playlist Sanctuary",
+    "playlist-grayscale": "The world in grayscale",
+    "playlist-hard": "SHITS GOES HARD",
+    "playlist-indos": "Indo's"
+  };
+  return artistMap[bodyArtist] || "Music Sanctuary";
+}
+
+function createQueuePanelDOM() {
+  if (document.getElementById("queue-panel-overlay")) return;
+
+  const queueDiv = document.createElement("div");
+  queueDiv.className = "queue-panel-overlay";
+  queueDiv.id = "queue-panel-overlay";
+  queueDiv.setAttribute("aria-hidden", "true");
+
+  queueDiv.innerHTML = `
+    <div class="queue-container">
+      <div class="queue-header">
+        <div class="queue-header-title">
+          <i class="fa-solid fa-list-ul"></i>
+          <div>
+            <h2>Antrean Pemutaran</h2>
+            <span class="queue-playlist-name" id="queue-playlist-subtitle">Sanctuary Playlist</span>
+          </div>
+        </div>
+        <button class="queue-close-btn" id="queue-close-btn" title="Tutup Antrean">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="queue-body">
+        <!-- Section 1: Now Playing -->
+        <div class="queue-section">
+          <h3 class="queue-section-title">Now playing</h3>
+          <div class="queue-track-card now-playing" id="queue-now-playing-card"></div>
+        </div>
+
+        <!-- Section 2: Next in queue (Shown only when userQueue has items) -->
+        <div class="queue-section" id="queue-user-section" style="margin-top: 18px; display: none;">
+          <div class="queue-section-header">
+            <h3 class="queue-section-title">Next in queue</h3>
+            <button class="btn-clear-queue" id="btn-clear-queue">Clear queue</button>
+          </div>
+          <div class="queue-track-list" id="queue-user-list"></div>
+        </div>
+
+        <!-- Section 3: Next from: [Playlist Name] -->
+        <div class="queue-section" style="margin-top: 18px;">
+          <div class="queue-section-header">
+            <h3 class="queue-section-title" id="queue-next-from-title">Next from: Playlist</h3>
+          </div>
+          <div class="queue-track-list" id="queue-next-list"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(queueDiv);
+
+  const closeBtn = document.getElementById("queue-close-btn");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeQueuePanel);
+  }
+
+  const clearBtn = document.getElementById("btn-clear-queue");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      userQueue = [];
+      renderQueuePanel();
+      showToast("Antrean manual dibersihkan");
+    });
+  }
+}
+
+function bindRowDragEvents(row, pos, section) {
+  row.addEventListener("dragstart", (e) => {
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", JSON.stringify({ pos: pos, section: section }));
+    row.classList.add("dragging");
+  });
+
+  row.addEventListener("dragend", () => {
+    row.classList.remove("dragging");
+    document.querySelectorAll(".queue-item-row").forEach(r => r.classList.remove("drag-over-top", "drag-over-bottom"));
+  });
+
+  row.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    const rect = row.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    if (e.clientY < midY) {
+      row.classList.add("drag-over-top");
+      row.classList.remove("drag-over-bottom");
+    } else {
+      row.classList.add("drag-over-bottom");
+      row.classList.remove("drag-over-top");
+    }
+  });
+
+  row.addEventListener("dragleave", () => {
+    row.classList.remove("drag-over-top", "drag-over-bottom");
+  });
+
+  row.addEventListener("drop", (e) => {
+    e.preventDefault();
+    row.classList.remove("drag-over-top", "drag-over-bottom");
+    try {
+      const data = JSON.parse(e.dataTransfer.getData("text/plain"));
+      if (data && data.pos !== undefined) {
+        reorderQueue(data.pos, pos, data.section, section);
+      }
+    } catch (err) {}
+  });
+
+  let touchStartY = 0;
+  let isTouchDragging = false;
+
+  row.addEventListener("touchstart", (e) => {
+    if (e.target.closest(".q-remove-btn")) return;
+    if (e.touches && e.touches.length === 1) {
+      touchStartY = e.touches[0].clientY;
+      isTouchDragging = false;
+    }
+  }, { passive: true });
+
+  row.addEventListener("touchmove", (e) => {
+    if (e.touches && e.touches.length === 1) {
+      const currentY = e.touches[0].clientY;
+      if (Math.abs(currentY - touchStartY) > 8) {
+        isTouchDragging = true;
+        row.classList.add("dragging");
+        const targetEl = document.elementFromPoint(e.touches[0].clientX, currentY);
+        const targetRow = targetEl ? targetEl.closest(".queue-item-row") : null;
+        document.querySelectorAll(".queue-item-row").forEach(r => r.classList.remove("drag-over-top", "drag-over-bottom"));
+        if (targetRow && targetRow !== row) {
+          targetRow.classList.add("drag-over-top");
+        }
+      }
+    }
+  }, { passive: true });
+
+  row.addEventListener("touchend", (e) => {
+    if (isTouchDragging) {
+      row.classList.remove("dragging");
+      document.querySelectorAll(".queue-item-row").forEach(r => r.classList.remove("drag-over-top", "drag-over-bottom"));
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        const endY = e.changedTouches[0].clientY;
+        const endX = e.changedTouches[0].clientX;
+        const targetEl = document.elementFromPoint(endX, endY);
+        const targetRow = targetEl ? targetEl.closest(".queue-item-row") : null;
+        if (targetRow && targetRow !== row) {
+          const fromPos = pos;
+          const toPos = parseInt(targetRow.dataset.qpos, 10);
+          const toSection = targetRow.dataset.qsection;
+          if (!isNaN(toPos)) {
+            reorderQueue(fromPos, toPos, section, toSection);
+          }
+        }
+      }
+    }
+  });
+}
+
+function reorderQueue(fromPos, toPos, fromSection, toSection) {
+  if (fromPos === toPos && fromSection === toSection) return;
+
+  const tracks = getTracks();
+
+  if (fromSection === "user" && toSection === "user") {
+    const [moved] = userQueue.splice(fromPos, 1);
+    userQueue.splice(toPos, 0, moved);
+  } else if (fromSection === "playlist" && toSection === "playlist") {
+    if (!isShuffle) {
+      shuffleQueue = [];
+      for (let i = 1; i < tracks.length; i++) {
+        shuffleQueue.push((currentTrackIdx + i) % tracks.length);
+      }
+      isShuffle = true;
+      updateShuffleRepeatUI();
+    }
+    const [moved] = shuffleQueue.splice(fromPos, 1);
+    shuffleQueue.splice(toPos, 0, moved);
+  } else if (fromSection === "playlist" && toSection === "user") {
+    if (!isShuffle) {
+      shuffleQueue = [];
+      for (let i = 1; i < tracks.length; i++) {
+        shuffleQueue.push((currentTrackIdx + i) % tracks.length);
+      }
+    }
+    const [moved] = shuffleQueue.splice(fromPos, 1);
+    userQueue.splice(toPos, 0, moved);
+  } else if (fromSection === "user" && toSection === "playlist") {
+    const [moved] = userQueue.splice(fromPos, 1);
+    if (!isShuffle) {
+      shuffleQueue = [];
+      for (let i = 1; i < tracks.length; i++) {
+        shuffleQueue.push((currentTrackIdx + i) % tracks.length);
+      }
+      isShuffle = true;
+      updateShuffleRepeatUI();
+    }
+    shuffleQueue.splice(toPos, 0, moved);
+  }
+
+  renderQueuePanel();
+  showToast("Urutan antrean diubah");
+}
+
+function renderQueuePanel() {
+  createQueuePanelDOM();
+  const queueOverlay = document.getElementById("queue-panel-overlay");
+  if (!queueOverlay) return;
+
+  const tracks = getTracks();
+  const currentTrack = tracks[currentTrackIdx];
+  const contextName = getCurrentPlaylistContextName();
+
+  const queueSubtitle = document.getElementById("queue-playlist-subtitle");
+  if (queueSubtitle) queueSubtitle.innerText = contextName;
+
+  const nextFromTitle = document.getElementById("queue-next-from-title");
+  if (nextFromTitle) nextFromTitle.innerText = `Next from: ${contextName}`;
+
+  const modeBadge = document.getElementById("queue-mode-badge");
+  if (modeBadge) {
+    if (isShuffle) {
+      modeBadge.innerHTML = `<i class="fa-solid fa-shuffle"></i> Mode Acak (Shuffle)`;
+      modeBadge.classList.add("shuffle-active");
+    } else {
+      modeBadge.innerHTML = `<i class="fa-solid fa-list-ol"></i> Urutan Playlist`;
+      modeBadge.classList.remove("shuffle-active");
+    }
+  }
+
+  // 1. Render Now Playing Card
+  const nowPlayingCard = document.getElementById("queue-now-playing-card");
+  if (nowPlayingCard && currentTrack) {
+    const resolvedCover = encodeURI(fixPath(currentTrack.cover));
+    const fallbackCover = encodeURI(fixPath("assets/images/Daniel Caesar.jfif"));
+    nowPlayingCard.innerHTML = `
+      <div class="q-cover-wrap">
+        <img src="${resolvedCover}" alt="${currentTrack.title}" onerror="this.onerror=null; this.src='${fallbackCover}';" />
+        <i class="fa-solid fa-volume-high q-playing-icon"></i>
+      </div>
+      <div class="q-track-meta">
+        <span class="q-track-title">${currentTrack.title}</span>
+        <span class="q-track-artist">${currentTrack.artist || 'Fadhil\'s Music'}</span>
+      </div>
+      <span class="q-track-duration">${currentTrack.duration}</span>
+    `;
+  }
+
+  // 2. Render Section 2: Next in queue (User Queued Tracks)
+  const userSection = document.getElementById("queue-user-section");
+  const userList = document.getElementById("queue-user-list");
+  if (userSection && userList) {
+    if (userQueue && userQueue.length > 0) {
+      userSection.style.display = "block";
+      userList.innerHTML = "";
+
+      userQueue.forEach((trackIdx, uPos) => {
+        const track = tracks[trackIdx];
+        if (!track) return;
+
+        const row = document.createElement("div");
+        row.className = "queue-item-row user-queued";
+        row.setAttribute("draggable", "true");
+        row.dataset.qpos = uPos;
+        row.dataset.qsection = "user";
+
+        const resolvedCover = encodeURI(fixPath(track.cover));
+        const fallbackCover = encodeURI(fixPath("assets/images/Daniel Caesar.jfif"));
+
+        row.innerHTML = `
+          <i class="fa-solid fa-grip-vertical q-grip" title="Geser untuk mengubah urutan"></i>
+          <span class="q-num">${uPos + 1}</span>
+          <img class="q-thumb" src="${resolvedCover}" alt="${track.title}" onerror="this.onerror=null; this.src='${fallbackCover}';" />
+          <div class="q-info">
+            <span class="q-title">${track.title}</span>
+            <span class="q-artist">${track.artist || track.album}</span>
+          </div>
+          <span class="q-duration">${track.duration}</span>
+          <button class="q-remove-btn" title="Hapus dari antrean"><i class="fa-solid fa-xmark"></i></button>
+        `;
+
+        row.addEventListener("click", (e) => {
+          if (e.target.closest(".q-remove-btn") || e.target.closest(".q-grip")) return;
+          userQueue.splice(uPos, 1);
+          loadTrack(trackIdx, true);
+          renderQueuePanel();
+        });
+
+        const removeBtn = row.querySelector(".q-remove-btn");
+        if (removeBtn) {
+          removeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            userQueue.splice(uPos, 1);
+            renderQueuePanel();
+            showToast(`Dihapus dari antrean: <strong>${track.title}</strong>`);
+          });
+        }
+
+        bindRowDragEvents(row, uPos, "user");
+        userList.appendChild(row);
+      });
+    } else {
+      userSection.style.display = "none";
+      userList.innerHTML = "";
+    }
+  }
+
+  // 3. Render Section 3: Next from: [Playlist Name]
+  const nextList = document.getElementById("queue-next-list");
+  if (!nextList) return;
+  nextList.innerHTML = "";
+
+  const upcomingPlaylistIndices = [];
+  if (isShuffle) {
+    if (!shuffleQueue || shuffleQueue.length === 0) {
+      shuffleQueue = generateShuffleQueue(tracks.length, currentTrackIdx);
+    }
+    shuffleQueue.forEach(idx => upcomingPlaylistIndices.push(idx));
+  } else {
+    for (let i = 1; i < tracks.length; i++) {
+      const idx = (currentTrackIdx + i) % tracks.length;
+      upcomingPlaylistIndices.push(idx);
+    }
+  }
+
+  if (upcomingPlaylistIndices.length === 0) {
+    nextList.innerHTML = `<div class="queue-empty-text">Tidak ada lagu berikutnya dalam playlist.</div>`;
+    return;
+  }
+
+  upcomingPlaylistIndices.forEach((trackIdx, pPos) => {
+    const track = tracks[trackIdx];
+    if (!track) return;
+
+    const row = document.createElement("div");
+    row.className = "queue-item-row";
+    row.setAttribute("draggable", "true");
+    row.dataset.qpos = pPos;
+    row.dataset.qsection = "playlist";
+
+    const resolvedCover = encodeURI(fixPath(track.cover));
+    const fallbackCover = encodeURI(fixPath("assets/images/Daniel Caesar.jfif"));
+
+    row.innerHTML = `
+      <i class="fa-solid fa-grip-vertical q-grip" title="Geser untuk mengubah urutan"></i>
+      <span class="q-num">${pPos + 1}</span>
+      <img class="q-thumb" src="${resolvedCover}" alt="${track.title}" onerror="this.onerror=null; this.src='${fallbackCover}';" />
+      <div class="q-info">
+        <span class="q-title">${track.title}</span>
+        <span class="q-artist">${track.artist || track.album}</span>
+      </div>
+      <span class="q-duration">${track.duration}</span>
+    `;
+
+    row.addEventListener("click", (e) => {
+      if (e.target.closest(".q-grip")) return;
+      loadTrack(trackIdx, true);
+      renderQueuePanel();
+    });
+
+    bindRowDragEvents(row, pPos, "playlist");
+    nextList.appendChild(row);
+  });
+}
+
+function openQueuePanel() {
+  createQueuePanelDOM();
+  renderQueuePanel();
+  const queueOverlay = document.getElementById("queue-panel-overlay");
+  const queueBtn = document.getElementById("sp-btn-queue");
+  if (!queueOverlay) return;
+
+  queueOverlay.classList.add("active");
+  queueOverlay.setAttribute("aria-hidden", "false");
+  if (queueBtn) queueBtn.classList.add("active");
+}
+
+function closeQueuePanel() {
+  const queueOverlay = document.getElementById("queue-panel-overlay");
+  const queueBtn = document.getElementById("sp-btn-queue");
+  if (!queueOverlay) return;
+
+  queueOverlay.classList.remove("active");
+  queueOverlay.setAttribute("aria-hidden", "true");
+  if (queueBtn) queueBtn.classList.remove("active");
+}
+
+function toggleQueuePanel() {
+  const queueOverlay = document.getElementById("queue-panel-overlay");
+  if (queueOverlay && queueOverlay.classList.contains("active")) {
+    closeQueuePanel();
+  } else {
+    openQueuePanel();
+  }
+}
+
+function openQueuePanel() {
+  createQueuePanelDOM();
+  renderQueuePanel();
+  const queueOverlay = document.getElementById("queue-panel-overlay");
+  const queueBtn = document.getElementById("sp-btn-queue");
+  if (!queueOverlay) return;
+
+  queueOverlay.classList.add("active");
+  queueOverlay.setAttribute("aria-hidden", "false");
+  if (queueBtn) queueBtn.classList.add("active");
+}
+
+function closeQueuePanel() {
+  const queueOverlay = document.getElementById("queue-panel-overlay");
+  const queueBtn = document.getElementById("sp-btn-queue");
+  if (!queueOverlay) return;
+
+  queueOverlay.classList.remove("active");
+  queueOverlay.setAttribute("aria-hidden", "true");
+  if (queueBtn) queueBtn.classList.remove("active");
+}
+
+function toggleQueuePanel() {
+  const queueOverlay = document.getElementById("queue-panel-overlay");
+  if (queueOverlay && queueOverlay.classList.contains("active")) {
+    closeQueuePanel();
+  } else {
+    openQueuePanel();
+  }
 }
 
 

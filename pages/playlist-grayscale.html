@@ -85,7 +85,7 @@
                 <th style="width: 50px; text-align: center;">#</th>
                 <th>Title</th>
                 <th>Album</th>
-                <th style="width: 80px; text-align: right;"><i class="fa-regular fa-clock"></i></th>
+                <th style="width: 130px; text-align: right;"><i class="fa-regular fa-clock"></i></th>
               </tr>
             </thead>
             <tbody id="playlist-table-body">
@@ -136,6 +136,9 @@
     </div>
 
     <div class="spotify-right-controls">
+      <button class="spotify-btn-ctrl" id="sp-btn-queue" title="Antrean Pemutaran (Queue)">
+        <i class="fa-solid fa-list-ul"></i>
+      </button>
       <i class="fa-solid fa-volume-high" id="vol-icon" title="Mute / Unmute" style="cursor: pointer; color: var(--text-muted);"></i>
       <input type="range" class="volume-slider" id="vol-slider" min="0" max="1" step="0.05" value="0.8" style="width: 90px;" />
     </div>
