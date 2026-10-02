@@ -3222,6 +3222,10 @@ footer p span {
 .track-album-cell {
   font-size: 0.88rem;
   color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
 }
 
 .track-duration-cell {
@@ -3622,18 +3626,32 @@ footer p span {
     max-width: none !important;
   }
 
-.spotify-bottom-player #sp-btn-prev,
-.spotify-bottom-player #sp-btn-next {
-  display: none !important;
-}
-
-  .spotify-bottom-player .spotify-btn-ctrl:not(.spotify-btn-play) {
+  .spotify-bottom-player #sp-btn-prev,
+  .spotify-bottom-player #sp-btn-next,
+  .spotify-bottom-player #sp-btn-shuffle,
+  .spotify-bottom-player #sp-btn-repeat {
     display: none !important;
   }
 
   .spotify-progress-wrap,
-  .spotify-right-controls {
+  .spotify-bottom-player #vol-icon,
+  .spotify-bottom-player #vol-slider {
     display: none !important;
+  }
+
+  .spotify-right-controls {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    width: auto !important;
+  }
+
+  .spotify-bottom-player #sp-btn-queue {
+    display: inline-flex !important;
+    color: var(--text-main) !important;
+    font-size: 1.15rem !important;
+    padding: 6px !important;
+    margin-left: 4px !important;
   }
 }
 

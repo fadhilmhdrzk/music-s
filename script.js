@@ -1529,15 +1529,15 @@ function renderPlaylistTable() {
     const artistName = track.artist || "";
 
     tr.innerHTML = `
-      <div class="swipe-queue-action">
-        <i class="fa-solid fa-bars-staggered"></i>
-      </div>
       <td class="track-num-cell">
         <span class="track-num-text">${idx + 1}</span>
         <i class="fa-solid fa-play play-icon-hover"></i>
         <i class="fa-solid fa-volume-high playing-eq-icon" style="display:none;"></i>
       </td>
       <td class="track-info-cell">
+        <div class="swipe-queue-action">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </div>
         <img class="track-thumb-img" src="${resolvedCover}" alt="${track.title}" onerror="this.onerror=null; this.src='${fallbackCover}';" />
         <div class="track-details-wrap">
           <span class="track-name-title">${track.title}</span>
