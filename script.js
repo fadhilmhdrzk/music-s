@@ -742,6 +742,33 @@ const grayscaleTracks = [
     cover: "assets/images/A sorrowful reunion.jfif",
     src: "assets/audio/gray_20_a_sorrowful_reunion.webm",
     duration: "4:20"
+  },
+  {
+    id: 20,
+    title: "Wiseman",
+    artist: "Frank Ocean",
+    album: "Single (2012)",
+    cover: "assets/images/Wiseman.jfif",
+    src: "assets/audio/gray_21_wiseman.webm",
+    duration: "3:51"
+  },
+  {
+    id: 21,
+    title: "Can't",
+    artist: "Daniel Caesar",
+    album: "Unreleased (2023)",
+    cover: "assets/images/Can't.jfif",
+    src: "assets/audio/gray_22_cant.webm",
+    duration: "2:10"
+  },
+  {
+    id: 22,
+    title: "Love Me Like I Love You",
+    artist: "Daniel Caesar",
+    album: "Unreleased (2023)",
+    cover: "assets/images/Love me like i love you.jfif",
+    src: "assets/audio/gray_23_love_me_like_i_love_you.webm",
+    duration: "4:53"
   }
 ];
 
@@ -2018,6 +2045,15 @@ function setupSpotifyControls() {
   updateShuffleRepeatUI();
 }
 
+function showBottomPlayer() {
+  const bottomPlayer = document.getElementById("spotify-bottom-player");
+  if (bottomPlayer) {
+    bottomPlayer.classList.add("is-visible", "show");
+    const footerEl = document.querySelector("footer");
+    if (footerEl) footerEl.classList.add("has-bottom-player", "player-visible");
+  }
+}
+
 
 
 function loadAudioSourceSafely(srcPath, autoPlay = false) {
@@ -2210,6 +2246,7 @@ function playAudio() {
   if (!audioElement) return;
   hasUserPlayed = true;
   isPlaying = true;
+  showBottomPlayer();
   if ('mediaSession' in navigator) {
     navigator.mediaSession.playbackState = "playing";
   }

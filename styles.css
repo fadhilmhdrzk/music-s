@@ -2039,6 +2039,24 @@ footer {
   font-size: 0.9rem;
   color: var(--text-muted);
   background: var(--bg-card);
+  position: relative;
+  z-index: 10;
+  transition: margin-bottom 0.3s ease;
+}
+
+/* Ensure footer is not covered by sticky bottom music player when visible */
+body:has(.spotify-bottom-player.is-visible) footer,
+body:has(.spotify-bottom-player.show) footer,
+footer.has-bottom-player.player-visible {
+  margin-bottom: 95px;
+}
+
+@media (max-width: 768px) {
+  body:has(.spotify-bottom-player.is-visible) footer,
+  body:has(.spotify-bottom-player.show) footer,
+  footer.has-bottom-player.player-visible {
+    margin-bottom: 75px;
+  }
 }
 
 footer p span {
@@ -3380,7 +3398,17 @@ footer p span {
   justify-content: space-between;
   padding: 0 28px;
   box-shadow: 0 -8px 24px rgba(0,0,0,0.25);
-  transition: background-color var(--transition-speed);
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background-color var(--transition-speed);
+}
+
+.spotify-bottom-player.is-visible,
+.spotify-bottom-player.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .spotify-now-playing {
