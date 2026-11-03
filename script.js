@@ -769,6 +769,51 @@ const grayscaleTracks = [
     cover: "assets/images/Love me like i love you.jfif",
     src: "assets/audio/gray_23_love_me_like_i_love_you.webm",
     duration: "4:53"
+  },
+  {
+    id: 23,
+    title: "Dance With Me",
+    artist: "Bruno Mars",
+    album: "The Romantic (2026)",
+    cover: "assets/images/Dance With Me.jpg",
+    src: "assets/audio/gray_24_dance_with_me.webm",
+    duration: "3:39"
+  },
+  {
+    id: 24,
+    title: "Coming Up Roses",
+    artist: "Harry Styles",
+    album: "Kiss All The Time. Disco, Occasionally. (2026)",
+    cover: "assets/images/Coming Up Roses.jpg",
+    src: "assets/audio/gray_25_coming_up_roses.webm",
+    duration: "4:09"
+  },
+  {
+    id: 25,
+    title: "Let Alone The One You Love",
+    artist: "Olivia Dean",
+    album: "The Art of Loving (2025)",
+    cover: "assets/images/Let Alone The One You Love.jpg",
+    src: "assets/audio/gray_26_let_alone_the_one_you_love.mp4",
+    duration: "3:05"
+  },
+  {
+    id: 26,
+    title: "Fade Into You",
+    artist: "Mazzy Star",
+    album: "So Tonight That I Might See (1993)",
+    cover: "assets/images/Fade Into You.jpg",
+    src: "assets/audio/gray_27_fade_into_you.mp4",
+    duration: "4:55"
+  },
+  {
+    id: 27,
+    title: "Nothing Lasts Forever",
+    artist: "Maroon 5",
+    album: "It Won't Be Soon Before Long (2007)",
+    cover: "assets/images/Nothing Lasts Forever.jpg",
+    src: "assets/audio/gray_28_nothing_lasts_forever.mp4",
+    duration: "3:08"
   }
 ];
 

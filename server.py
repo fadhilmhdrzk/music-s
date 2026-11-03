@@ -43,6 +43,8 @@ class RangeRequestHandler(SimpleHTTPRequestHandler):
         ctype = self.guess_type(path)
         if path.endswith('.webm'):
             ctype = 'audio/webm'
+        elif path.endswith('.mp4') or path.endswith('.m4a'):
+            ctype = 'audio/mp4'
 
         self.send_response(206)
         self.send_header('Content-Type', ctype)
