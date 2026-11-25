@@ -814,6 +814,60 @@ const grayscaleTracks = [
     cover: "assets/images/Nothing Lasts Forever.jpg",
     src: "assets/audio/gray_28_nothing_lasts_forever.mp4",
     duration: "3:08"
+  },
+  {
+    id: 28,
+    title: "Hannah Montana",
+    artist: "Rex Orange County",
+    album: "Hannah Montana - Single (2025)",
+    cover: "assets/images/Hannah Montana.jpg",
+    src: "assets/audio/gray_29_hannah_montana.mp4",
+    duration: "3:33"
+  },
+  {
+    id: 29,
+    title: "Indecision",
+    artist: "Rex Orange County ft. Daniel Caesar",
+    album: "The Alexander Technique (2024)",
+    cover: "assets/images/Indecision.jpg",
+    src: "assets/audio/gray_30_indecision.mp4",
+    duration: "3:06"
+  },
+  {
+    id: 30,
+    title: "Thinking Out Loud",
+    artist: "Ed Sheeran",
+    album: "x (2014)",
+    cover: "assets/images/Thinking Out Loud.jpg",
+    src: "assets/audio/gray_31_thinking_out_loud.mp4",
+    duration: "4:40"
+  },
+  {
+    id: 31,
+    title: "Japanese Denim (Cover)",
+    artist: "RINI",
+    album: "Single (Cover)",
+    cover: "assets/images/Japanese Denim Cover RINI.jpg",
+    src: "assets/audio/gray_32_japanese_denim_rini.mp4",
+    duration: "5:34"
+  },
+  {
+    id: 32,
+    title: "Soft",
+    artist: "LANY",
+    album: "a beautiful blur (2023)",
+    cover: "assets/images/Soft.jfif",
+    src: "assets/audio/lany_soft.webm",
+    duration: "3:12"
+  },
+  {
+    id: 33,
+    title: "'Cause you have to",
+    artist: "LANY",
+    album: "a beautiful blur (2023)",
+    cover: "assets/images/'Cause you have to.jfif",
+    src: "assets/audio/lany_cause.webm",
+    duration: "4:18"
   }
 ];
 
