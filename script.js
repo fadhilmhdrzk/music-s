@@ -794,7 +794,7 @@ const grayscaleTracks = [
     artist: "Olivia Dean",
     album: "The Art of Loving (2025)",
     cover: "assets/images/Let Alone The One You Love.jpg",
-    src: "assets/audio/gray_26_let_alone_the_one_you_love.mp4",
+    src: "assets/audio/gray_26_let_alone_the_one_you_love.webm",
     duration: "3:05"
   },
   {
@@ -803,7 +803,7 @@ const grayscaleTracks = [
     artist: "Mazzy Star",
     album: "So Tonight That I Might See (1993)",
     cover: "assets/images/Fade Into You.jpg",
-    src: "assets/audio/gray_27_fade_into_you.mp4",
+    src: "assets/audio/gray_27_fade_into_you.webm",
     duration: "4:55"
   },
   {
@@ -812,7 +812,7 @@ const grayscaleTracks = [
     artist: "Maroon 5",
     album: "It Won't Be Soon Before Long (2007)",
     cover: "assets/images/Nothing Lasts Forever.jpg",
-    src: "assets/audio/gray_28_nothing_lasts_forever.mp4",
+    src: "assets/audio/gray_28_nothing_lasts_forever.webm",
     duration: "3:08"
   },
   {
@@ -821,7 +821,7 @@ const grayscaleTracks = [
     artist: "Rex Orange County",
     album: "Hannah Montana - Single (2025)",
     cover: "assets/images/Hannah Montana.jpg",
-    src: "assets/audio/gray_29_hannah_montana.mp4",
+    src: "assets/audio/gray_29_hannah_montana.webm",
     duration: "3:33"
   },
   {
@@ -830,7 +830,7 @@ const grayscaleTracks = [
     artist: "Rex Orange County ft. Daniel Caesar",
     album: "The Alexander Technique (2024)",
     cover: "assets/images/Indecision.jpg",
-    src: "assets/audio/gray_30_indecision.mp4",
+    src: "assets/audio/gray_30_indecision.webm",
     duration: "3:06"
   },
   {
@@ -839,7 +839,7 @@ const grayscaleTracks = [
     artist: "Ed Sheeran",
     album: "x (2014)",
     cover: "assets/images/Thinking Out Loud.jpg",
-    src: "assets/audio/gray_31_thinking_out_loud.mp4",
+    src: "assets/audio/gray_31_thinking_out_loud.webm",
     duration: "4:40"
   },
   {
@@ -848,7 +848,7 @@ const grayscaleTracks = [
     artist: "RINI",
     album: "Single (Cover)",
     cover: "assets/images/Japanese Denim Cover RINI.jpg",
-    src: "assets/audio/gray_32_japanese_denim_rini.mp4",
+    src: "assets/audio/gray_32_japanese_denim_rini.webm",
     duration: "5:34"
   },
   {
@@ -1297,6 +1297,132 @@ const indosTracks = [
     cover: "assets/images/Rumah ke rumah.jfif",
     src: "assets/audio/hindia_membasuh.webm",
     duration: "6:10"
+  },
+  {
+    id: 20,
+    title: "Mistikus Cinta",
+    artist: "Dewa 19",
+    album: "Cintailah Cinta (2002)",
+    cover: "assets/images/Mistikus Cinta.jfif",
+    src: "assets/audio/dewa19_mistikus_cinta.webm",
+    duration: "5:35"
+  },
+  {
+    id: 21,
+    title: "Remaja",
+    artist: "HiVi!",
+    album: "Kereta Kencan (2017)",
+    cover: "assets/images/Remaja.jpg",
+    src: "assets/audio/indo_20_remaja.webm",
+    duration: "3:36"
+  },
+  {
+    id: 22,
+    title: "Pelangi",
+    artist: "HiVi!",
+    album: "Kereta Kencan (2017)",
+    cover: "assets/images/Pelangi.jpg",
+    src: "assets/audio/indo_21_pelangi.webm",
+    duration: "3:38"
+  },
+  {
+    id: 23,
+    title: "Nanti kita seperti ini",
+    artist: "Batas Senja",
+    album: "Nanti Kita Seperti Ini - Single (2022)",
+    cover: "assets/images/Nanti kita seperti ini.jpg",
+    src: "assets/audio/indo_22_nanti_kita_seperti_ini.webm",
+    duration: "3:30"
+  },
+  {
+    id: 24,
+    title: "Sampai jadi debu",
+    artist: "Banda Neira",
+    album: "Yang Patah Tumbuh, Yang Hilang Berganti (2016)",
+    cover: "assets/images/Sampai jadi debu.jpg",
+    src: "assets/audio/indo_23_sampai_jadi_debu.webm",
+    duration: "3:22"
+  },
+  {
+    id: 25,
+    title: "Bercinta lewat kata",
+    artist: "Donne Maula",
+    album: "Bercinta Lewat Kata - Single (2023)",
+    cover: "assets/images/Bercinta lewat kata.jpg",
+    src: "assets/audio/indo_24_bercinta_lewat_kata.webm",
+    duration: "2:54"
+  },
+  {
+    id: 26,
+    title: "Bicara",
+    artist: "The Overtunes, Monita Tahalea",
+    album: "Memory Lane (2019)",
+    cover: "assets/images/Bicara.jpg",
+    src: "assets/audio/indo_25_bicara.webm",
+    duration: "3:49"
+  },
+  {
+    id: 27,
+    title: "Lantas",
+    artist: "Juicy Luicy",
+    album: "Sentimental (2020)",
+    cover: "assets/images/Lantas.jpg",
+    src: "assets/audio/indo_26_lantas.webm",
+    duration: "3:51"
+  },
+  {
+    id: 28,
+    title: "Jangan cintai aku apa adanya",
+    artist: "Tulus",
+    album: "Gajah (2014)",
+    cover: "assets/images/Jangan cintai aku apa adanya.jpg",
+    src: "assets/audio/indo_27_jangan_cintai_aku_apa_adanya.webm",
+    duration: "3:38"
+  },
+  {
+    id: 29,
+    title: "Takkan terganti",
+    artist: "Kahitna",
+    album: "Cinta Sudah Lewat (2003)",
+    cover: "assets/images/Takkan terganti.jpg",
+    src: "assets/audio/indo_28_takkan_terganti.webm",
+    duration: "3:26"
+  },
+  {
+    id: 30,
+    title: "Monolog",
+    artist: "Pamungkas",
+    album: "Walk the Talk (2018)",
+    cover: "assets/images/Monolog.jpg",
+    src: "assets/audio/indo_29_monolog.webm",
+    duration: "3:21"
+  },
+  {
+    id: 31,
+    title: "To the bone",
+    artist: "Pamungkas",
+    album: "Flying Solo (2019)",
+    cover: "assets/images/To the bone.jpg",
+    src: "assets/audio/indo_30_to_the_bone.webm",
+    duration: "5:42"
+  },
+  {
+    id: 32,
+    title: "33x",
+    artist: "Perunggu",
+    album: "Memorandum (2022)",
+    cover: "assets/images/33x.jfif",
+    src: "assets/audio/perunggu_33x.webm",
+    duration: "4:12"
+  },
+  {
+    id: 33,
+    title: "Ini abadi",
+    artist: "Perunggu",
+    album: "Memorandum (2022)",
+    cover: "assets/images/33x.jfif",
+    src: "assets/audio/perunggu_ini_abadi.webm",
+    duration: "4:48"
   }
 ];
 
@@ -1999,7 +2125,7 @@ function openSpotifyFullPlayer() {
     isPlayerHistoryPushed = true;
     try {
       history.pushState({ spotifyFullPlayerOpen: true }, "");
-    } catch (e) {}
+    } catch (e) { }
   }
 
   fullPlayer.style.transform = "";
@@ -2023,7 +2149,7 @@ function closeSpotifyFullPlayer(fromPopState = false) {
     if (!fromPopState) {
       try {
         history.back();
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 }
@@ -2165,7 +2291,7 @@ function loadAudioSourceSafely(srcPath, autoPlay = false) {
   } else {
     try {
       audioElement.currentTime = 0;
-    } catch (e) {}
+    } catch (e) { }
   }
 
   if (autoPlay) {
@@ -2210,7 +2336,7 @@ function updateMediaSession(track) {
     handlers.forEach(([action, handler]) => {
       try {
         navigator.mediaSession.setActionHandler(action, handler);
-      } catch (e) {}
+      } catch (e) { }
     });
   } catch (err) {
     console.log("MediaSession update error:", err);
@@ -2227,7 +2353,7 @@ function updateMediaSessionPositionState() {
         position: Math.min(audioElement.currentTime || 0, audioElement.duration)
       });
     }
-  } catch (e) {}
+  } catch (e) { }
 }
 
 let hasUserPlayed = false;
@@ -2504,7 +2630,7 @@ function calculateSeekFromEvent(e, pBgTarget, updateAudioNow = false) {
       try {
         audioElement.currentTime = safeSeek;
         if (isPlaying) {
-          audioElement.play().catch(() => {});
+          audioElement.play().catch(() => { });
         }
       } catch (err) {
         console.log("Seek error:", err);
@@ -2731,7 +2857,7 @@ function switchView(viewName) {
   // Active Nav Link highlight
   const navItems = document.querySelectorAll(".nav-item");
   navItems.forEach(item => item.classList.remove("active"));
-  
+
   if (viewName === 'landing') {
     const navHome = document.getElementById("nav-home");
     if (navHome) navHome.classList.add("active");
@@ -3029,7 +3155,7 @@ function bindRowDragEvents(row, pos, section) {
       if (data && data.pos !== undefined) {
         reorderQueue(data.pos, pos, data.section, section);
       }
-    } catch (err) {}
+    } catch (err) { }
   });
 
   let touchStartY = 0;
