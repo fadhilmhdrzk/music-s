@@ -1542,6 +1542,7 @@ function toggleShuffle() {
   }
   updateShuffleRepeatUI();
   renderQueuePanel();
+  preloadNextTrack();
 }
 
 function toggleRepeat() {
@@ -1669,6 +1670,9 @@ function stopVisualizer() {
    ========================================================================== */
 
 let nextTrackPreloader = null;
+let preloadedBlobCache = { url: null, blobUrl: null };
+let preloadingUrl = null;
+
 function preloadNextTrack() {
   const currentTracks = getTracks();
   if (!currentTracks || currentTracks.length <= 1) return;
@@ -1683,13 +1687,36 @@ function preloadNextTrack() {
   const nextTrack = currentTracks[nextIdx];
   if (!nextTrack || !nextTrack.src) return;
 
+  const nextUrl = new URL(fixPath(nextTrack.src), window.location.href).href;
+
   if (!nextTrackPreloader) {
     nextTrackPreloader = new Audio();
     nextTrackPreloader.preload = "auto";
   }
-  const nextUrl = new URL(fixPath(nextTrack.src), window.location.href).href;
   if (nextTrackPreloader.src !== nextUrl) {
     nextTrackPreloader.src = nextUrl;
+  }
+
+  if (window.location.protocol !== "file:" && preloadedBlobCache.url !== nextUrl && preloadingUrl !== nextUrl) {
+    preloadingUrl = nextUrl;
+    fetch(nextUrl)
+      .then(res => {
+        if (!res.ok) throw new Error("Preload fetch failed");
+        return res.blob();
+      })
+      .then(blob => {
+        if (preloadingUrl !== nextUrl) return;
+        if (preloadedBlobCache.blobUrl) {
+          URL.revokeObjectURL(preloadedBlobCache.blobUrl);
+        }
+        preloadedBlobCache = {
+          url: nextUrl,
+          blobUrl: URL.createObjectURL(blob)
+        };
+      })
+      .catch(() => {
+        if (preloadingUrl === nextUrl) preloadingUrl = null;
+      });
   }
 }
 
@@ -1962,6 +1989,7 @@ function addToQueue(index) {
   userQueue.push(index);
   showToast(`Added to queue: <strong>${track.title}</strong>`);
   renderQueuePanel();
+  preloadNextTrack();
 }
 
 function showToast(message) {
@@ -2301,6 +2329,7 @@ function showBottomPlayer() {
 
 
 let wantToPlay = false;
+let isSwitchingTrack = false;
 
 function syncPlayUI(playing) {
   isPlaying = playing;
@@ -2337,12 +2366,13 @@ function bindAudioPlaybackSync() {
   audioElement.dataset.syncBound = "true";
 
   audioElement.addEventListener("playing", () => {
+    isSwitchingTrack = false;
     syncPlayUI(true);
     updateMediaSessionPositionState();
   });
 
   audioElement.addEventListener("pause", () => {
-    if (!audioElement.ended) {
+    if (!audioElement.ended && !isSwitchingTrack) {
       syncPlayUI(false);
     }
   });
@@ -2370,8 +2400,13 @@ function loadAudioSourceSafely(srcPath, autoPlay = false) {
   bindAudioPlaybackSync();
 
   const resolvedUrl = new URL(srcPath, window.location.href).href;
-  if (audioElement.src !== resolvedUrl) {
-    audioElement.src = resolvedUrl;
+  const targetSrc = (preloadedBlobCache.url === resolvedUrl && preloadedBlobCache.blobUrl)
+    ? preloadedBlobCache.blobUrl
+    : resolvedUrl;
+
+  if (audioElement.src !== targetSrc) {
+    isSwitchingTrack = autoPlay;
+    audioElement.src = targetSrc;
   } else {
     try {
       audioElement.currentTime = 0;
@@ -3183,6 +3218,7 @@ function createQueuePanelDOM() {
     clearBtn.addEventListener("click", () => {
       userQueue = [];
       renderQueuePanel();
+      preloadNextTrack();
       showToast("Antrean manual dibersihkan");
     });
   }
@@ -3320,6 +3356,7 @@ function reorderQueue(fromPos, toPos, fromSection, toSection) {
   }
 
   renderQueuePanel();
+  preloadNextTrack();
   showToast("Urutan antrean diubah");
 }
 
@@ -3413,6 +3450,7 @@ function renderQueuePanel() {
             e.stopPropagation();
             userQueue.splice(uPos, 1);
             renderQueuePanel();
+            preloadNextTrack();
             showToast(`Dihapus dari antrean: <strong>${track.title}</strong>`);
           });
         }
