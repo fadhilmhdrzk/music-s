@@ -1601,14 +1601,17 @@ const modalQuote = document.getElementById("modal-quote");
 const modalMeaningText = document.getElementById("modal-meaning-text");
 const btnPlayModal = document.getElementById("btn-play-modal");
 
-// Web Audio API Real Frequency Analyzer
+// Web Audio API Real Frequency Analyzer (Desktop only — mobile keeps native audio pipeline for background playback)
 let audioCtx = null;
 let analyser = null;
 let dataArray = null;
 let sourceNode = null;
 let visualizerAnimFrame = null;
+const isMobileDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
+  (navigator.maxTouchPoints > 0 && window.innerWidth <= 1024);
 
 function initAudioContext() {
+  if (isMobileDevice) return;
   if (!audioCtx) {
     try {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -1629,9 +1632,10 @@ function initAudioContext() {
 
 function startVisualizer() {
   if (visualizerWrap) visualizerWrap.classList.add("playing");
+  if (isMobileDevice) return;
   initAudioContext();
   if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
+    audioCtx.resume().catch(() => {});
   }
 
   function draw() {
@@ -1664,15 +1668,29 @@ function stopVisualizer() {
    MUSIC PLAYER LOGIC (TURNTABLE PLAYER)
    ========================================================================== */
 
-const preloadedAudios = [];
-function preloadArtistTracks() {
+let nextTrackPreloader = null;
+function preloadNextTrack() {
   const currentTracks = getTracks();
-  currentTracks.forEach(track => {
-    const a = new Audio();
-    a.preload = "auto";
-    a.src = fixPath(track.src);
-    preloadedAudios.push(a);
-  });
+  if (!currentTracks || currentTracks.length <= 1) return;
+
+  let nextIdx = (currentTrackIdx + 1) % currentTracks.length;
+  if (userQueue && userQueue.length > 0) {
+    nextIdx = userQueue[0];
+  } else if (isShuffle && shuffleQueue && shuffleQueue.length > 0) {
+    nextIdx = shuffleQueue[0];
+  }
+
+  const nextTrack = currentTracks[nextIdx];
+  if (!nextTrack || !nextTrack.src) return;
+
+  if (!nextTrackPreloader) {
+    nextTrackPreloader = new Audio();
+    nextTrackPreloader.preload = "auto";
+  }
+  const nextUrl = new URL(fixPath(nextTrack.src), window.location.href).href;
+  if (nextTrackPreloader.src !== nextUrl) {
+    nextTrackPreloader.src = nextUrl;
+  }
 }
 
 function initPlayer() {
@@ -1700,7 +1718,8 @@ function initPlayer() {
   setupProgressScrubbing();
   setupSpotifyControls();
   loadTrack(currentTrackIdx, false, true);
-  preloadArtistTracks();
+  preloadNextTrack();
+  bindAudioPlaybackSync();
 }
 
 let currentSearchTerm = "";
@@ -2281,13 +2300,78 @@ function showBottomPlayer() {
 
 
 
+let wantToPlay = false;
+
+function syncPlayUI(playing) {
+  isPlaying = playing;
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.playbackState = playing ? "playing" : "paused";
+  }
+
+  const iconClass = playing ? "fa-solid fa-pause" : "fa-solid fa-play";
+  if (playIcon) playIcon.className = iconClass;
+  const spPlayIcon = document.getElementById("sp-play-icon");
+  if (spPlayIcon) spPlayIcon.className = iconClass;
+  const spFullPlayIcon = document.getElementById("sp-full-play-icon");
+  if (spFullPlayIcon) spFullPlayIcon.className = iconClass;
+  const btnPlaylistPlayIcon = document.getElementById("btn-playlist-play-icon");
+  if (btnPlaylistPlayIcon) btnPlaylistPlayIcon.className = iconClass;
+
+  if (vinylDisc) vinylDisc.classList.toggle("playing", playing);
+  if (turntableDeck) turntableDeck.classList.toggle("playing", playing);
+
+  const rows = document.querySelectorAll(".playlist-row");
+  rows.forEach((row, i) => {
+    row.classList.toggle("playing", playing && i === currentTrackIdx);
+  });
+
+  if (playing) {
+    startVisualizer();
+  } else {
+    stopVisualizer();
+  }
+}
+
+function bindAudioPlaybackSync() {
+  if (!audioElement || audioElement.dataset.syncBound) return;
+  audioElement.dataset.syncBound = "true";
+
+  audioElement.addEventListener("playing", () => {
+    syncPlayUI(true);
+    updateMediaSessionPositionState();
+  });
+
+  audioElement.addEventListener("pause", () => {
+    if (!audioElement.ended) {
+      syncPlayUI(false);
+    }
+  });
+
+  audioElement.addEventListener("canplay", () => {
+    if (wantToPlay && audioElement.paused && !audioElement.ended) {
+      audioElement.play().catch(() => {});
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      if (audioCtx && audioCtx.state === "suspended" && isPlaying) {
+        audioCtx.resume().catch(() => {});
+      }
+      if (wantToPlay && audioElement.paused && !audioElement.ended) {
+        playAudio();
+      }
+    }
+  });
+}
+
 function loadAudioSourceSafely(srcPath, autoPlay = false) {
   if (!audioElement) return;
+  bindAudioPlaybackSync();
 
   const resolvedUrl = new URL(srcPath, window.location.href).href;
   if (audioElement.src !== resolvedUrl) {
     audioElement.src = resolvedUrl;
-    audioElement.load();
   } else {
     try {
       audioElement.currentTime = 0;
@@ -2297,6 +2381,7 @@ function loadAudioSourceSafely(srcPath, autoPlay = false) {
   if (autoPlay) {
     playAudio();
   }
+  preloadNextTrack();
 }
 
 function updateMediaSession(track) {
@@ -2469,58 +2554,44 @@ function loadTrack(index, autoPlay = false, isBackNavigation = false) {
 
 function playAudio() {
   if (!audioElement) return;
+  bindAudioPlaybackSync();
   hasUserPlayed = true;
-  isPlaying = true;
+  wantToPlay = true;
   showBottomPlayer();
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.playbackState = "playing";
+  syncPlayUI(true);
+
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
   }
-  audioElement.play().catch(e => {
-    console.log("Audio play error:", e);
-  });
-  if (playIcon) playIcon.className = "fa-solid fa-pause";
-  const spPlayIcon = document.getElementById("sp-play-icon");
-  if (spPlayIcon) spPlayIcon.className = "fa-solid fa-pause";
-  const spFullPlayIcon = document.getElementById("sp-full-play-icon");
-  if (spFullPlayIcon) spFullPlayIcon.className = "fa-solid fa-pause";
-  const btnPlaylistPlayIcon = document.getElementById("btn-playlist-play-icon");
-  if (btnPlaylistPlayIcon) btnPlaylistPlayIcon.className = "fa-solid fa-pause";
 
-  if (vinylDisc) vinylDisc.classList.add("playing");
-  if (turntableDeck) turntableDeck.classList.add("playing");
-
-  const rows = document.querySelectorAll(".playlist-row");
-  rows.forEach((row, i) => {
-    row.classList.toggle("playing", i === currentTrackIdx);
-  });
-
-  startVisualizer();
+  const playPromise = audioElement.play();
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      if (wantToPlay) {
+        syncPlayUI(true);
+      }
+    }).catch(e => {
+      console.log("Audio play error:", e);
+      if (e && e.name === "AbortError" && wantToPlay) {
+        // Source is still loading; canplay listener will trigger play()
+        return;
+      }
+      if (wantToPlay && audioElement.readyState < 3) {
+        // Wait for enough buffer to play
+        return;
+      }
+      if (audioElement.paused) {
+        syncPlayUI(false);
+      }
+    });
+  }
 }
 
 function pauseAudio() {
   if (!audioElement) return;
-  isPlaying = false;
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.playbackState = "paused";
-  }
+  wantToPlay = false;
   audioElement.pause();
-  if (playIcon) playIcon.className = "fa-solid fa-play";
-  const spPlayIcon = document.getElementById("sp-play-icon");
-  if (spPlayIcon) spPlayIcon.className = "fa-solid fa-play";
-  const spFullPlayIcon = document.getElementById("sp-full-play-icon");
-  if (spFullPlayIcon) spFullPlayIcon.className = "fa-solid fa-play";
-  const btnPlaylistPlayIcon = document.getElementById("btn-playlist-play-icon");
-  if (btnPlaylistPlayIcon) btnPlaylistPlayIcon.className = "fa-solid fa-play";
-
-  if (vinylDisc) vinylDisc.classList.remove("playing");
-  if (turntableDeck) turntableDeck.classList.remove("playing");
-
-  const rows = document.querySelectorAll(".playlist-row");
-  rows.forEach((row) => {
-    row.classList.remove("playing");
-  });
-
-  stopVisualizer();
+  syncPlayUI(false);
 }
 
 // Play/Pause Toggle Button
